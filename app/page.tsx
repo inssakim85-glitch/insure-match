@@ -687,6 +687,7 @@ export default function App() {
     | "ADMIN_LOG"
   >("GA_LIST");
   const [isAutoSyncing, setIsAutoSyncing] = useState(false);
+  const [showAuthPopup, setShowAuthPopup] = useState(false);
   const [showPreviewModal, setShowPreviewModal] = useState(false);
 
   // 주요 GA 탭 전용 검색 State (전체 제휴 GA 대상 검색)
@@ -766,12 +767,13 @@ export default function App() {
     setMainTab("ADMIN_HOME");
   };
 
-  // 간편인증 데이터 자동 연동 (로그인 시 사용한 카카오/네이버 계정으로 사업소득·실적 조회 동의 후 연동)
+  // 실적 인증 팝업에서 "동의하고 계속하기"를 눌렀을 때 실제 데이터 연동 처리
   const handleAutoFetchData = () => {
     setIsAutoSyncing(true);
     const providerLabel = socialProvider === "naver" ? "네이버" : "카카오";
     setTimeout(() => {
       setIsAutoSyncing(false);
+      setShowAuthPopup(false);
       setProfile((prev) => ({
         ...prev,
         exp: "7년차",
@@ -782,7 +784,7 @@ export default function App() {
       alert(
         `${providerLabel} 인증이 완료되었습니다!\n국세청 사업소득 및 보험협회 경력/유지율 데이터가 자동 연동되었습니다.`
       );
-    }, 1200);
+    }, 1400);
   };
 
   // 프로필 저장 (미리보기 팝업 먼저 오픈)
@@ -2418,7 +2420,7 @@ export default function App() {
 
               <button
                 type="button"
-                onClick={handleAutoFetchData}
+                onClick={() => setShowAuthPopup(true)}
                 disabled={isAutoSyncing}
                 className={`font-black px-4 py-2.5 rounded-xl text-xs transition shadow-sm flex items-center gap-2 shrink-0 ${
                   socialProvider === "naver"
@@ -4037,6 +4039,109 @@ export default function App() {
         )}
       </main>
       </div>
+
+      {showAuthPopup && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm overflow-hidden">
+            <div
+              className={`p-5 flex items-center gap-3 ${
+                socialProvider === "naver" ? "bg-[#03c75a]" : "bg-[#fee500]"
+              }`}
+            >
+              {socialProvider === "naver" ? (
+                <div className="w-9 h-9 rounded-full bg-white flex items-center justify-center shrink-0 font-black text-[#03c75a] text-base">
+                  N
+                </div>
+              ) : (
+                <div className="w-9 h-9 rounded-full bg-[#191919] flex items-center justify-center shrink-0">
+                  <svg className="w-5 h-5 fill-[#fee500]" viewBox="0 0 24 24">
+                    <path d="M12 3c-4.97 0-9 3.185-9 7.115 0 2.557 1.707 4.8 4.27 6.054-.188.702-.682 2.545-.78 2.94-.122.49.178.483.376.351.155-.103 2.466-1.675 3.464-2.353.557.08 1.13.123 1.67.123 4.97 0 9-3.186 9-7.115C21 6.185 16.97 3 12 3z" />
+                  </svg>
+                </div>
+              )}
+              <div>
+                <p
+                  className={`font-black text-sm ${
+                    socialProvider === "naver" ? "text-white" : "text-[#191919]"
+                  }`}
+                >
+                  {socialProvider === "naver" ? "네이버" : "카카오"} 인증
+                </p>
+                <p
+                  className={`text-[11px] ${
+                    socialProvider === "naver" ? "text-white/80" : "text-[#191919]/70"
+                  }`}
+                >
+                  인슈어매치가 아래 정보를 요청합니다
+                </p>
+              </div>
+            </div>
+
+            <div className="p-5 space-y-4">
+              {isAutoSyncing ? (
+                <div className="py-8 flex flex-col items-center justify-center gap-3">
+                  <RefreshCw className="w-7 h-7 text-blue-600 animate-spin" />
+                  <p className="text-slate-600 text-xs font-bold">
+                    {socialProvider === "naver" ? "네이버" : "카카오"} 인증 및 실적 데이터 조회 중...
+                  </p>
+                </div>
+              ) : (
+                <>
+                  <div className="space-y-2.5">
+                    <div className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                      <div>
+                        <p className="text-slate-800 text-xs font-bold">본인 확인 정보</p>
+                        <p className="text-slate-400 text-[11px]">이름, 생년월일 등 기본 인증 정보</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                      <div>
+                        <p className="text-slate-800 text-xs font-bold">국세청 사업소득(3.3%) 신고 내역</p>
+                        <p className="text-slate-400 text-[11px]">월 평균 매출(업적) 확인 목적</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                      <div>
+                        <p className="text-slate-800 text-xs font-bold">보험협회 등록 경력·유지율 정보</p>
+                        <p className="text-slate-400 text-[11px]">경력 연차 및 계약 유지율 확인 목적</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <p className="text-slate-400 text-[10px] leading-relaxed border-t border-slate-100 pt-3">
+                    동의하신 정보는 실적 인증 목적으로만 사용되며, GA 매니저에게는 인증 뱃지와 요약된 범위 정보만
+                    공개되고 원본 데이터는 공유되지 않습니다.
+                  </p>
+
+                  <div className="flex items-center gap-2 pt-1">
+                    <button
+                      type="button"
+                      onClick={() => setShowAuthPopup(false)}
+                      className="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold py-3 rounded-xl text-xs transition"
+                    >
+                      취소
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleAutoFetchData}
+                      className={`flex-1 font-black py-3 rounded-xl text-xs transition ${
+                        socialProvider === "naver"
+                          ? "bg-[#03c75a] hover:bg-[#02b351] text-white"
+                          : "bg-[#fee500] hover:bg-[#fada00] text-[#191919]"
+                      }`}
+                    >
+                      동의하고 계속하기
+                    </button>
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
       {offerTarget && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
