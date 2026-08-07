@@ -662,6 +662,7 @@ export default function App() {
   const [authView, setAuthView] = useState<"LANDING" | "LOGIN">("LANDING");
   const loginCardRef = useRef<HTMLDivElement>(null);
   const [userRole, setUserRole] = useState<"FC" | "GA" | "ADMIN">("FC");
+  const [socialProvider, setSocialProvider] = useState<"kakao" | "naver" | null>(null);
   const [mainTab, setMainTab] = useState<
     | "AI_MATCH"
     | "GA_LIST"
@@ -717,14 +718,6 @@ export default function App() {
     memo: "단독석 제공 및 초기 정착지원 우수 지점 선호합니다."
   });
 
-  // FC 코드(설계사 등록번호) + 사업소득 기반 실적 인증 신청 State
-  const [fcCodeVerification, setFcCodeVerification] = useState({
-    status: "미제출", // "미제출" | "심사중" | "인증완료" | "반려됨"
-    fcCode: "",
-    affiliatedGa: "",
-    agreed: false
-  });
-
   // AI 추천 GA 탭 - 원하는 조건 선택 State
   const [aiPreferences, setAiPreferences] = useState({
     region: "서울 강남 / 서초 / 송파",
@@ -740,6 +733,7 @@ export default function App() {
 
   // 카카오/네이버 FC 로그인
   const handleSocialLogin = (provider: "kakao" | "naver") => {
+    setSocialProvider(provider);
     setIsLoggedIn(true);
     setMainTab("GA_LIST");
   };
@@ -772,41 +766,23 @@ export default function App() {
     setMainTab("ADMIN_HOME");
   };
 
-  // 간편인증 데이터 자동 연동
+  // 간편인증 데이터 자동 연동 (로그인 시 사용한 카카오/네이버 계정으로 사업소득·실적 조회 동의 후 연동)
   const handleAutoFetchData = () => {
     setIsAutoSyncing(true);
+    const providerLabel = socialProvider === "naver" ? "네이버" : "카카오";
     setTimeout(() => {
       setIsAutoSyncing(false);
       setProfile((prev) => ({
         ...prev,
         exp: "7년차",
-        salesRange: "월 평균 185만원 (국세청 홈택스 연동)",
+        salesRange: `월 평균 185만원 (국세청 홈택스 연동)`,
         retentionRate: "13회차 90.1% (e-클린보험 연동)",
         isVerified: true
       }));
-      alert("카카오 간편인증이 완료되었습니다!\n국세청 사업소득 및 보험협회 경력/유지율 데이터가 자동 연동되었습니다.");
+      alert(
+        `${providerLabel} 인증이 완료되었습니다!\n국세청 사업소득 및 보험협회 경력/유지율 데이터가 자동 연동되었습니다.`
+      );
     }, 1200);
-  };
-
-  // FC 코드 + 사업소득 기반 실적 인증 신청
-  const handleSubmitFcCodeVerification = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!fcCodeVerification.fcCode.trim()) {
-      alert("FC 코드(설계사 등록번호)를 입력해주세요.");
-      return;
-    }
-    if (!fcCodeVerification.affiliatedGa.trim()) {
-      alert("현재 소속 GA/보험사명을 입력해주세요.");
-      return;
-    }
-    if (!fcCodeVerification.agreed) {
-      alert("사업소득 원천징수 내역 조회 동의가 필요합니다.");
-      return;
-    }
-    setFcCodeVerification((prev) => ({ ...prev, status: "심사중" }));
-    alert(
-      "FC 코드 실적 인증 신청이 접수되었습니다!\n보험협회 등록 정보 및 국세청 사업소득(3.3%) 신고 내역을 대조해 1~2 영업일 내 인증 처리됩니다."
-    );
   };
 
   // 프로필 저장 (미리보기 팝업 먼저 오픈)
@@ -2444,87 +2420,19 @@ export default function App() {
                 type="button"
                 onClick={handleAutoFetchData}
                 disabled={isAutoSyncing}
-                className="bg-amber-400 hover:bg-amber-500 text-amber-950 font-black px-4 py-2.5 rounded-xl text-xs transition shadow-sm flex items-center gap-2 shrink-0"
+                className={`font-black px-4 py-2.5 rounded-xl text-xs transition shadow-sm flex items-center gap-2 shrink-0 ${
+                  socialProvider === "naver"
+                    ? "bg-[#03c75a] hover:bg-[#02b351] text-white"
+                    : "bg-amber-400 hover:bg-amber-500 text-amber-950"
+                }`}
               >
                 <RefreshCw className={`w-3.5 h-3.5 ${isAutoSyncing ? "animate-spin" : ""}`} />
-                <span>{isAutoSyncing ? "데이터 불러오는 중..." : "카카오 인증 실적 자동 불러오기"}</span>
-              </button>
-            </div>
-
-            <div className="bg-blue-50/50 border border-blue-100 rounded-2xl p-4 space-y-3">
-              <div className="flex items-start justify-between flex-wrap gap-2">
-                <div>
-                  <h3 className="font-black text-sm text-slate-800 flex items-center gap-1.5">
-                    <UserCheck className="w-4 h-4 text-blue-600" />
-                    FC 코드로 실적 인증하기
-                  </h3>
-                  <p className="text-slate-500 text-[11px] mt-0.5 leading-relaxed">
-                    카카오 인증이 어려우시다면, 보유하신 설계사 등록번호(FC 코드)와 사업소득(3.3%) 신고 내역으로도 실적을
-                    인증할 수 있어요.
-                  </p>
-                </div>
-                <span
-                  className={`text-[10px] font-bold px-2.5 py-1 rounded-full shrink-0 ${
-                    fcCodeVerification.status === "인증완료"
-                      ? "bg-emerald-100 text-emerald-700"
-                      : fcCodeVerification.status === "심사중"
-                      ? "bg-amber-100 text-amber-700"
-                      : fcCodeVerification.status === "반려됨"
-                      ? "bg-red-100 text-red-700"
-                      : "bg-slate-200 text-slate-600"
-                  }`}
-                >
-                  {fcCodeVerification.status}
+                <span>
+                  {isAutoSyncing
+                    ? "데이터 불러오는 중..."
+                    : `${socialProvider === "naver" ? "네이버" : "카카오"} 인증 실적 자동 불러오기`}
                 </span>
-              </div>
-
-              <form onSubmit={handleSubmitFcCodeVerification} className="space-y-3">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div className="space-y-1">
-                    <label className="font-extrabold text-slate-700 text-xs">FC 코드 (설계사 등록번호)</label>
-                    <input
-                      type="text"
-                      value={fcCodeVerification.fcCode}
-                      onChange={(e) => setFcCodeVerification({ ...fcCodeVerification, fcCode: e.target.value })}
-                      placeholder="예: 2019-생손-0031452"
-                      className="w-full bg-white border border-slate-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                  </div>
-                  <div className="space-y-1">
-                    <label className="font-extrabold text-slate-700 text-xs">현재 소속 GA/보험사명</label>
-                    <input
-                      type="text"
-                      value={fcCodeVerification.affiliatedGa}
-                      onChange={(e) =>
-                        setFcCodeVerification({ ...fcCodeVerification, affiliatedGa: e.target.value })
-                      }
-                      placeholder="예: OO GA 강남지점"
-                      className="w-full bg-white border border-slate-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                  </div>
-                </div>
-
-                <label className="flex items-start gap-2 text-[11px] text-slate-600 leading-relaxed">
-                  <input
-                    type="checkbox"
-                    checked={fcCodeVerification.agreed}
-                    onChange={(e) => setFcCodeVerification({ ...fcCodeVerification, agreed: e.target.checked })}
-                    className="mt-0.5"
-                  />
-                  <span>
-                    국세청 사업소득(3.3%) 원천징수 신고 내역 및 보험협회 등록 정보 조회에 동의합니다. 조회 결과는
-                    실적 인증 심사 목적으로만 사용됩니다.
-                  </span>
-                </label>
-
-                <button
-                  type="submit"
-                  disabled={fcCodeVerification.status === "심사중"}
-                  className="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed text-white font-extrabold px-5 py-2.5 rounded-xl text-xs transition"
-                >
-                  {fcCodeVerification.status === "심사중" ? "심사 대기 중" : "실적 인증 신청하기"}
-                </button>
-              </form>
+              </button>
             </div>
 
             <form onSubmit={handleOpenPreview} className="space-y-6">
