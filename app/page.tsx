@@ -14,7 +14,6 @@ import {
   TrendingUp,
   Award,
   FileText,
-  Link2,
   Inbox,
   Check,
   PhoneCall,
@@ -128,51 +127,6 @@ const MOCK_AI_MATCHES = [
     matchReasons: ["손해보험 전문 경력과 부합", "법인·VIP 영업으로 확장 시 유리한 조건"]
   }
 ];
-
-// ==========================================
-// MOCK DATA : 국내 전체 손해보험사 / 생명보험사 상세 전산 & 수수료표
-// ==========================================
-const MOCK_INSURERS_DETAIL = {
-  life: [
-    { name: "신한라이프", code: "L01", phone: "1588-5580", inCall: "1522-2285", fax: "가상번호 부여", status: "연동완료", maxCommission: "92.5%", firstMonth: "585%", total12: "1150%" },
-    { name: "미래에셋생명", code: "L02", phone: "1588-6363", inCall: "1588-6363", fax: "가상번호 부여", status: "연동완료", maxCommission: "93.0%", firstMonth: "590%", total12: "1160%" },
-    { name: "한화생명", code: "L03", phone: "1588-6363", inCall: "1800-6633", fax: "가상번호 부여", status: "연동완료", maxCommission: "92.0%", firstMonth: "590%", total12: "1140%" },
-    { name: "삼성생명", code: "L04", phone: "1588-3114", inCall: "1588-3115", fax: "가상번호 부여", status: "연동완료", maxCommission: "91.5%", firstMonth: "580%", total12: "1120%" },
-    { name: "교보생명", code: "L05", phone: "1588-1001", inCall: "1588-1636", fax: "가상번호 부여", status: "연동완료", maxCommission: "90.8%", firstMonth: "570%", total12: "1110%" },
-    { name: "흥국생명", code: "L06", phone: "1588-2288", inCall: "1577-7006", fax: "가상번호 부여", status: "연동완료", maxCommission: "92.5%", firstMonth: "600%", total12: "1150%" },
-    { name: "푸본현대생명", code: "L07", phone: "1577-3311", inCall: "1577-3311", fax: "0505-106-0311", status: "연동완료", maxCommission: "91.0%", firstMonth: "580%", total12: "1120%" },
-    { name: "iM라이프", code: "L08", phone: "1588-4770", inCall: "1588-4770", fax: "0505-083-5420", status: "연동완료", maxCommission: "91.5%", firstMonth: "585%", total12: "1125%" },
-    { name: "KDB생명", code: "L09", phone: "1588-4040", inCall: "1588-4040", fax: "02-2669-7939", status: "연동완료", maxCommission: "91.2%", firstMonth: "580%", total12: "1120%" },
-    { name: "KB라이프", code: "L10", phone: "1588-3374", inCall: "1566-2730", fax: "02-6220-9912", status: "연동완료", maxCommission: "93.0%", firstMonth: "610%", total12: "1160%" },
-    { name: "DB생명", code: "L11", phone: "1588-3131", inCall: "1588-3131", fax: "가상번호 부여", status: "연동완료", maxCommission: "92.0%", firstMonth: "590%", total12: "1140%" },
-    { name: "동양생명", code: "L12", phone: "1577-1004", inCall: "1577-1004", fax: "가상번호 부여", status: "연동완료", maxCommission: "92.8%", firstMonth: "600%", total12: "1155%" },
-    { name: "AIA생명", code: "L13", phone: "1588-9595", inCall: "1588-9595", fax: "가상번호 부여", status: "연동완료", maxCommission: "91.8%", firstMonth: "580%", total12: "1130%" },
-    { name: "MetLife생명", code: "L14", phone: "1588-9600", inCall: "1588-9600", fax: "가상번호 부여", status: "연동완료", maxCommission: "93.5%", firstMonth: "610%", total12: "1170%" },
-    { name: "ABL생명", code: "L15", phone: "1588-4433", inCall: "1588-4433", fax: "가상번호 부여", status: "연동완료", maxCommission: "91.0%", firstMonth: "575%", total12: "1120%" },
-    { name: "라이나생명", code: "L16", phone: "1588-0058", inCall: "1588-0058", fax: "가상번호 부여", status: "연동완료", maxCommission: "94.0%", firstMonth: "620%", total12: "1180%" },
-    { name: "NH농협생명", code: "L17", phone: "1544-2000", inCall: "1544-2000", fax: "가상번호 부여", status: "연동완료", maxCommission: "91.5%", firstMonth: "580%", total12: "1130%" },
-    { name: "하나생명", code: "L18", phone: "1577-1112", inCall: "1577-1112", fax: "가상번호 부여", status: "연동완료", maxCommission: "90.5%", firstMonth: "570%", total12: "1110%" },
-    { name: "처브라이프", code: "L19", phone: "1599-5500", inCall: "1599-5500", fax: "가상번호 부여", status: "연동완료", maxCommission: "91.2%", firstMonth: "580%", total12: "1125%" },
-    { name: "BNP파리바카디프", code: "L20", phone: "1688-1118", inCall: "1688-1118", fax: "가상번호 부여", status: "연동완료", maxCommission: "90.0%", firstMonth: "560%", total12: "1100%" },
-    { name: "IBK연금보험", code: "L21", phone: "1577-1300", inCall: "1577-1300", fax: "가상번호 부여", status: "연동완료", maxCommission: "89.5%", firstMonth: "550%", total12: "1090%" },
-    { name: "교보라이프플래닛", code: "L22", phone: "1566-0999", inCall: "1566-0999", fax: "가상번호 부여", status: "연동완료", maxCommission: "90.0%", firstMonth: "560%", total12: "1100%" }
-  ],
-  nonLife: [
-    { name: "삼성화재", code: "N01", phone: "1588-5114", inCall: "1588-5114", fax: "가상번호 부여", status: "연동완료", maxCommission: "95.0%", firstMonth: "650%", total12: "1180%" },
-    { name: "현대해상", code: "N02", phone: "1588-5644", inCall: "1588-5644", fax: "가상번호 부여", status: "연동완료", maxCommission: "94.5%", firstMonth: "640%", total12: "1175%" },
-    { name: "DB손해보험", code: "N03", phone: "1588-0100", inCall: "1588-0100", fax: "가상번호 부여", status: "연동완료", maxCommission: "94.8%", firstMonth: "660%", total12: "1190%" },
-    { name: "KB손해보험", code: "N04", phone: "1544-0114", inCall: "1544-0114", fax: "가상번호 부여", status: "연동완료", maxCommission: "93.8%", firstMonth: "630%", total12: "1160%" },
-    { name: "메리츠화재", code: "N05", phone: "1566-7711", inCall: "1566-7711", fax: "가상번호 부여", status: "연동완료", maxCommission: "95.2%", firstMonth: "670%", total12: "1195%" },
-    { name: "한화손해보험", code: "N06", phone: "1566-8000", inCall: "1566-8000", fax: "가상번호 부여", status: "연동완료", maxCommission: "93.0%", firstMonth: "620%", total12: "1150%" },
-    { name: "흥국화재", code: "N07", phone: "1688-1688", inCall: "1688-1688", fax: "가상번호 부여", status: "연동완료", maxCommission: "92.5%", firstMonth: "610%", total12: "1140%" },
-    { name: "롯데손해보험", code: "N08", phone: "1588-3344", inCall: "1588-3344", fax: "가상번호 부여", status: "연동완료", maxCommission: "93.5%", firstMonth: "630%", total12: "1165%" },
-    { name: "MG손해보험", code: "N09", phone: "1588-5959", inCall: "1588-5959", fax: "가상번호 부여", status: "연동완료", maxCommission: "92.0%", firstMonth: "600%", total12: "1135%" },
-    { name: "NH농협손해보험", code: "N10", phone: "1644-9000", inCall: "1644-9000", fax: "가상번호 부여", status: "연동완료", maxCommission: "93.2%", firstMonth: "625%", total12: "1155%" },
-    { name: "하나손해보험", code: "N11", phone: "1566-3000", inCall: "1566-3000", fax: "가상번호 부여", status: "연동완료", maxCommission: "92.0%", firstMonth: "610%", total12: "1140%" },
-    { name: "AXA손해보험", code: "N12", phone: "1566-1566", inCall: "1566-1566", fax: "가상번호 부여", status: "연동완료", maxCommission: "91.5%", firstMonth: "600%", total12: "1130%" },
-    { name: "캐롯손해보험", code: "N13", phone: "1566-0300", inCall: "1566-0300", fax: "가상번호 부여", status: "연동완료", maxCommission: "91.0%", firstMonth: "590%", total12: "1120%" }
-  ]
-};
 
 // ==========================================
 // MOCK DATA : FC가 받은 GA 역경매 제안함 (Inbox)
@@ -666,7 +620,6 @@ export default function App() {
   const [mainTab, setMainTab] = useState<
     | "AI_MATCH"
     | "GA_LIST"
-    | "INSURER_CONNECT"
     | "OFFERS_INBOX"
     | "FC_PROFILE"
     | "GA_HOME"
@@ -695,10 +648,6 @@ export default function App() {
 
   // 주요 GA 탭 전용 검색 State (전체 제휴 GA 대상 검색)
   const [gaListSearchQuery, setGaListSearchQuery] = useState("");
-
-  // INSURER_CONNECT 전용 내부 검색 & 필터 State
-  const [insurerSearchQuery, setInsurerSearchQuery] = useState("");
-  const [insurerFilterTab, setInsurerFilterTab] = useState<"ALL" | "LIFE" | "NON_LIFE">("ALL");
 
   // GA 로그인 Form State
   const [gaBusinessNum, setGaBusinessNum] = useState("");
@@ -1706,18 +1655,6 @@ export default function App() {
               </button>
 
               <button
-                onClick={() => setMainTab("INSURER_CONNECT")}
-                className={`py-3.5 border-b-2 transition flex items-center gap-2 whitespace-nowrap ${
-                  mainTab === "INSURER_CONNECT"
-                    ? "border-blue-600 text-blue-600 font-black"
-                    : "border-transparent text-slate-500 hover:text-slate-800"
-                }`}
-              >
-                <Link2 className="w-4 h-4" />
-                <span>보험사 전산 및 수수료표</span>
-              </button>
-
-              <button
                 onClick={() => setMainTab("OFFERS_INBOX")}
                 className={`py-3.5 border-b-2 transition flex items-center gap-2 whitespace-nowrap ${
                   mainTab === "OFFERS_INBOX"
@@ -2235,216 +2172,6 @@ export default function App() {
                 </div>
               ))}
             </div>
-          </div>
-        )}
-
-        {/* 탭 2: 보험사 전산 및 수수료표 */}
-        {mainTab === "INSURER_CONNECT" && (
-          <div className="space-y-6">
-            {/* 검색 및 상단 카테고리 필터 버튼 */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
-              <div className="relative w-full sm:w-96">
-                <Search className="w-4 h-4 absolute left-3.5 top-3 text-slate-400" />
-                <input
-                  type="text"
-                  placeholder="보험사 이름으로 검색..."
-                  value={insurerSearchQuery}
-                  onChange={(e) => setInsurerSearchQuery(e.target.value)}
-                  className="w-full bg-white border border-slate-200 rounded-full pl-10 pr-4 py-2.5 text-xs shadow-sm focus:ring-2 focus:ring-blue-500 outline-none"
-                />
-              </div>
-
-              <div className="flex items-center gap-1.5 bg-slate-200/60 p-1 rounded-full text-xs self-end sm:self-auto">
-                <button
-                  onClick={() => setInsurerFilterTab("ALL")}
-                  className={`px-4 py-1.5 rounded-full font-bold transition ${
-                    insurerFilterTab === "ALL"
-                      ? "bg-blue-600 text-white shadow-sm"
-                      : "text-slate-600 hover:text-slate-900"
-                  }`}
-                >
-                  전체 ({MOCK_INSURERS_DETAIL.life.length + MOCK_INSURERS_DETAIL.nonLife.length})
-                </button>
-                <button
-                  onClick={() => setInsurerFilterTab("LIFE")}
-                  className={`px-4 py-1.5 rounded-full font-bold transition ${
-                    insurerFilterTab === "LIFE"
-                      ? "bg-blue-600 text-white shadow-sm"
-                      : "text-slate-600 hover:text-slate-900"
-                  }`}
-                >
-                  생명보험사 ({MOCK_INSURERS_DETAIL.life.length})
-                </button>
-                <button
-                  onClick={() => setInsurerFilterTab("NON_LIFE")}
-                  className={`px-4 py-1.5 rounded-full font-bold transition ${
-                    insurerFilterTab === "NON_LIFE"
-                      ? "bg-blue-600 text-white shadow-sm"
-                      : "text-slate-600 hover:text-slate-900"
-                  }`}
-                >
-                  손해보험사 ({MOCK_INSURERS_DETAIL.nonLife.length})
-                </button>
-              </div>
-            </div>
-
-            {/* 생명보험사 섹션 */}
-            {(insurerFilterTab === "ALL" || insurerFilterTab === "LIFE") && (
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="text-blue-600 font-extrabold text-xs">01</span>
-                    <h2 className="text-base font-black text-slate-900">생명보험사 (총 22개사)</h2>
-                  </div>
-                  <span className="bg-blue-50 text-blue-600 text-[11px] font-bold px-2.5 py-0.5 rounded-full">
-                    {
-                      MOCK_INSURERS_DETAIL.life.filter((item) =>
-                        item.name.toLowerCase().includes(insurerSearchQuery.toLowerCase())
-                      ).length
-                    }개사 조회됨
-                  </span>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
-                  {MOCK_INSURERS_DETAIL.life
-                    .filter((item) =>
-                      item.name.toLowerCase().includes(insurerSearchQuery.toLowerCase())
-                    )
-                    .map((item, idx) => (
-                      <div
-                        key={idx}
-                        className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm hover:shadow-md hover:border-blue-400 transition space-y-3 flex flex-col justify-between"
-                      >
-                        <div className="space-y-2">
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-1.5">
-                              <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center text-[10px] font-black text-blue-600 shrink-0">
-                                {item.name.substring(0, 1)}
-                              </div>
-                              <h3 className="font-bold text-slate-900 text-xs">{item.name}</h3>
-                            </div>
-                            <span className="bg-emerald-50 text-emerald-600 border border-emerald-200 text-[9px] px-1.5 py-0.5 rounded font-extrabold">
-                              {item.status}
-                            </span>
-                          </div>
-
-                          <div className="bg-slate-50 p-2.5 rounded-lg space-y-1 border border-slate-100">
-                            <div className="flex justify-between items-center text-[11px]">
-                              <span className="text-slate-400">최대 수수료율</span>
-                              <span className="font-black text-blue-600">{item.maxCommission}</span>
-                            </div>
-                            <div className="flex justify-between items-center text-[10px]">
-                              <span className="text-slate-400">초년도/총지급</span>
-                              <span className="font-semibold text-slate-700">{item.firstMonth} / {item.total12}</span>
-                            </div>
-                          </div>
-
-                          <div className="space-y-1 text-[10px] text-slate-500 pt-1">
-                            <div className="flex items-center justify-between">
-                              <span className="flex items-center gap-1"><Headphones className="w-3 h-3 text-slate-400" /> 콜센터</span>
-                              <span className="font-mono text-slate-700">{item.phone}</span>
-                            </div>
-                            <div className="flex items-center justify-between">
-                              <span className="flex items-center gap-1"><PhoneCall className="w-3 h-3 text-slate-400" /> 인콜지원</span>
-                              <span className="font-mono text-slate-700">{item.inCall}</span>
-                            </div>
-                            <div className="flex items-center justify-between">
-                              <span className="flex items-center gap-1"><Printer className="w-3 h-3 text-slate-400" /> 팩스번호</span>
-                              <span className="font-mono text-slate-700">{item.fax}</span>
-                            </div>
-                          </div>
-                        </div>
-
-                        <button 
-                          onClick={() => alert(`${item.name} 전산 매뉴얼 및 수수료 상세표 다운로드 요청`)}
-                          className="w-full mt-2 bg-slate-100 hover:bg-blue-50 hover:text-blue-600 text-slate-600 font-bold py-1.5 rounded-lg text-[11px] transition text-center"
-                        >
-                          전산 지원 및 상세 수수료표
-                        </button>
-                      </div>
-                    ))}
-                </div>
-              </div>
-            )}
-
-            {/* 손해보험사 섹션 */}
-            {(insurerFilterTab === "ALL" || insurerFilterTab === "NON_LIFE") && (
-              <div className="space-y-4 pt-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="text-blue-600 font-extrabold text-xs">02</span>
-                    <h2 className="text-base font-black text-slate-900">손해보험사 (총 13개사)</h2>
-                  </div>
-                  <span className="bg-blue-50 text-blue-600 text-[11px] font-bold px-2.5 py-0.5 rounded-full">
-                    {
-                      MOCK_INSURERS_DETAIL.nonLife.filter((item) =>
-                        item.name.toLowerCase().includes(insurerSearchQuery.toLowerCase())
-                      ).length
-                    }개사 조회됨
-                  </span>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
-                  {MOCK_INSURERS_DETAIL.nonLife
-                    .filter((item) =>
-                      item.name.toLowerCase().includes(insurerSearchQuery.toLowerCase())
-                    )
-                    .map((item, idx) => (
-                      <div
-                        key={idx}
-                        className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm hover:shadow-md hover:border-blue-400 transition space-y-3 flex flex-col justify-between"
-                      >
-                        <div className="space-y-2">
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-1.5">
-                              <div className="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center text-[10px] font-black text-emerald-600 shrink-0">
-                                {item.name.substring(0, 1)}
-                              </div>
-                              <h3 className="font-bold text-slate-900 text-xs">{item.name}</h3>
-                            </div>
-                            <span className="bg-emerald-50 text-emerald-600 border border-emerald-200 text-[9px] px-1.5 py-0.5 rounded font-extrabold">
-                              {item.status}
-                            </span>
-                          </div>
-
-                          <div className="bg-slate-50 p-2.5 rounded-lg space-y-1 border border-slate-100">
-                            <div className="flex justify-between items-center text-[11px]">
-                              <span className="text-slate-400">최대 수수료율</span>
-                              <span className="font-black text-emerald-600">{item.maxCommission}</span>
-                            </div>
-                            <div className="flex justify-between items-center text-[10px]">
-                              <span className="text-slate-400">초년도/총지급</span>
-                              <span className="font-semibold text-slate-700">{item.firstMonth} / {item.total12}</span>
-                            </div>
-                          </div>
-
-                          <div className="space-y-1 text-[10px] text-slate-500 pt-1">
-                            <div className="flex items-center justify-between">
-                              <span className="flex items-center gap-1"><Headphones className="w-3 h-3 text-slate-400" /> 콜센터</span>
-                              <span className="font-mono text-slate-700">{item.phone}</span>
-                            </div>
-                            <div className="flex items-center justify-between">
-                              <span className="flex items-center gap-1"><PhoneCall className="w-3 h-3 text-slate-400" /> 인콜지원</span>
-                              <span className="font-mono text-slate-700">{item.inCall}</span>
-                            </div>
-                            <div className="flex items-center justify-between">
-                              <span className="flex items-center gap-1"><Printer className="w-3 h-3 text-slate-400" /> 팩스번호</span>
-                              <span className="font-mono text-slate-700">{item.fax}</span>
-                            </div>
-                          </div>
-                        </div>
-
-                        <button 
-                          onClick={() => alert(`${item.name} 전산 매뉴얼 및 수수료 상세표 다운로드 요청`)}
-                          className="w-full mt-2 bg-slate-100 hover:bg-emerald-50 hover:text-emerald-600 text-slate-600 font-bold py-1.5 rounded-lg text-[11px] transition text-center"
-                        >
-                          전산 지원 및 상세 수수료표
-                        </button>
-                      </div>
-                    ))}
-                </div>
-              </div>
-            )}
           </div>
         )}
 
