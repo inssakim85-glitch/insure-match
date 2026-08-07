@@ -41,6 +41,8 @@ const MOCK_GA_FULL_LIST = [
     guaranteedCommission: "최소 88.0% 보장 (경력·실적별 최대 93.5%까지)",
     lifeCommission: "생보 92.0% (12개사 연동)",
     nonLifeCommission: "손보 95.0% (10개사 연동)",
+    incentiveNote: "이번 분기 메리츠·DB 손보 신규 계약 대리점 추가시상 최대 350% 진행 중 (프로모션 기간 한정)",
+    incentiveUpdatedAt: "2026-07",
     settlement: "최대 1,500만원 (초기 3개월 지급)",
     dbSupport: "월 30개 무료 지원 (재무상담/보장분석 고품질 DB)",
     retention: "13회차 94.2%",
@@ -62,6 +64,8 @@ const MOCK_GA_FULL_LIST = [
     guaranteedCommission: "최소 85.0% 보장 (경력·실적별 최대 91.5%까지)",
     lifeCommission: "생보 90.5% (전 생보사 연동)",
     nonLifeCommission: "손보 92.5% (장기/자동차 수수료 우수)",
+    incentiveNote: "삼성화재 장기보장성 익월 시상 280% + 신인 정착 지원금 별도 지급 (2026년 3분기 한정)",
+    incentiveUpdatedAt: "2026-08",
     settlement: "최대 1,200만원 지원",
     dbSupport: "월 50개 제공 (퍼널 맞춤형 DB)",
     retention: "13회차 91.8%",
@@ -82,6 +86,8 @@ const MOCK_GA_FULL_LIST = [
     guaranteedCommission: "최소 86.0% 보장 (경력·실적별 최대 92.0%까지)",
     lifeCommission: "생보 93.0% (종신/변액 특화)",
     nonLifeCommission: "손보 91.0%",
+    incentiveNote: "현재 별도 진행 중인 시책 없음 (상시 조건으로만 운영)",
+    incentiveUpdatedAt: "2026-08",
     settlement: "최대 1,000만원 (일시 정착금 선택 가능)",
     dbSupport: "월 25개 지원 (법인/VIP DB 지원)",
     retention: "13회차 92.5%",
@@ -815,10 +821,14 @@ export default function App() {
     branch: "서초 지점",
     contactName: "김민준 매니저",
     contactPhone: "010-1234-5678",
-    commissionMin: "88",
-    commissionMax: "93",
+    lifeCommissionMin: "85",
+    lifeCommissionMax: "90.5",
+    nonLifeCommissionMin: "87",
+    nonLifeCommissionMax: "92.5",
     settlementSupportPercent: "100",
     dbSupport: "월 30개 무료 지원",
+    incentiveNote: "삼성화재 장기보장성 익월 시상 280% + 신인 정착 지원금 별도 지급 (2026년 3분기 한정)",
+    incentiveUpdatedAt: "2026-08",
     intro: "설계사 개개인의 경력과 실적에 맞춰 최적의 조건을 개별 제안드립니다."
   });
 
@@ -2099,6 +2109,15 @@ export default function App() {
                       상세 수수료표 및 이직 상담 신청
                     </button>
                   </div>
+
+                  <div className="p-3 rounded-xl bg-amber-50/60 border border-amber-100 flex items-start gap-2 text-xs">
+                    <Megaphone className="w-3.5 h-3.5 text-amber-600 shrink-0 mt-0.5" />
+                    <div>
+                      <span className="text-amber-700 font-extrabold text-[11px]">이번 시즌 시책·포상금 (변동 가능)</span>
+                      <p className="text-slate-600 text-[11px] leading-relaxed mt-0.5">{ga.incentiveNote}</p>
+                      <p className="text-slate-400 text-[10px] mt-1">최근 업데이트: {ga.incentiveUpdatedAt}</p>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -2709,7 +2728,10 @@ export default function App() {
                   <p className="text-slate-500 text-[11px] leading-relaxed pt-1">{gaProfile.intro}</p>
                   <div className="flex flex-wrap gap-1.5 pt-1">
                     <span className="bg-white border border-slate-200 text-slate-600 text-[10px] font-bold px-2 py-1 rounded-full">
-                      수수료 {gaProfile.commissionMin}~{gaProfile.commissionMax}%
+                      생보 {gaProfile.lifeCommissionMin}~{gaProfile.lifeCommissionMax}%
+                    </span>
+                    <span className="bg-white border border-slate-200 text-slate-600 text-[10px] font-bold px-2 py-1 rounded-full">
+                      손보 {gaProfile.nonLifeCommissionMin}~{gaProfile.nonLifeCommissionMax}%
                     </span>
                     <span className="bg-white border border-slate-200 text-slate-600 text-[10px] font-bold px-2 py-1 rounded-full">
                       정착지원금{" "}
@@ -2721,6 +2743,9 @@ export default function App() {
                       DB {gaProfile.dbSupport}
                     </span>
                   </div>
+                  <p className="text-amber-700 text-[10px] font-bold pt-1">
+                    시책·포상금: {gaProfile.incentiveNote} (업데이트 {gaProfile.incentiveUpdatedAt})
+                  </p>
                 </div>
               </div>
             </div>
@@ -3014,27 +3039,49 @@ export default function App() {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-extrabold text-slate-700 text-xs">수수료 지급률 (범위)</label>
+                  <label className="font-extrabold text-slate-700 text-xs">생명보험(인보험) 수수료 지급률 (범위)</label>
                   <div className="flex items-center gap-2">
                     <input
                       type="text"
-                      value={gaProfile.commissionMin}
-                      onChange={(e) => setGaProfile({ ...gaProfile, commissionMin: e.target.value })}
-                      placeholder="최소 (예: 88)"
+                      value={gaProfile.lifeCommissionMin}
+                      onChange={(e) => setGaProfile({ ...gaProfile, lifeCommissionMin: e.target.value })}
+                      placeholder="최소 (예: 85)"
                       className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-blue-500"
                     />
                     <span className="text-slate-400 font-bold text-xs shrink-0">% ~</span>
                     <input
                       type="text"
-                      value={gaProfile.commissionMax}
-                      onChange={(e) => setGaProfile({ ...gaProfile, commissionMax: e.target.value })}
-                      placeholder="최대 (예: 93)"
+                      value={gaProfile.lifeCommissionMax}
+                      onChange={(e) => setGaProfile({ ...gaProfile, lifeCommissionMax: e.target.value })}
+                      placeholder="최대 (예: 90.5)"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                    <span className="text-slate-400 font-bold text-xs shrink-0">%</span>
+                  </div>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="font-extrabold text-slate-700 text-xs">손해보험(물보험) 수수료 지급률 (범위)</label>
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="text"
+                      value={gaProfile.nonLifeCommissionMin}
+                      onChange={(e) => setGaProfile({ ...gaProfile, nonLifeCommissionMin: e.target.value })}
+                      placeholder="최소 (예: 87)"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                    <span className="text-slate-400 font-bold text-xs shrink-0">% ~</span>
+                    <input
+                      type="text"
+                      value={gaProfile.nonLifeCommissionMax}
+                      onChange={(e) => setGaProfile({ ...gaProfile, nonLifeCommissionMax: e.target.value })}
+                      placeholder="최대 (예: 92.5)"
                       className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-blue-500"
                     />
                     <span className="text-slate-400 font-bold text-xs shrink-0">%</span>
                   </div>
                   <p className="text-slate-400 text-[11px] leading-relaxed pt-0.5">
-                    경력·실적에 따라 지급 가능한 수수료율 범위를 여유 있게 입력해주세요.
+                    생보/손보 상품군별로 수수료 체계가 달라 두 범위를 나눠서 받고 있어요. 경력·실적에 따라 지급 가능한 범위를 여유 있게 입력해주세요.
                   </p>
                 </div>
 
@@ -3070,6 +3117,29 @@ export default function App() {
                       </option>
                     ))}
                   </select>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="font-extrabold text-slate-700 text-xs">이번 시즌 시책·포상금 (선택 입력)</label>
+                  <textarea
+                    rows={2}
+                    value={gaProfile.incentiveNote}
+                    onChange={(e) => setGaProfile({ ...gaProfile, incentiveNote: e.target.value })}
+                    placeholder="예: OO보험사 신규 계약 시 대리점 추가시상 최대 OOO% (프로모션 기간 한정)"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-medium outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                  <div className="flex items-center gap-2 pt-1">
+                    <span className="text-slate-500 font-bold text-xs shrink-0">업데이트 기준월</span>
+                    <input
+                      type="month"
+                      value={gaProfile.incentiveUpdatedAt}
+                      onChange={(e) => setGaProfile({ ...gaProfile, incentiveUpdatedAt: e.target.value })}
+                      className="bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-xs font-bold outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
+                  <p className="text-slate-400 text-[11px] leading-relaxed pt-0.5">
+                    시책·포상금은 보험사·기간에 따라 자주 바뀌는 항목이라 정확한 %보다는 대표 시책과 기준월을 함께 안내해주세요. 설계사에게는 "참고용 스냅샷"으로 노출되며, 최종 조건은 개별 상담에서 확정됩니다.
+                  </p>
                 </div>
               </div>
 
