@@ -779,6 +779,45 @@ export default function App() {
     }>
   >([]);
 
+  // GA ↔ FC 1:1 익명 메시지 (제안 조건 조율용). 제안(offer) id를 키로 대화 스레드를 관리합니다.
+  const [messageThreads, setMessageThreads] = useState<
+    Record<number, Array<{ sender: "FC" | "GA"; text: string; time: string }>>
+  >({
+    101: [
+      {
+        sender: "GA",
+        text: "안녕하세요! 제안드린 조건 관련해서 궁금하신 점 있으시면 편하게 문의 주세요.",
+        time: "2026-08-04 15:10"
+      }
+    ],
+    102: [
+      {
+        sender: "GA",
+        text: "정착지원금은 첫 달 500만원, 이후 5개월간 매월 140만원씩 분할 지급 가능합니다.",
+        time: "2026-08-03 11:20"
+      }
+    ]
+  });
+  const [activeMessageThread, setActiveMessageThread] = useState<{ id: number; title: string } | null>(null);
+  const [messageDraft, setMessageDraft] = useState("");
+
+  // 메시지 전송 (현재 로그인 역할을 발신자로 기록)
+  const handleSendMessage = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!activeMessageThread || !messageDraft.trim()) return;
+    const now = new Date();
+    const pad = (n: number) => String(n).padStart(2, "0");
+    const time = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())} ${pad(
+      now.getHours()
+    )}:${pad(now.getMinutes())}`;
+    const sender: "FC" | "GA" = userRole === "GA" ? "GA" : "FC";
+    setMessageThreads((prev) => ({
+      ...prev,
+      [activeMessageThread.id]: [...(prev[activeMessageThread.id] || []), { sender, text: messageDraft.trim(), time }]
+    }));
+    setMessageDraft("");
+  };
+
   // 우리 GA 기본 정보 (최종 제안 조건은 설계사마다 달라 여기서는 어필 가능한 범위만 관리)
   const [gaProfile, setGaProfile] = useState({
     gaName: "프리미어 쉴드 GA",
@@ -2222,13 +2261,21 @@ export default function App() {
                   </div>
 
                   <div className="flex gap-2 justify-end pt-1">
-                    <button 
+                    <button
+                      type="button"
+                      onClick={() => setActiveMessageThread({ id: offer.id, title: offer.gaName })}
+                      className="px-4 py-2 bg-white border border-slate-200 hover:border-blue-300 text-slate-700 font-bold rounded-xl text-xs transition flex items-center gap-1.5"
+                    >
+                      <MessageSquare className="w-3.5 h-3.5" />
+                      <span>메시지{messageThreads[offer.id]?.length ? ` (${messageThreads[offer.id].length})` : ""}</span>
+                    </button>
+                    <button
                       onClick={() => alert("제안을 거절하였습니다.")}
                       className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold rounded-xl text-xs transition"
                     >
                       거절하기
                     </button>
-                    <button 
+                    <button
                       onClick={() => alert("제안을 수락하였습니다! 담당 매니저가 매칭 대화방으로 안내해 드립니다.")}
                       className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-extrabold rounded-xl text-xs transition shadow-md"
                     >
@@ -2269,6 +2316,39 @@ export default function App() {
                     : `${socialProvider === "naver" ? "네이버" : "카카오"} 인증 실적 자동 불러오기`}
                 </span>
               </button>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                <div className="flex items-center gap-1.5 text-slate-400 text-[10px] font-semibold">
+                  <Search className="w-3.5 h-3.5" />
+                  <span>프로필 조회수 (이번 주)</span>
+                </div>
+                <p className="text-xl font-black text-slate-900 mt-1">46회</p>
+              </div>
+              <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                <div className="flex items-center gap-1.5 text-slate-400 text-[10px] font-semibold">
+                  <Inbox className="w-3.5 h-3.5" />
+                  <span>받은 제안</span>
+                </div>
+                <p className="text-xl font-black text-slate-900 mt-1">{MOCK_OFFERS_RECEIVED.length}건</p>
+              </div>
+              <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                <div className="flex items-center gap-1.5 text-slate-400 text-[10px] font-semibold">
+                  <MessageSquare className="w-3.5 h-3.5" />
+                  <span>진행중 대화</span>
+                </div>
+                <p className="text-xl font-black text-slate-900 mt-1">{Object.keys(messageThreads).length}건</p>
+              </div>
+              <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                <div className="flex items-center gap-1.5 text-slate-400 text-[10px] font-semibold">
+                  <UserCheck className="w-3.5 h-3.5" />
+                  <span>실적 인증 상태</span>
+                </div>
+                <p className={`text-xl font-black mt-1 ${profile.isVerified ? "text-emerald-600" : "text-slate-400"}`}>
+                  {profile.isVerified ? "인증완료" : "미인증"}
+                </p>
+              </div>
             </div>
 
             <form onSubmit={handleOpenPreview} className="space-y-6">
@@ -2786,6 +2866,15 @@ export default function App() {
                         "{offer.message}"
                       </div>
                     )}
+
+                    <button
+                      type="button"
+                      onClick={() => setActiveMessageThread({ id: offer.id, title: offer.candidateNickname })}
+                      className="w-full sm:w-auto px-4 py-2 bg-white border border-slate-200 hover:border-blue-300 text-slate-700 font-bold rounded-xl text-[11px] transition flex items-center justify-center gap-1.5"
+                    >
+                      <MessageSquare className="w-3.5 h-3.5" />
+                      <span>메시지{messageThreads[offer.id]?.length ? ` (${messageThreads[offer.id].length})` : ""}</span>
+                    </button>
 
                     {offer.status === "매칭 완료" && (
                       <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-3 text-[11px] text-emerald-800">
@@ -3973,6 +4062,74 @@ export default function App() {
                 </>
               )}
             </div>
+          </div>
+        </div>
+      )}
+
+      {activeMessageThread && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md h-[80vh] max-h-[600px] flex flex-col overflow-hidden">
+            <div className="p-4 border-b border-slate-100 flex items-center justify-between shrink-0">
+              <div>
+                <p className="text-[10px] text-slate-400 font-bold">
+                  {userRole === "GA" ? "설계사 후보와의 대화" : "GA 매니저와의 대화"}
+                </p>
+                <h3 className="font-black text-sm text-slate-900">{activeMessageThread.title}</h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setActiveMessageThread(null);
+                  setMessageDraft("");
+                }}
+                className="text-slate-400 hover:text-slate-600 transition"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-slate-50">
+              {(messageThreads[activeMessageThread.id] || []).length === 0 && (
+                <p className="text-slate-400 text-xs text-center pt-8">
+                  아직 주고받은 메시지가 없습니다. 조건 관련 궁금한 점을 편하게 물어보세요.
+                </p>
+              )}
+              {(messageThreads[activeMessageThread.id] || []).map((msg, idx) => {
+                const isMine = msg.sender === (userRole === "GA" ? "GA" : "FC");
+                return (
+                  <div key={idx} className={`flex ${isMine ? "justify-end" : "justify-start"}`}>
+                    <div className={`max-w-[75%] ${isMine ? "items-end" : "items-start"} flex flex-col gap-0.5`}>
+                      <div
+                        className={`px-3.5 py-2.5 rounded-2xl text-xs leading-relaxed ${
+                          isMine
+                            ? "bg-blue-600 text-white rounded-br-sm"
+                            : "bg-white border border-slate-200 text-slate-700 rounded-bl-sm"
+                        }`}
+                      >
+                        {msg.text}
+                      </div>
+                      <span className="text-slate-400 text-[10px] px-1">{msg.time}</span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            <form onSubmit={handleSendMessage} className="p-3 border-t border-slate-100 flex items-center gap-2 shrink-0">
+              <input
+                type="text"
+                value={messageDraft}
+                onChange={(e) => setMessageDraft(e.target.value)}
+                placeholder="메시지를 입력하세요 (실명·연락처는 노출되지 않아요)"
+                className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <button
+                type="submit"
+                className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-2.5 rounded-xl text-xs transition shrink-0"
+              >
+                전송
+              </button>
+            </form>
           </div>
         </div>
       )}
