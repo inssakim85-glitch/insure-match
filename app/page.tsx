@@ -299,7 +299,7 @@ const LANDING_TESTIMONIALS = [
     initial: "이",
     name: "이OO 설계사",
     meta: "신입 · 첫 위촉",
-    quote: "신입이라 막막했는데 매니저님이 제 상황에 맞는 GA를 직접 골라주셔서 안심하고 시작할 수 있었어요.",
+    quote: "신입이라 막막했는데 조건별로 한눈에 비교할 수 있어서 안심하고 시작할 수 있었어요.",
     tag: "신입 정착 지원"
   },
   {
@@ -351,7 +351,7 @@ const MOCK_COMMUNITY_POSTS = [
     badge: "신입 · 첫 위촉",
     title: "신입인데도 저에게 맞는 GA를 찾을 수 있었어요",
     content:
-      "신입이라 막막했는데 매니저님이 제 상황에 맞는 GA를 직접 골라주셔서 안심하고 시작할 수 있었어요. 정착지원금 조건도 꼼꼼히 비교해봤습니다.",
+      "신입이라 막막했는데 조건별로 한눈에 비교할 수 있어서 안심하고 시작할 수 있었어요. 정착지원금 조건도 꼼꼼히 비교해봤습니다.",
     tag: "신입 정착 지원",
     likes: 18,
     comments: 9,
@@ -1065,14 +1065,14 @@ export default function App() {
   // ==========================================
   if (!isLoggedIn && authView === "LOGIN") {
     return (
-      <div className="min-h-screen bg-[#0d1424] text-white flex items-center justify-center p-4 py-12 relative overflow-hidden">
-        <div className="pointer-events-none absolute -top-40 -left-40 w-[32rem] h-[32rem] rounded-full bg-blue-600/10 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-40 -right-20 w-[36rem] h-[36rem] rounded-full bg-amber-400/10 blur-3xl" />
+      <div className="min-h-screen bg-[#fdfaf5] text-[#2b2621] flex items-center justify-center p-4 py-12 relative overflow-hidden">
+        <div className="pointer-events-none absolute -top-40 -left-40 w-[32rem] h-[32rem] rounded-full bg-[#d97a4d]/10 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-40 -right-20 w-[36rem] h-[36rem] rounded-full bg-[#e9a374]/10 blur-3xl" />
 
         <button
           type="button"
           onClick={() => setAuthView("LANDING")}
-          className="absolute top-6 left-6 z-20 flex items-center gap-1.5 text-slate-400 hover:text-white text-xs font-bold transition"
+          className="absolute top-6 left-6 z-20 flex items-center gap-1.5 text-[#8a7a68] hover:text-[#2b2621] text-xs font-bold transition"
         >
           <span aria-hidden="true">←</span>
           <span>홈으로</span>
@@ -1081,55 +1081,55 @@ export default function App() {
         <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-24 items-center relative z-10">
           <div className="w-full max-w-xl lg:max-w-2xl mx-auto lg:mx-0 space-y-8 text-center lg:text-left">
             <div className="flex items-center justify-center lg:justify-start gap-2.5">
-              <Shield className="w-7 h-7 xl:w-8 xl:h-8 text-blue-400" />
-              <span className="font-black text-xl sm:text-2xl xl:text-3xl tracking-wide text-white">인슈어매치</span>
+              <Shield className="w-7 h-7 xl:w-8 xl:h-8 text-[#d97a4d]" />
+              <span className="font-black text-xl sm:text-2xl xl:text-3xl tracking-wide text-[#2b2621]">인슈어매치</span>
             </div>
 
-            <div className="inline-flex items-center gap-2 bg-[#162950] border border-[#234380] text-blue-400 text-xs xl:text-sm px-4 xl:px-5 py-1.5 xl:py-2 rounded-full font-bold shadow-inner">
-              <Target className="w-4 h-4 text-blue-400" />
+            <div className="inline-flex items-center gap-2 bg-white border border-[#eee3d3] text-[#b35a2e] text-xs xl:text-sm px-4 xl:px-5 py-1.5 xl:py-2 rounded-full font-bold shadow-inner">
+              <Target className="w-4 h-4 text-[#d97a4d]" />
               <span>누적 매칭 4,200건 · 제휴 GA사 87곳</span>
             </div>
 
             <div className="space-y-4">
               <h1 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-black tracking-wide leading-snug whitespace-nowrap">
-                <span className="text-white">더 나은 조건, 더 나은 미래</span>
+                <span className="text-[#2b2621]">더 나은 조건, 더 나은 미래</span>
                 <br />
-                <span className="text-amber-400">나에게 꼭 맞는 GA를 찾으세요</span>
+                <span className="text-[#d97a4d]">나에게 꼭 맞는 GA를 찾으세요</span>
               </h1>
-              <p className="text-slate-400 text-xs sm:text-sm xl:text-base font-medium leading-relaxed max-w-md xl:max-w-lg mx-auto lg:mx-0">
-                수수료율, 지원제도, 전산시스템까지 — 여러 GA의 조건을 한눈에 비교하고, 전담 매니저의 1:1 컨설팅으로 이직·위촉의 리스크를 최소화하세요.
+              <p className="text-[#6b5d4f] text-xs sm:text-sm xl:text-base font-medium leading-relaxed max-w-md xl:max-w-lg mx-auto lg:mx-0">
+                수수료율, 지원제도, 전산시스템까지 — 여러 GA의 조건을 한눈에 비교하고, 나에게 가장 유리한 곳을 직접 선택하세요.
               </p>
             </div>
 
-            <div className="w-full grid grid-cols-2 sm:grid-cols-4 gap-y-5 gap-x-6 pt-6 border-t border-[#1c2740]">
+            <div className="w-full grid grid-cols-2 sm:grid-cols-4 gap-y-5 gap-x-6 pt-6 border-t border-[#eee3d3]">
               <div>
-                <p className="text-base sm:text-lg xl:text-xl font-black text-white whitespace-nowrap">4,200+</p>
-                <p className="text-[10px] sm:text-[11px] xl:text-xs text-slate-500 font-semibold mt-0.5 whitespace-nowrap">누적 매칭 건수</p>
+                <p className="text-base sm:text-lg xl:text-xl font-black text-[#2b2621] whitespace-nowrap">4,200+</p>
+                <p className="text-[10px] sm:text-[11px] xl:text-xs text-[#8a7a68] font-semibold mt-0.5 whitespace-nowrap">누적 매칭 건수</p>
               </div>
               <div>
-                <p className="text-base sm:text-lg xl:text-xl font-black text-white whitespace-nowrap">87개</p>
-                <p className="text-[10px] sm:text-[11px] xl:text-xs text-slate-500 font-semibold mt-0.5 whitespace-nowrap">제휴 GA사</p>
+                <p className="text-base sm:text-lg xl:text-xl font-black text-[#2b2621] whitespace-nowrap">87개</p>
+                <p className="text-[10px] sm:text-[11px] xl:text-xs text-[#8a7a68] font-semibold mt-0.5 whitespace-nowrap">제휴 GA사</p>
               </div>
               <div>
-                <p className="text-base sm:text-lg xl:text-xl font-black text-white whitespace-nowrap">평균 9일</p>
-                <p className="text-[10px] sm:text-[11px] xl:text-xs text-slate-500 font-semibold mt-0.5 whitespace-nowrap">매칭 소요 기간</p>
+                <p className="text-base sm:text-lg xl:text-xl font-black text-[#2b2621] whitespace-nowrap">평균 9일</p>
+                <p className="text-[10px] sm:text-[11px] xl:text-xs text-[#8a7a68] font-semibold mt-0.5 whitespace-nowrap">매칭 소요 기간</p>
               </div>
               <div>
-                <p className="text-base sm:text-lg xl:text-xl font-black text-white whitespace-nowrap">4.8 / 5</p>
-                <p className="text-[10px] sm:text-[11px] xl:text-xs text-slate-500 font-semibold mt-0.5 whitespace-nowrap">설계사 만족도</p>
+                <p className="text-base sm:text-lg xl:text-xl font-black text-[#2b2621] whitespace-nowrap">4.8 / 5</p>
+                <p className="text-[10px] sm:text-[11px] xl:text-xs text-[#8a7a68] font-semibold mt-0.5 whitespace-nowrap">설계사 만족도</p>
               </div>
             </div>
           </div>
 
-          <div ref={loginCardRef} className="w-full max-w-md lg:max-w-lg mx-auto lg:mx-0 bg-[#141c2e] border border-[#212c45] p-6 xl:p-8 rounded-3xl shadow-2xl space-y-5 text-left">
-            <div className="bg-[#0b101d] p-1.5 rounded-2xl grid grid-cols-3 gap-1 border border-[#1e293b]">
+          <div ref={loginCardRef} className="w-full max-w-md lg:max-w-lg mx-auto lg:mx-0 bg-white border border-[#eee3d3] p-6 xl:p-8 rounded-3xl shadow-2xl space-y-5 text-left">
+            <div className="bg-[#f7f0e6] p-1.5 rounded-2xl grid grid-cols-3 gap-1 border border-[#eee3d3]">
               <button
                 type="button"
                 onClick={() => setUserRole("FC")}
                 className={`py-3 rounded-xl font-extrabold text-[11px] flex items-center justify-center gap-1.5 transition ${
                   userRole === "FC"
-                    ? "bg-[#1d6bf3] text-white shadow-lg"
-                    : "text-slate-400 hover:text-slate-200"
+                    ? "bg-[#d97a4d] text-white shadow-lg"
+                    : "text-[#8a7a68] hover:text-[#2b2621]"
                 }`}
               >
                 <UserCheck className="w-3.5 h-3.5" />
@@ -1141,8 +1141,8 @@ export default function App() {
                 onClick={() => setUserRole("GA")}
                 className={`py-3 rounded-xl font-extrabold text-[11px] flex items-center justify-center gap-1.5 transition ${
                   userRole === "GA"
-                    ? "bg-[#1d6bf3] text-white shadow-lg"
-                    : "text-slate-400 hover:text-slate-200"
+                    ? "bg-[#d97a4d] text-white shadow-lg"
+                    : "text-[#8a7a68] hover:text-[#2b2621]"
                 }`}
               >
                 <Building2 className="w-3.5 h-3.5" />
@@ -1154,8 +1154,8 @@ export default function App() {
                 onClick={() => setUserRole("ADMIN")}
                 className={`py-3 rounded-xl font-extrabold text-[11px] flex items-center justify-center gap-1.5 transition ${
                   userRole === "ADMIN"
-                    ? "bg-[#1d6bf3] text-white shadow-lg"
-                    : "text-slate-400 hover:text-slate-200"
+                    ? "bg-[#d97a4d] text-white shadow-lg"
+                    : "text-[#8a7a68] hover:text-[#2b2621]"
                 }`}
               >
                 <Lock className="w-3.5 h-3.5" />
@@ -1165,13 +1165,13 @@ export default function App() {
 
             {userRole === "FC" && (
               <div className="space-y-4">
-                <div className="bg-[#16233b]/60 border border-[#21375c] p-4 rounded-2xl flex items-start gap-3">
-                  <Lock className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
+                <div className="bg-[#fbeee0] border border-[#f3ddc4] p-4 rounded-2xl flex items-start gap-3">
+                  <Lock className="w-5 h-5 text-[#d97a4d] shrink-0 mt-0.5" />
                   <div className="space-y-1">
-                    <h4 className="text-xs font-extrabold text-blue-300">
+                    <h4 className="text-xs font-extrabold text-[#b35a2e]">
                       100% 익명성 보장 & 전직 GA 차단
                     </h4>
-                    <p className="text-[11px] text-slate-400 leading-relaxed">
+                    <p className="text-[11px] text-[#6b5d4f] leading-relaxed">
                       간편 인증 시 본인 확인 용도로만 사용되며, 제안 승인 전까지 이름/연락처는 절대 공개되지 않습니다.
                     </p>
                   </div>
@@ -1202,7 +1202,7 @@ export default function App() {
             {userRole === "GA" && (
               <form onSubmit={handleGaLogin} className="space-y-3 pt-1">
                 <div>
-                  <label className="text-[11px] font-bold text-slate-300 mb-1 block">
+                  <label className="text-[11px] font-bold text-[#57493c] mb-1 block">
                     GA 사업자등록번호
                   </label>
                   <input
@@ -1210,12 +1210,12 @@ export default function App() {
                     placeholder="000-00-00000 ('-' 제외 가능)"
                     value={gaBusinessNum}
                     onChange={(e) => setGaBusinessNum(e.target.value)}
-                    className="w-full bg-[#0b101d] border border-[#212c45] text-white rounded-xl p-3 text-xs focus:border-blue-500 outline-none"
+                    className="w-full bg-[#faf6ef] border border-[#eee3d3] text-[#2b2621] rounded-xl p-3 text-xs focus:border-[#d97a4d] outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="text-[11px] font-bold text-slate-300 mb-1 block">
+                  <label className="text-[11px] font-bold text-[#57493c] mb-1 block">
                     GA 승인 코드 (지사 전용 코드)
                   </label>
                   <input
@@ -1223,13 +1223,13 @@ export default function App() {
                     placeholder="GA 고유 인증 코드를 입력하세요"
                     value={gaCode}
                     onChange={(e) => setGaCode(e.target.value)}
-                    className="w-full bg-[#0b101d] border border-[#212c45] text-white rounded-xl p-3 text-xs focus:border-blue-500 outline-none"
+                    className="w-full bg-[#faf6ef] border border-[#eee3d3] text-[#2b2621] rounded-xl p-3 text-xs focus:border-[#d97a4d] outline-none"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full bg-[#1d6bf3] hover:bg-blue-600 text-white font-extrabold py-3.5 rounded-xl text-xs transition shadow-lg mt-2"
+                  className="w-full bg-[#d97a4d] hover:bg-[#c96a3d] text-white font-extrabold py-3.5 rounded-xl text-xs transition shadow-lg mt-2"
                 >
                   GA 매니저 인증 로그인
                 </button>
@@ -1238,38 +1238,38 @@ export default function App() {
 
             {userRole === "ADMIN" && (
               <form onSubmit={handleAdminLogin} className="space-y-3 pt-1">
-                <div className="bg-[#16233b]/60 border border-[#21375c] p-3.5 rounded-2xl flex items-start gap-2.5">
-                  <Lock className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
-                  <p className="text-[11px] text-slate-400 leading-relaxed">
+                <div className="bg-[#fbeee0] border border-[#f3ddc4] p-3.5 rounded-2xl flex items-start gap-2.5">
+                  <Lock className="w-4 h-4 text-[#d97a4d] shrink-0 mt-0.5" />
+                  <p className="text-[11px] text-[#6b5d4f] leading-relaxed">
                     내부 운영진 전용 로그인입니다. 가입한 설계사·GA 계정 관리는 이 화면에서 진행합니다.
                   </p>
                 </div>
 
                 <div>
-                  <label className="text-[11px] font-bold text-slate-300 mb-1 block">관리자 계정</label>
+                  <label className="text-[11px] font-bold text-[#57493c] mb-1 block">관리자 계정</label>
                   <input
                     type="text"
                     placeholder="관리자 아이디를 입력하세요"
                     value={adminId}
                     onChange={(e) => setAdminId(e.target.value)}
-                    className="w-full bg-[#0b101d] border border-[#212c45] text-white rounded-xl p-3 text-xs focus:border-blue-500 outline-none"
+                    className="w-full bg-[#faf6ef] border border-[#eee3d3] text-[#2b2621] rounded-xl p-3 text-xs focus:border-[#d97a4d] outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="text-[11px] font-bold text-slate-300 mb-1 block">비밀번호</label>
+                  <label className="text-[11px] font-bold text-[#57493c] mb-1 block">비밀번호</label>
                   <input
                     type="password"
                     placeholder="비밀번호를 입력하세요"
                     value={adminPassword}
                     onChange={(e) => setAdminPassword(e.target.value)}
-                    className="w-full bg-[#0b101d] border border-[#212c45] text-white rounded-xl p-3 text-xs focus:border-blue-500 outline-none"
+                    className="w-full bg-[#faf6ef] border border-[#eee3d3] text-[#2b2621] rounded-xl p-3 text-xs focus:border-[#d97a4d] outline-none"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full bg-[#1d6bf3] hover:bg-blue-600 text-white font-extrabold py-3.5 rounded-xl text-xs transition shadow-lg mt-2"
+                  className="w-full bg-[#d97a4d] hover:bg-[#c96a3d] text-white font-extrabold py-3.5 rounded-xl text-xs transition shadow-lg mt-2"
                 >
                   관리자 로그인
                 </button>
@@ -1318,8 +1318,8 @@ export default function App() {
             <div className="p-5 space-y-4">
               {isSocialLoginLoading ? (
                 <div className="py-8 flex flex-col items-center justify-center gap-3">
-                  <RefreshCw className="w-7 h-7 text-blue-600 animate-spin" />
-                  <p className="text-slate-600 text-xs font-bold">
+                  <RefreshCw className="w-7 h-7 text-[#d97a4d] animate-spin" />
+                  <p className="text-[#57493c] text-xs font-bold">
                     {loginPopupProvider === "naver" ? "네이버" : "카카오"} 계정 확인 중...
                   </p>
                 </div>
@@ -1329,22 +1329,22 @@ export default function App() {
                     <div className="flex items-start gap-2.5">
                       <Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
                       <div>
-                        <p className="text-slate-800 text-xs font-bold">닉네임 · 프로필 사진</p>
-                        <p className="text-slate-400 text-[11px]">익명 프로필 표시용 (실명은 사용하지 않아요)</p>
+                        <p className="text-[#2b2621] text-xs font-bold">닉네임 · 프로필 사진</p>
+                        <p className="text-[#8a7a68] text-[11px]">익명 프로필 표시용 (실명은 사용하지 않아요)</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-2.5">
                       <Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
                       <div>
-                        <p className="text-slate-800 text-xs font-bold">
+                        <p className="text-[#2b2621] text-xs font-bold">
                           {loginPopupProvider === "naver" ? "네이버 아이디(이메일)" : "카카오계정(이메일)"}
                         </p>
-                        <p className="text-slate-400 text-[11px]">본인 확인 및 계정 식별 목적</p>
+                        <p className="text-[#8a7a68] text-[11px]">본인 확인 및 계정 식별 목적</p>
                       </div>
                     </div>
                   </div>
 
-                  <p className="text-slate-400 text-[10px] leading-relaxed border-t border-slate-100 pt-3">
+                  <p className="text-[#8a7a68] text-[10px] leading-relaxed border-t border-[#f7f0e6] pt-3">
                     동의하신 정보는 회원가입 및 본인 확인 목적으로만 사용되며, 실명·연락처는 GA 매니저에게 절대
                     공개되지 않습니다.
                   </p>
@@ -1353,7 +1353,7 @@ export default function App() {
                     <button
                       type="button"
                       onClick={() => setLoginPopupProvider(null)}
-                      className="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold py-3 rounded-xl text-xs transition"
+                      className="flex-1 bg-[#f7f0e6] hover:bg-[#eee3d3] text-[#57493c] font-bold py-3 rounded-xl text-xs transition"
                     >
                       취소
                     </button>
@@ -1385,33 +1385,33 @@ export default function App() {
   // ==========================================
   if (!isLoggedIn) {
     return (
-      <div className="min-h-screen bg-white text-slate-800">
+      <div className="min-h-screen bg-[#fdfaf5] text-[#2b2621]">
         {/* 상단 헤더 */}
-        <header className="sticky top-0 z-30 bg-[#0d1424]/95 backdrop-blur border-b border-[#1c2740]">
+        <header className="sticky top-0 z-30 bg-[#fdfaf5]/90 backdrop-blur border-b border-[#eee3d3]">
           <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Shield className="w-6 h-6 text-blue-400" />
-              <span className="font-black text-lg text-white tracking-wide">인슈어매치</span>
+              <Shield className="w-6 h-6 text-[#d97a4d]" />
+              <span className="font-black text-lg text-[#2b2621] tracking-wide">인슈어매치</span>
             </div>
             <div className="flex items-center gap-2 sm:gap-3">
               <button
                 type="button"
                 onClick={() => openLogin(userRole)}
-                className="text-slate-300 hover:text-white text-xs font-bold px-2.5 sm:px-3 py-2 transition"
+                className="text-[#6b5d4f] hover:text-[#2b2621] text-xs font-bold px-2.5 sm:px-3 py-2 transition"
               >
                 로그인
               </button>
               <button
                 type="button"
                 onClick={() => openLogin("FC")}
-                className="bg-[#1d6bf3] hover:bg-blue-600 text-white text-xs font-bold px-3 sm:px-4 py-2 rounded-lg transition whitespace-nowrap"
+                className="bg-[#d97a4d] hover:bg-[#c96a3d] text-white text-xs font-bold px-3 sm:px-4 py-2 rounded-lg transition whitespace-nowrap"
               >
                 FC 회원가입
               </button>
               <button
                 type="button"
                 onClick={() => openLogin("GA")}
-                className="bg-white/10 hover:bg-white/20 text-white text-xs font-bold px-3 sm:px-4 py-2 rounded-lg border border-white/10 transition whitespace-nowrap"
+                className="bg-white hover:bg-[#f7f0e6] text-[#4a3f35] text-xs font-bold px-3 sm:px-4 py-2 rounded-lg border border-[#eee3d3] transition whitespace-nowrap"
               >
                 GA 회원가입
               </button>
@@ -1420,40 +1420,40 @@ export default function App() {
         </header>
 
         {/* 히어로 섹션 */}
-        <section className="bg-[#0d1424] text-white relative overflow-hidden">
-          <div className="pointer-events-none absolute -top-40 -left-40 w-[32rem] h-[32rem] rounded-full bg-blue-600/10 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-40 -right-20 w-[36rem] h-[36rem] rounded-full bg-amber-400/10 blur-3xl" />
+        <section className="bg-[#fdfaf5] text-[#2b2621] relative overflow-hidden">
+          <div className="pointer-events-none absolute -top-40 -left-40 w-[32rem] h-[32rem] rounded-full bg-[#d97a4d]/10 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-40 -right-20 w-[36rem] h-[36rem] rounded-full bg-[#e9a374]/10 blur-3xl" />
           <div className="max-w-4xl mx-auto px-6 py-20 text-center relative z-10 space-y-8">
-            <div className="inline-flex items-center gap-2 bg-[#162950] border border-[#234380] text-blue-400 text-xs sm:text-sm px-4 py-1.5 rounded-full font-bold shadow-inner">
-              <Target className="w-4 h-4 text-blue-400" />
+            <div className="inline-flex items-center gap-2 bg-white border border-[#eee3d3] text-[#b35a2e] text-xs sm:text-sm px-4 py-1.5 rounded-full font-bold shadow-inner">
+              <Target className="w-4 h-4 text-[#d97a4d]" />
               <span>누적 매칭 4,200건 · 제휴 GA사 87곳</span>
             </div>
 
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-wide leading-snug">
-              <span className="text-white">더 나은 조건, 더 나은 미래</span>
+              <span className="text-[#2b2621]">더 나은 조건, 더 나은 미래</span>
               <br />
-              <span className="text-amber-400">나에게 꼭 맞는 GA를 찾으세요</span>
+              <span className="text-[#d97a4d]">나에게 꼭 맞는 GA를 찾으세요</span>
             </h1>
-            <p className="text-slate-400 text-sm sm:text-base font-medium leading-relaxed max-w-2xl mx-auto">
-              수수료율, 지원제도, 전산시스템까지 — 여러 GA의 조건을 한눈에 비교하고, 전담 매니저의 1:1 컨설팅으로 이직·위촉의 리스크를 최소화하세요.
+            <p className="text-[#6b5d4f] text-sm sm:text-base font-medium leading-relaxed max-w-2xl mx-auto">
+              수수료율, 지원제도, 전산시스템까지 — 여러 GA의 조건을 한눈에 비교하고, 나에게 가장 유리한 곳을 직접 선택하세요.
             </p>
 
-            <div className="w-full max-w-2xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-y-5 gap-x-6 pt-8 border-t border-[#1c2740]">
+            <div className="w-full max-w-2xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-y-5 gap-x-6 pt-8 border-t border-[#eee3d3]">
               <div>
-                <p className="text-base sm:text-lg xl:text-xl font-black text-white whitespace-nowrap">4,200+</p>
-                <p className="text-[10px] sm:text-[11px] xl:text-xs text-slate-500 font-semibold mt-0.5 whitespace-nowrap">누적 매칭 건수</p>
+                <p className="text-base sm:text-lg xl:text-xl font-black text-[#2b2621] whitespace-nowrap">4,200+</p>
+                <p className="text-[10px] sm:text-[11px] xl:text-xs text-[#8a7a68] font-semibold mt-0.5 whitespace-nowrap">누적 매칭 건수</p>
               </div>
               <div>
-                <p className="text-base sm:text-lg xl:text-xl font-black text-white whitespace-nowrap">87개</p>
-                <p className="text-[10px] sm:text-[11px] xl:text-xs text-slate-500 font-semibold mt-0.5 whitespace-nowrap">제휴 GA사</p>
+                <p className="text-base sm:text-lg xl:text-xl font-black text-[#2b2621] whitespace-nowrap">87개</p>
+                <p className="text-[10px] sm:text-[11px] xl:text-xs text-[#8a7a68] font-semibold mt-0.5 whitespace-nowrap">제휴 GA사</p>
               </div>
               <div>
-                <p className="text-base sm:text-lg xl:text-xl font-black text-white whitespace-nowrap">평균 9일</p>
-                <p className="text-[10px] sm:text-[11px] xl:text-xs text-slate-500 font-semibold mt-0.5 whitespace-nowrap">매칭 소요 기간</p>
+                <p className="text-base sm:text-lg xl:text-xl font-black text-[#2b2621] whitespace-nowrap">평균 9일</p>
+                <p className="text-[10px] sm:text-[11px] xl:text-xs text-[#8a7a68] font-semibold mt-0.5 whitespace-nowrap">매칭 소요 기간</p>
               </div>
               <div>
-                <p className="text-base sm:text-lg xl:text-xl font-black text-white whitespace-nowrap">4.8 / 5</p>
-                <p className="text-[10px] sm:text-[11px] xl:text-xs text-slate-500 font-semibold mt-0.5 whitespace-nowrap">설계사 만족도</p>
+                <p className="text-base sm:text-lg xl:text-xl font-black text-[#2b2621] whitespace-nowrap">4.8 / 5</p>
+                <p className="text-[10px] sm:text-[11px] xl:text-xs text-[#8a7a68] font-semibold mt-0.5 whitespace-nowrap">설계사 만족도</p>
               </div>
             </div>
           </div>
@@ -1462,42 +1462,42 @@ export default function App() {
         {/* WHY 인슈매치 */}
         <section className="bg-white py-20 px-6">
           <div className="max-w-5xl mx-auto text-center space-y-4">
-            <span className="inline-block bg-blue-50 text-blue-700 text-[11px] font-black px-3 py-1.5 rounded-full tracking-wide">
+            <span className="inline-block bg-[#fbeee0] text-[#b35a2e] text-[11px] font-black px-3 py-1.5 rounded-full tracking-wide">
               WHY 인슈매치
             </span>
-            <h2 className="text-2xl sm:text-3xl font-black text-slate-900">이직·위촉, 왜 항상 불안할까요?</h2>
-            <p className="text-slate-500 text-xs sm:text-sm md:text-base max-w-none md:whitespace-nowrap">
+            <h2 className="text-2xl sm:text-3xl font-black text-[#2b2621]">이직·위촉, 왜 항상 불안할까요?</h2>
+            <p className="text-[#6b5d4f] text-xs sm:text-sm md:text-base max-w-none md:whitespace-nowrap">
               정보 비대칭 속에서 혼자 결정하다 보면, 좋은 조건을 놓치거나 예상치 못한 손실을 겪기 쉽습니다.
             </p>
           </div>
           <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-5 mt-12">
             {LANDING_PROBLEMS.map((p) => (
-              <div key={p.no} className="bg-slate-50 border border-slate-200 rounded-2xl p-6 space-y-2">
-                <span className="text-blue-600 font-black text-xs">{p.no}</span>
-                <h3 className="font-black text-slate-900 text-base">{p.title}</h3>
-                <p className="text-slate-500 text-sm leading-relaxed">{p.desc}</p>
+              <div key={p.no} className="bg-[#fdfaf5] border border-[#eee3d3] rounded-2xl p-6 space-y-2">
+                <span className="text-[#d97a4d] font-black text-xs">{p.no}</span>
+                <h3 className="font-black text-[#2b2621] text-base">{p.title}</h3>
+                <p className="text-[#6b5d4f] text-sm leading-relaxed">{p.desc}</p>
               </div>
             ))}
           </div>
         </section>
 
         {/* HOW IT WORKS */}
-        <section className="bg-slate-50 py-20 px-6">
+        <section className="bg-[#f7f0e6] py-20 px-6">
           <div className="max-w-5xl mx-auto text-center space-y-4">
-            <span className="inline-block bg-blue-50 text-blue-700 text-[11px] font-black px-3 py-1.5 rounded-full tracking-wide">
+            <span className="inline-block bg-[#fbeee0] text-[#b35a2e] text-[11px] font-black px-3 py-1.5 rounded-full tracking-wide">
               HOW IT WORKS
             </span>
-            <h2 className="text-2xl sm:text-3xl font-black text-slate-900">4단계로 끝나는 GA 매칭</h2>
-            <p className="text-slate-500 text-sm sm:text-base max-w-xl mx-auto">복잡한 비교와 협상 과정을 인슈매치가 대신합니다.</p>
+            <h2 className="text-2xl sm:text-3xl font-black text-[#2b2621]">4단계로 끝나는 GA 매칭</h2>
+            <p className="text-[#6b5d4f] text-sm sm:text-base max-w-xl mx-auto">복잡한 비교와 협상 과정을 인슈매치가 대신합니다.</p>
           </div>
           <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-12">
             {LANDING_STEPS.map((s) => (
-              <div key={s.no} className="bg-white border border-slate-200 rounded-2xl p-6 space-y-3">
-                <div className="w-9 h-9 rounded-lg bg-slate-900 text-white flex items-center justify-center font-black text-sm">
+              <div key={s.no} className="bg-white border border-[#eee3d3] rounded-2xl p-6 space-y-3">
+                <div className="w-9 h-9 rounded-lg bg-[#2b2621] text-white flex items-center justify-center font-black text-sm">
                   {s.no}
                 </div>
-                <h3 className="font-black text-slate-900 text-base">{s.title}</h3>
-                <p className="text-slate-500 text-sm leading-relaxed">{s.desc}</p>
+                <h3 className="font-black text-[#2b2621] text-base">{s.title}</h3>
+                <p className="text-[#6b5d4f] text-sm leading-relaxed">{s.desc}</p>
               </div>
             ))}
           </div>
@@ -1506,49 +1506,49 @@ export default function App() {
         {/* WHY US */}
         <section className="bg-white py-20 px-6">
           <div className="max-w-5xl mx-auto text-center space-y-4">
-            <span className="inline-block bg-blue-50 text-blue-700 text-[11px] font-black px-3 py-1.5 rounded-full tracking-wide">
+            <span className="inline-block bg-[#fbeee0] text-[#b35a2e] text-[11px] font-black px-3 py-1.5 rounded-full tracking-wide">
               WHY US
             </span>
-            <h2 className="text-2xl sm:text-3xl font-black text-slate-900">인슈매치가 다른 이유</h2>
-            <p className="text-slate-500 text-sm sm:text-base max-w-xl mx-auto">
+            <h2 className="text-2xl sm:text-3xl font-black text-[#2b2621]">인슈매치가 다른 이유</h2>
+            <p className="text-[#6b5d4f] text-sm sm:text-base max-w-xl mx-auto">
               객관적인 데이터와 전문성으로 설계사님의 다음 커리어를 함께 설계합니다.
             </p>
           </div>
           <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-5 mt-12">
             {LANDING_FEATURES.map((f) => (
               <div key={f.title} className="space-y-3">
-                <div className="w-11 h-11 rounded-xl bg-blue-50 flex items-center justify-center">
-                  <f.icon className="w-5 h-5 text-blue-600" />
+                <div className="w-11 h-11 rounded-xl bg-[#fbeee0] flex items-center justify-center">
+                  <f.icon className="w-5 h-5 text-[#d97a4d]" />
                 </div>
-                <h3 className="font-black text-slate-900 text-sm">{f.title}</h3>
-                <p className="text-slate-500 text-xs leading-relaxed">{f.desc}</p>
+                <h3 className="font-black text-[#2b2621] text-sm">{f.title}</h3>
+                <p className="text-[#6b5d4f] text-xs leading-relaxed">{f.desc}</p>
               </div>
             ))}
           </div>
         </section>
 
         {/* SUCCESS STORY */}
-        <section className="bg-slate-50 py-20 px-6">
+        <section className="bg-[#f7f0e6] py-20 px-6">
           <div className="max-w-5xl mx-auto text-center space-y-4">
-            <span className="inline-block bg-blue-50 text-blue-700 text-[11px] font-black px-3 py-1.5 rounded-full tracking-wide">
+            <span className="inline-block bg-[#fbeee0] text-[#b35a2e] text-[11px] font-black px-3 py-1.5 rounded-full tracking-wide">
               SUCCESS STORY
             </span>
-            <h2 className="text-2xl sm:text-3xl font-black text-slate-900">설계사님들의 이야기</h2>
-            <p className="text-slate-500 text-sm sm:text-base max-w-xl mx-auto">
+            <h2 className="text-2xl sm:text-3xl font-black text-[#2b2621]">설계사님들의 이야기</h2>
+            <p className="text-[#6b5d4f] text-sm sm:text-base max-w-xl mx-auto">
               인슈매치를 통해 더 나은 조건으로 새출발한 분들의 후기입니다.
             </p>
           </div>
           <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-5 mt-12">
             {LANDING_TESTIMONIALS.map((t) => (
-              <div key={t.name} className="bg-white border border-slate-200 rounded-2xl p-6 space-y-4">
-                <p className="text-slate-600 text-sm leading-relaxed">&ldquo;{t.quote}&rdquo;</p>
+              <div key={t.name} className="bg-white border border-[#eee3d3] rounded-2xl p-6 space-y-4">
+                <p className="text-[#4a3f35] text-sm leading-relaxed">&ldquo;{t.quote}&rdquo;</p>
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-full bg-blue-100 text-blue-700 font-black text-sm flex items-center justify-center shrink-0">
+                  <div className="w-9 h-9 rounded-full bg-[#fbeee0] text-[#b35a2e] font-black text-sm flex items-center justify-center shrink-0">
                     {t.initial}
                   </div>
                   <div>
-                    <p className="font-bold text-slate-900 text-xs">{t.name}</p>
-                    <p className="text-slate-400 text-[11px]">{t.meta}</p>
+                    <p className="font-bold text-[#2b2621] text-xs">{t.name}</p>
+                    <p className="text-[#8a7a68] text-[11px]">{t.meta}</p>
                   </div>
                 </div>
                 <span className="inline-block bg-emerald-50 text-emerald-700 text-[10px] font-bold px-2.5 py-1 rounded-full">
@@ -1560,8 +1560,8 @@ export default function App() {
         </section>
 
         {/* FOR GA 파트너사 */}
-        <section className="bg-[#0d1424] py-20 px-6">
-          <div className="max-w-5xl mx-auto bg-[#141c2e] border border-[#212c45] rounded-3xl p-8 sm:p-10 grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-8 items-center">
+        <section className="bg-white py-20 px-6">
+          <div className="max-w-5xl mx-auto bg-[#2b2621] border border-[#3a332c] rounded-3xl p-8 sm:p-10 grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-8 items-center">
             <div className="space-y-5">
               <span className="inline-block bg-white/10 text-white text-[11px] font-black px-3 py-1.5 rounded-full tracking-wide">
                 FOR GA 파트너사
@@ -1569,13 +1569,13 @@ export default function App() {
               <h2 className="text-xl sm:text-2xl font-black text-white leading-snug">
                 우수 설계사를 더 빠르게, 더 정확하게 만나세요
               </h2>
-              <p className="text-slate-400 text-sm leading-relaxed">
+              <p className="text-[#c9bdad] text-sm leading-relaxed">
                 검증된 설계사 풀을 확보하고, 데이터 기반 매칭으로 채용 비용과 시간을 절감하세요. 인슈매치와 함께라면 채용이 더 쉬워집니다.
               </p>
               <div className="space-y-2">
                 {GA_CTA_POINTS.map((point) => (
-                  <div key={point} className="flex items-center gap-2 text-slate-200 text-xs sm:text-sm">
-                    <Check className="w-4 h-4 text-blue-400 shrink-0" />
+                  <div key={point} className="flex items-center gap-2 text-[#e4dccf] text-xs sm:text-sm">
+                    <Check className="w-4 h-4 text-[#e9a374] shrink-0" />
                     <span>{point}</span>
                   </div>
                 ))}
@@ -1583,15 +1583,15 @@ export default function App() {
               <button
                 type="button"
                 onClick={() => openLogin("GA")}
-                className="bg-amber-400 hover:bg-amber-300 text-[#0d1424] font-black px-6 py-3.5 rounded-xl text-sm transition shadow-lg mt-2"
+                className="bg-[#e9a374] hover:bg-[#dd8f5c] text-[#2b2621] font-black px-6 py-3.5 rounded-xl text-sm transition shadow-lg mt-2"
               >
                 GA사 등록 문의하기 →
               </button>
             </div>
-            <div className="bg-[#0b101d] border border-[#212c45] rounded-2xl p-6 space-y-4">
+            <div className="bg-black/20 border border-[#3a332c] rounded-2xl p-6 space-y-4">
               {GA_CTA_STATS.map((s) => (
                 <div key={s.label} className="flex items-center justify-between">
-                  <span className="text-slate-400 text-xs">{s.label}</span>
+                  <span className="text-[#c9bdad] text-xs">{s.label}</span>
                   <span className="text-white font-black text-lg">{s.value}</span>
                 </div>
               ))}
@@ -1600,12 +1600,12 @@ export default function App() {
         </section>
 
         {/* 푸터 */}
-        <footer className="bg-[#0d1424] border-t border-[#1c2740] py-8 px-6 text-center space-y-2">
-          <p className="text-slate-500 text-[11px]">© 2026 인슈어매치. All rights reserved.</p>
+        <footer className="bg-[#fdfaf5] border-t border-[#eee3d3] py-8 px-6 text-center space-y-2">
+          <p className="text-[#8a7a68] text-[11px]">© 2026 인슈어매치. All rights reserved.</p>
           <button
             type="button"
             onClick={() => openLogin("ADMIN")}
-            className="text-slate-600 hover:text-slate-400 text-[10px] transition"
+            className="text-[#b3a692] hover:text-[#6b5d4f] text-[10px] transition"
           >
             관리자 로그인
           </button>
@@ -1618,16 +1618,16 @@ export default function App() {
   // 2. 메인 대시보드 화면
   // ==========================================
   return (
-    <div className="min-h-screen bg-slate-100 text-slate-800 text-xs pb-12 font-sans">
+    <div className="min-h-screen bg-[#f7f0e6] text-[#2b2621] text-xs pb-12 font-sans">
       {/* 헤더 */}
-      <header className="bg-white border-b border-slate-200 sticky top-0 z-30 px-6 h-14 flex items-center justify-between shadow-sm">
+      <header className="bg-white border-b border-[#eee3d3] sticky top-0 z-30 px-6 h-14 flex items-center justify-between shadow-sm">
         <div className="flex items-center gap-3">
-          <div className="bg-blue-600 text-white p-1.5 rounded-lg">
+          <div className="bg-[#d97a4d] text-white p-1.5 rounded-lg">
             <Shield className="w-5 h-5" />
           </div>
           <div className="flex items-center gap-2">
-            <span className="font-black text-base text-slate-900">인슈어매치</span>
-            <span className="bg-blue-100 text-blue-800 text-[10px] px-2.5 py-0.5 rounded-full font-bold">
+            <span className="font-black text-base text-[#201b16]">인슈어매치</span>
+            <span className="bg-[#fbeee0] text-[#8a3c1f] text-[10px] px-2.5 py-0.5 rounded-full font-bold">
               {userRole === "ADMIN" ? "관리자 모드" : userRole === "GA" ? "GA 리크루터 모드" : "FC 익명 모드"}
             </span>
           </div>
@@ -1641,21 +1641,21 @@ export default function App() {
                 setUserRole(nextRole);
                 setMainTab(nextRole === "FC" ? "GA_LIST" : "GA_HOME");
               }}
-              className="bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg border border-slate-300 text-xs font-bold transition flex items-center gap-1.5"
+              className="bg-[#f7f0e6] hover:bg-[#eee3d3] text-[#453a2f] px-3 py-1.5 rounded-lg border border-[#ddd0ba] text-xs font-bold transition flex items-center gap-1.5"
             >
               <RefreshCw className="w-3.5 h-3.5" />
               <span>{userRole === "FC" ? "GA 매니저 모드 전환" : "FC 모드 전환"}</span>
             </button>
           )}
 
-          <div className="h-4 w-[1px] bg-slate-200 my-auto"></div>
+          <div className="h-4 w-[1px] bg-[#eee3d3] my-auto"></div>
 
           <button
             onClick={() => {
               setIsLoggedIn(false);
               setAuthView("LANDING");
             }}
-            className="flex items-center gap-1.5 text-slate-500 hover:text-red-600 hover:bg-red-50 px-2.5 py-1.5 rounded-lg transition font-semibold"
+            className="flex items-center gap-1.5 text-[#6b5d4f] hover:text-red-600 hover:bg-red-50 px-2.5 py-1.5 rounded-lg transition font-semibold"
           >
             <LogOut className="w-4 h-4" />
             <span className="hidden sm:inline">로그아웃</span>
@@ -1665,7 +1665,7 @@ export default function App() {
 
       {/* 메인 네비게이션 탭 (FC/GA) */}
       {userRole !== "ADMIN" && (
-      <div className="bg-white border-b border-slate-200 px-6">
+      <div className="bg-white border-b border-[#eee3d3] px-6">
         <div className="max-w-6xl mx-auto flex gap-6 sm:gap-8 overflow-x-auto font-bold text-xs sm:text-sm">
           {userRole === "FC" && (
             <>
@@ -1673,8 +1673,8 @@ export default function App() {
                 onClick={() => setMainTab("GA_LIST")}
                 className={`py-3.5 border-b-2 transition flex items-center gap-2 whitespace-nowrap ${
                   mainTab === "GA_LIST"
-                    ? "border-blue-600 text-blue-600 font-black"
-                    : "border-transparent text-slate-500 hover:text-slate-800"
+                    ? "border-[#d97a4d] text-[#d97a4d] font-black"
+                    : "border-transparent text-[#6b5d4f] hover:text-[#2b2621]"
                 }`}
               >
                 <Building2 className="w-4 h-4" />
@@ -1685,8 +1685,8 @@ export default function App() {
                 onClick={() => setMainTab("AI_MATCH")}
                 className={`py-3.5 border-b-2 transition flex items-center gap-2 whitespace-nowrap ${
                   mainTab === "AI_MATCH"
-                    ? "border-blue-600 text-blue-600 font-black"
-                    : "border-transparent text-slate-500 hover:text-slate-800"
+                    ? "border-[#d97a4d] text-[#d97a4d] font-black"
+                    : "border-transparent text-[#6b5d4f] hover:text-[#2b2621]"
                 }`}
               >
                 <Sparkles className="w-4 h-4" />
@@ -1697,8 +1697,8 @@ export default function App() {
                 onClick={() => setMainTab("OFFERS_INBOX")}
                 className={`py-3.5 border-b-2 transition flex items-center gap-2 whitespace-nowrap ${
                   mainTab === "OFFERS_INBOX"
-                    ? "border-blue-600 text-blue-600 font-black"
-                    : "border-transparent text-slate-500 hover:text-slate-800"
+                    ? "border-[#d97a4d] text-[#d97a4d] font-black"
+                    : "border-transparent text-[#6b5d4f] hover:text-[#2b2621]"
                 }`}
               >
                 <Inbox className="w-4 h-4" />
@@ -1709,8 +1709,8 @@ export default function App() {
                 onClick={() => setMainTab("FC_PROFILE")}
                 className={`py-3.5 border-b-2 transition flex items-center gap-2 whitespace-nowrap ${
                   mainTab === "FC_PROFILE"
-                    ? "border-blue-600 text-blue-600 font-black"
-                    : "border-transparent text-slate-500 hover:text-slate-800"
+                    ? "border-[#d97a4d] text-[#d97a4d] font-black"
+                    : "border-transparent text-[#6b5d4f] hover:text-[#2b2621]"
                 }`}
               >
                 <FileText className="w-4 h-4" />
@@ -1725,8 +1725,8 @@ export default function App() {
                 onClick={() => setMainTab("GA_HOME")}
                 className={`py-3.5 border-b-2 transition flex items-center gap-2 whitespace-nowrap ${
                   mainTab === "GA_HOME"
-                    ? "border-blue-600 text-blue-600 font-black"
-                    : "border-transparent text-slate-500 hover:text-slate-800"
+                    ? "border-[#d97a4d] text-[#d97a4d] font-black"
+                    : "border-transparent text-[#6b5d4f] hover:text-[#2b2621]"
                 }`}
               >
                 <LayoutDashboard className="w-4 h-4" />
@@ -1737,8 +1737,8 @@ export default function App() {
                 onClick={() => setMainTab("FC_CANDIDATES")}
                 className={`py-3.5 border-b-2 transition flex items-center gap-2 whitespace-nowrap ${
                   mainTab === "FC_CANDIDATES"
-                    ? "border-blue-600 text-blue-600 font-black"
-                    : "border-transparent text-slate-500 hover:text-slate-800"
+                    ? "border-[#d97a4d] text-[#d97a4d] font-black"
+                    : "border-transparent text-[#6b5d4f] hover:text-[#2b2621]"
                 }`}
               >
                 <UserCheck className="w-4 h-4" />
@@ -1749,8 +1749,8 @@ export default function App() {
                 onClick={() => setMainTab("SENT_OFFERS")}
                 className={`py-3.5 border-b-2 transition flex items-center gap-2 whitespace-nowrap ${
                   mainTab === "SENT_OFFERS"
-                    ? "border-blue-600 text-blue-600 font-black"
-                    : "border-transparent text-slate-500 hover:text-slate-800"
+                    ? "border-[#d97a4d] text-[#d97a4d] font-black"
+                    : "border-transparent text-[#6b5d4f] hover:text-[#2b2621]"
                 }`}
               >
                 <Inbox className="w-4 h-4" />
@@ -1761,8 +1761,8 @@ export default function App() {
                 onClick={() => setMainTab("GA_PROFILE")}
                 className={`py-3.5 border-b-2 transition flex items-center gap-2 whitespace-nowrap ${
                   mainTab === "GA_PROFILE"
-                    ? "border-blue-600 text-blue-600 font-black"
-                    : "border-transparent text-slate-500 hover:text-slate-800"
+                    ? "border-[#d97a4d] text-[#d97a4d] font-black"
+                    : "border-transparent text-[#6b5d4f] hover:text-[#2b2621]"
                 }`}
               >
                 <Building2 className="w-4 h-4" />
@@ -1775,8 +1775,8 @@ export default function App() {
             onClick={() => setMainTab("COMMUNITY")}
             className={`py-3.5 border-b-2 transition flex items-center gap-2 whitespace-nowrap ${
               mainTab === "COMMUNITY"
-                ? "border-blue-600 text-blue-600 font-black"
-                : "border-transparent text-slate-500 hover:text-slate-800"
+                ? "border-[#d97a4d] text-[#d97a4d] font-black"
+                : "border-transparent text-[#6b5d4f] hover:text-[#2b2621]"
             }`}
           >
             <MessageSquare className="w-4 h-4" />
@@ -1789,13 +1789,13 @@ export default function App() {
       {/* 관리자 모드 레이아웃 wrapper (사이드바 + 콘텐츠) */}
       <div className={userRole === "ADMIN" ? "max-w-6xl mx-auto flex items-start gap-6 px-4 sm:px-6" : ""}>
         {userRole === "ADMIN" && (
-          <aside className="hidden md:block w-56 flex-shrink-0 sticky top-4 mt-4 sm:mt-6 bg-white border border-slate-200 rounded-2xl p-4 space-y-5">
+          <aside className="hidden md:block w-56 flex-shrink-0 sticky top-4 mt-4 sm:mt-6 bg-white border border-[#eee3d3] rounded-2xl p-4 space-y-5">
             <div className="space-y-1">
-              <p className="px-2 mb-1.5 text-[11px] font-black text-slate-400 tracking-wide">개요</p>
+              <p className="px-2 mb-1.5 text-[11px] font-black text-[#8a7a68] tracking-wide">개요</p>
               <button
                 onClick={() => setMainTab("ADMIN_HOME")}
                 className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs sm:text-sm font-bold transition ${
-                  mainTab === "ADMIN_HOME" ? "bg-blue-50 text-blue-600" : "text-slate-600 hover:bg-slate-50"
+                  mainTab === "ADMIN_HOME" ? "bg-[#fdf3ea] text-[#d97a4d]" : "text-[#57493c] hover:bg-[#fdfaf5]"
                 }`}
               >
                 <LayoutDashboard className="w-4 h-4" />
@@ -1804,11 +1804,11 @@ export default function App() {
             </div>
 
             <div className="space-y-1">
-              <p className="px-2 mb-1.5 text-[11px] font-black text-slate-400 tracking-wide">회원 관리</p>
+              <p className="px-2 mb-1.5 text-[11px] font-black text-[#8a7a68] tracking-wide">회원 관리</p>
               <button
                 onClick={() => setMainTab("ADMIN_FC")}
                 className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs sm:text-sm font-bold transition ${
-                  mainTab === "ADMIN_FC" ? "bg-blue-50 text-blue-600" : "text-slate-600 hover:bg-slate-50"
+                  mainTab === "ADMIN_FC" ? "bg-[#fdf3ea] text-[#d97a4d]" : "text-[#57493c] hover:bg-[#fdfaf5]"
                 }`}
               >
                 <UserCheck className="w-4 h-4" />
@@ -1818,7 +1818,7 @@ export default function App() {
               <button
                 onClick={() => setMainTab("ADMIN_VERIFICATION")}
                 className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs sm:text-sm font-bold transition ${
-                  mainTab === "ADMIN_VERIFICATION" ? "bg-blue-50 text-blue-600" : "text-slate-600 hover:bg-slate-50"
+                  mainTab === "ADMIN_VERIFICATION" ? "bg-[#fdf3ea] text-[#d97a4d]" : "text-[#57493c] hover:bg-[#fdfaf5]"
                 }`}
               >
                 <Award className="w-4 h-4" />
@@ -1833,7 +1833,7 @@ export default function App() {
               <button
                 onClick={() => setMainTab("ADMIN_GA")}
                 className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs sm:text-sm font-bold transition ${
-                  mainTab === "ADMIN_GA" ? "bg-blue-50 text-blue-600" : "text-slate-600 hover:bg-slate-50"
+                  mainTab === "ADMIN_GA" ? "bg-[#fdf3ea] text-[#d97a4d]" : "text-[#57493c] hover:bg-[#fdfaf5]"
                 }`}
               >
                 <Building2 className="w-4 h-4" />
@@ -1842,11 +1842,11 @@ export default function App() {
             </div>
 
             <div className="space-y-1">
-              <p className="px-2 mb-1.5 text-[11px] font-black text-slate-400 tracking-wide">노출·매출</p>
+              <p className="px-2 mb-1.5 text-[11px] font-black text-[#8a7a68] tracking-wide">노출·매출</p>
               <button
                 onClick={() => setMainTab("ADMIN_PLANS")}
                 className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs sm:text-sm font-bold transition ${
-                  mainTab === "ADMIN_PLANS" ? "bg-blue-50 text-blue-600" : "text-slate-600 hover:bg-slate-50"
+                  mainTab === "ADMIN_PLANS" ? "bg-[#fdf3ea] text-[#d97a4d]" : "text-[#57493c] hover:bg-[#fdfaf5]"
                 }`}
               >
                 <Target className="w-4 h-4" />
@@ -1856,7 +1856,7 @@ export default function App() {
               <button
                 onClick={() => setMainTab("ADMIN_BILLING")}
                 className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs sm:text-sm font-bold transition ${
-                  mainTab === "ADMIN_BILLING" ? "bg-blue-50 text-blue-600" : "text-slate-600 hover:bg-slate-50"
+                  mainTab === "ADMIN_BILLING" ? "bg-[#fdf3ea] text-[#d97a4d]" : "text-[#57493c] hover:bg-[#fdfaf5]"
                 }`}
               >
                 <TrendingUp className="w-4 h-4" />
@@ -1866,7 +1866,7 @@ export default function App() {
               <button
                 onClick={() => setMainTab("ADMIN_STATS")}
                 className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs sm:text-sm font-bold transition ${
-                  mainTab === "ADMIN_STATS" ? "bg-blue-50 text-blue-600" : "text-slate-600 hover:bg-slate-50"
+                  mainTab === "ADMIN_STATS" ? "bg-[#fdf3ea] text-[#d97a4d]" : "text-[#57493c] hover:bg-[#fdfaf5]"
                 }`}
               >
                 <BarChart3 className="w-4 h-4" />
@@ -1875,11 +1875,11 @@ export default function App() {
             </div>
 
             <div className="space-y-1">
-              <p className="px-2 mb-1.5 text-[11px] font-black text-slate-400 tracking-wide">콘텐츠</p>
+              <p className="px-2 mb-1.5 text-[11px] font-black text-[#8a7a68] tracking-wide">콘텐츠</p>
               <button
                 onClick={() => setMainTab("ADMIN_COMMUNITY")}
                 className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs sm:text-sm font-bold transition ${
-                  mainTab === "ADMIN_COMMUNITY" ? "bg-blue-50 text-blue-600" : "text-slate-600 hover:bg-slate-50"
+                  mainTab === "ADMIN_COMMUNITY" ? "bg-[#fdf3ea] text-[#d97a4d]" : "text-[#57493c] hover:bg-[#fdfaf5]"
                 }`}
               >
                 <MessageSquare className="w-4 h-4" />
@@ -1889,7 +1889,7 @@ export default function App() {
               <button
                 onClick={() => setMainTab("ADMIN_ANNOUNCEMENTS")}
                 className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs sm:text-sm font-bold transition ${
-                  mainTab === "ADMIN_ANNOUNCEMENTS" ? "bg-blue-50 text-blue-600" : "text-slate-600 hover:bg-slate-50"
+                  mainTab === "ADMIN_ANNOUNCEMENTS" ? "bg-[#fdf3ea] text-[#d97a4d]" : "text-[#57493c] hover:bg-[#fdfaf5]"
                 }`}
               >
                 <Megaphone className="w-4 h-4" />
@@ -1898,11 +1898,11 @@ export default function App() {
             </div>
 
             <div className="space-y-1">
-              <p className="px-2 mb-1.5 text-[11px] font-black text-slate-400 tracking-wide">시스템</p>
+              <p className="px-2 mb-1.5 text-[11px] font-black text-[#8a7a68] tracking-wide">시스템</p>
               <button
                 onClick={() => setMainTab("ADMIN_ACCOUNTS")}
                 className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs sm:text-sm font-bold transition ${
-                  mainTab === "ADMIN_ACCOUNTS" ? "bg-blue-50 text-blue-600" : "text-slate-600 hover:bg-slate-50"
+                  mainTab === "ADMIN_ACCOUNTS" ? "bg-[#fdf3ea] text-[#d97a4d]" : "text-[#57493c] hover:bg-[#fdfaf5]"
                 }`}
               >
                 <Lock className="w-4 h-4" />
@@ -1912,7 +1912,7 @@ export default function App() {
               <button
                 onClick={() => setMainTab("ADMIN_LOG")}
                 className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs sm:text-sm font-bold transition ${
-                  mainTab === "ADMIN_LOG" ? "bg-blue-50 text-blue-600" : "text-slate-600 hover:bg-slate-50"
+                  mainTab === "ADMIN_LOG" ? "bg-[#fdf3ea] text-[#d97a4d]" : "text-[#57493c] hover:bg-[#fdfaf5]"
                 }`}
               >
                 <FileText className="w-4 h-4" />
@@ -1924,11 +1924,11 @@ export default function App() {
 
         {/* 관리자 모드 전용: 모바일용 탭 드롭다운 (사이드바가 숨겨지는 화면 크기) */}
         {userRole === "ADMIN" && (
-          <div className="md:hidden fixed top-[104px] left-0 right-0 z-30 bg-white border-b border-slate-200 px-4 py-2">
+          <div className="md:hidden fixed top-[104px] left-0 right-0 z-30 bg-white border-b border-[#eee3d3] px-4 py-2">
             <select
               value={mainTab}
               onChange={(e) => setMainTab(e.target.value as typeof mainTab)}
-              className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm font-bold"
+              className="w-full border border-[#ddd0ba] rounded-lg px-3 py-2 text-sm font-bold"
             >
               <option value="ADMIN_HOME">개요 · 대시보드</option>
               <option value="ADMIN_FC">회원 관리 · 설계사 관리</option>
@@ -1956,13 +1956,13 @@ export default function App() {
         {/* 탭 0: AI·전문가 매칭 추천 */}
         {mainTab === "AI_MATCH" && (
           <div className="space-y-5">
-            <div className="bg-gradient-to-r from-blue-600 to-blue-500 p-5 sm:p-6 rounded-2xl text-white flex items-start gap-3 shadow-sm">
+            <div className="bg-gradient-to-r from-[#d97a4d] to-[#d97a4d] p-5 sm:p-6 rounded-2xl text-white flex items-start gap-3 shadow-sm">
               <div className="bg-white/15 p-2 rounded-xl shrink-0">
                 <Sparkles className="w-5 h-5" />
               </div>
               <div>
                 <h2 className="font-black text-base sm:text-lg">AI가 분석한 나에게 맞는 GA</h2>
-                <p className="text-blue-100 text-xs sm:text-sm mt-1 leading-relaxed">
+                <p className="text-[#fbeee0] text-xs sm:text-sm mt-1 leading-relaxed">
                   아직 어떤 조건을 원하시는지 알 수 없으니, 아래에서 원하는 조건을 먼저 선택해주세요.
                 </p>
               </div>
@@ -1970,26 +1970,26 @@ export default function App() {
 
             <form
               onSubmit={handleFindAiMatches}
-              className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4"
+              className="bg-white p-5 rounded-2xl border border-[#eee3d3] shadow-sm space-y-4"
             >
-              <h3 className="font-black text-sm text-slate-900">어떤 조건의 GA를 찾고 계신가요?</h3>
+              <h3 className="font-black text-sm text-[#201b16]">어떤 조건의 GA를 찾고 계신가요?</h3>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="space-y-1">
-                  <label className="font-extrabold text-slate-700 text-xs">희망 근무 지역</label>
+                  <label className="font-extrabold text-[#453a2f] text-xs">희망 근무 지역</label>
                   <input
                     type="text"
                     value={aiPreferences.region}
                     onChange={(e) => setAiPreferences({ ...aiPreferences, region: e.target.value })}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#d97a4d]"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-extrabold text-slate-700 text-xs">주력 영업 분야</label>
+                  <label className="font-extrabold text-[#453a2f] text-xs">주력 영업 분야</label>
                   <select
                     value={aiPreferences.field}
                     onChange={(e) => setAiPreferences({ ...aiPreferences, field: e.target.value })}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold text-slate-800 outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold text-[#2b2621] outline-none focus:ring-2 focus:ring-[#d97a4d]"
                   >
                     {MAIN_FIELD_OPTIONS.map((option) => (
                       <option key={option} value={option}>
@@ -2000,11 +2000,11 @@ export default function App() {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-extrabold text-slate-700 text-xs">가장 중요하게 보는 조건</label>
+                  <label className="font-extrabold text-[#453a2f] text-xs">가장 중요하게 보는 조건</label>
                   <select
                     value={aiPreferences.priority}
                     onChange={(e) => setAiPreferences({ ...aiPreferences, priority: e.target.value })}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold text-slate-800 outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold text-[#2b2621] outline-none focus:ring-2 focus:ring-[#d97a4d]"
                   >
                     <option>수수료율</option>
                     <option>정착지원금</option>
@@ -2016,7 +2016,7 @@ export default function App() {
 
               <button
                 type="submit"
-                className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-extrabold px-6 py-3.5 rounded-xl text-xs transition shadow-lg flex items-center justify-center gap-2"
+                className="w-full sm:w-auto bg-[#d97a4d] hover:bg-[#b35a2e] text-white font-extrabold px-6 py-3.5 rounded-xl text-xs transition shadow-lg flex items-center justify-center gap-2"
               >
                 <Sparkles className="w-4 h-4" />
                 <span>AI 맞춤 GA 찾기</span>
@@ -2033,32 +2033,32 @@ export default function App() {
                   return (
                     <div
                       key={ga.id}
-                      className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:border-blue-400 transition space-y-4"
+                      className="bg-white p-5 rounded-2xl border border-[#eee3d3] shadow-sm hover:border-[#e9a374] transition space-y-4"
                     >
-                      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-slate-100 pb-3">
+                      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-[#f7f0e6] pb-3">
                         <div>
-                          <h3 className="font-black text-base text-slate-900 flex items-center gap-2">
+                          <h3 className="font-black text-base text-[#201b16] flex items-center gap-2">
                             {ga.name}
-                            <span className="text-xs font-bold text-slate-400">({ga.branch})</span>
+                            <span className="text-xs font-bold text-[#8a7a68]">({ga.branch})</span>
                           </h3>
-                          <p className="text-slate-400 text-[11px] mt-0.5">{ga.guaranteedCommission}</p>
+                          <p className="text-[#8a7a68] text-[11px] mt-0.5">{ga.guaranteedCommission}</p>
                         </div>
-                        <div className="flex items-center gap-2 bg-blue-50 px-3 py-1.5 rounded-full shrink-0">
-                          <Sparkles className="w-3.5 h-3.5 text-blue-600" />
-                          <span className="font-black text-blue-700 text-sm">매칭률 {match.matchScore}%</span>
+                        <div className="flex items-center gap-2 bg-[#fdf3ea] px-3 py-1.5 rounded-full shrink-0">
+                          <Sparkles className="w-3.5 h-3.5 text-[#d97a4d]" />
+                          <span className="font-black text-[#b35a2e] text-sm">매칭률 {match.matchScore}%</span>
                         </div>
                       </div>
 
-                      <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                      <div className="w-full h-1.5 bg-[#f7f0e6] rounded-full overflow-hidden">
                         <div
-                          className="h-full bg-blue-600 rounded-full"
+                          className="h-full bg-[#d97a4d] rounded-full"
                           style={{ width: `${match.matchScore}%` }}
                         />
                       </div>
 
                       <div className="space-y-1.5">
                         {match.matchReasons.map((reason, idx) => (
-                          <div key={idx} className="flex items-start gap-2 text-slate-600 text-xs">
+                          <div key={idx} className="flex items-start gap-2 text-[#57493c] text-xs">
                             <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
                             <span>{reason}</span>
                           </div>
@@ -2068,7 +2068,7 @@ export default function App() {
                       <button
                         type="button"
                         onClick={() => setMainTab("GA_LIST")}
-                        className="text-blue-600 text-xs font-bold hover:underline"
+                        className="text-[#d97a4d] text-xs font-bold hover:underline"
                       >
                         전체 조건 비교에서 자세히 보기 →
                       </button>
@@ -2083,24 +2083,24 @@ export default function App() {
         {/* 탭 1: GA 메인 비교 리스트 */}
         {mainTab === "GA_LIST" && (
           <div className="space-y-5">
-            <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row justify-between items-center gap-3">
+            <div className="bg-white p-4 rounded-2xl border border-[#eee3d3] shadow-sm flex flex-col sm:flex-row justify-between items-center gap-3">
               <div className="flex flex-col gap-1 w-full sm:w-auto">
                 <div className="relative flex-1 sm:w-64">
-                  <Search className="w-4 h-4 absolute left-3 top-2.5 text-slate-400" />
+                  <Search className="w-4 h-4 absolute left-3 top-2.5 text-[#8a7a68]" />
                   <input
                     type="text"
                     placeholder="GA명 또는 지역 검색 (예: 테헤란로)"
                     value={gaListSearchQuery}
                     onChange={(e) => setGaListSearchQuery(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-lg pl-9 pr-3 py-2 text-xs focus:ring-2 focus:ring-blue-500 outline-none"
+                    className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-lg pl-9 pr-3 py-2 text-xs focus:ring-2 focus:ring-[#d97a4d] outline-none"
                   />
                 </div>
-                <p className="text-slate-400 text-[10px] pl-1">전체 87개 제휴 GA를 대상으로 검색합니다.</p>
+                <p className="text-[#8a7a68] text-[10px] pl-1">전체 87개 제휴 GA를 대상으로 검색합니다.</p>
               </div>
 
-              <div className="flex items-center gap-2 text-slate-500 text-xs font-medium self-end sm:self-auto">
+              <div className="flex items-center gap-2 text-[#6b5d4f] text-xs font-medium self-end sm:self-auto">
                 <span>정렬 기준:</span>
-                <select className="bg-slate-50 border border-slate-200 rounded-lg p-1.5 font-bold text-slate-800 outline-none">
+                <select className="bg-[#fdfaf5] border border-[#eee3d3] rounded-lg p-1.5 font-bold text-[#2b2621] outline-none">
                   <option>수수료율 높은순</option>
                   <option>정착지원금 높은순</option>
                   <option>유지율 높은순</option>
@@ -2110,31 +2110,31 @@ export default function App() {
 
             <div className="space-y-4">
               {filteredGaList.length === 0 && (
-                <div className="bg-white p-8 rounded-2xl border border-slate-200 text-center text-slate-400 text-xs">
+                <div className="bg-white p-8 rounded-2xl border border-[#eee3d3] text-center text-[#8a7a68] text-xs">
                   검색 조건에 맞는 GA가 없습니다.
                 </div>
               )}
               {filteredGaList.map((ga) => (
                 <div
                   key={ga.id}
-                  className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:border-blue-400 transition space-y-4"
+                  className="bg-white p-5 rounded-2xl border border-[#eee3d3] shadow-sm hover:border-[#e9a374] transition space-y-4"
                 >
-                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-slate-100 pb-3">
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-[#f7f0e6] pb-3">
                     <div className="flex items-center gap-2.5">
-                      <span className="bg-slate-900 text-white font-black px-2.5 py-1 rounded-lg text-xs">
+                      <span className="bg-[#201b16] text-white font-black px-2.5 py-1 rounded-lg text-xs">
                         {ga.rank}
                       </span>
                       <div>
-                        <h3 className="font-black text-base text-slate-900 flex items-center gap-2">
+                        <h3 className="font-black text-base text-[#201b16] flex items-center gap-2">
                           {ga.name}
-                          <span className="text-xs font-bold text-slate-400">({ga.branch})</span>
+                          <span className="text-xs font-bold text-[#8a7a68]">({ga.branch})</span>
                         </h3>
                       </div>
                     </div>
 
                     <div className="flex items-center gap-1.5 flex-wrap">
                       {ga.tags.map((tag, idx) => (
-                        <span key={idx} className="bg-blue-50 text-blue-700 font-bold px-2 py-0.5 rounded text-[10px]">
+                        <span key={idx} className="bg-[#fdf3ea] text-[#b35a2e] font-bold px-2 py-0.5 rounded text-[10px]">
                           #{tag}
                         </span>
                       ))}
@@ -2149,52 +2149,52 @@ export default function App() {
                         </span>
                         <span className="font-black text-emerald-700 text-xs">{ga.lifeCommission.split(" ")[1]}</span>
                       </div>
-                      <p className="text-slate-600 text-[11px] leading-relaxed">
+                      <p className="text-[#57493c] text-[11px] leading-relaxed">
                         {ga.lifeCommission}
                       </p>
                     </div>
 
-                    <div className="bg-blue-50/60 border border-blue-100 p-3.5 rounded-xl space-y-1">
+                    <div className="bg-[#fdf3ea]/60 border border-[#fbeee0] p-3.5 rounded-xl space-y-1">
                       <div className="flex items-center justify-between">
-                        <span className="font-extrabold text-blue-900 text-xs flex items-center gap-1">
-                          <Award className="w-3.5 h-3.5 text-blue-600" /> 손해보험 수수료 조건
+                        <span className="font-extrabold text-[#5c2814] text-xs flex items-center gap-1">
+                          <Award className="w-3.5 h-3.5 text-[#d97a4d]" /> 손해보험 수수료 조건
                         </span>
-                        <span className="font-black text-blue-700 text-xs">{ga.nonLifeCommission.split(" ")[1]}</span>
+                        <span className="font-black text-[#b35a2e] text-xs">{ga.nonLifeCommission.split(" ")[1]}</span>
                       </div>
-                      <p className="text-slate-600 text-[11px] leading-relaxed">
+                      <p className="text-[#57493c] text-[11px] leading-relaxed">
                         {ga.nonLifeCommission}
                       </p>
                     </div>
                   </div>
 
-                  <div className="bg-slate-50/70 p-3 rounded-xl border border-slate-100 space-y-1.5">
-                    <span className="text-[11px] font-extrabold text-slate-700 block">주요 지원 혜택 & 지원 사항:</span>
-                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1 text-[11px] text-slate-600">
+                  <div className="bg-[#fdfaf5]/70 p-3 rounded-xl border border-[#f7f0e6] space-y-1.5">
+                    <span className="text-[11px] font-extrabold text-[#453a2f] block">주요 지원 혜택 & 지원 사항:</span>
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1 text-[11px] text-[#57493c]">
                       {ga.features.map((feat, idx) => (
                         <li key={idx} className="flex items-center gap-1.5">
-                          <Check className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+                          <Check className="w-3.5 h-3.5 text-[#d97a4d] shrink-0" />
                           <span>{feat}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs">
+                  <div className="p-3 rounded-xl bg-[#fdfaf5] border border-[#f7f0e6] flex flex-wrap items-center justify-between gap-3 text-xs">
                     <div className="flex items-center gap-4">
                       <div>
-                        <span className="text-slate-400 font-semibold block text-[10px]">정착지원금</span>
-                        <span className="font-extrabold text-slate-800">{ga.settlement}</span>
+                        <span className="text-[#8a7a68] font-semibold block text-[10px]">정착지원금</span>
+                        <span className="font-extrabold text-[#2b2621]">{ga.settlement}</span>
                       </div>
-                      <div className="h-6 w-[1px] bg-slate-200"></div>
+                      <div className="h-6 w-[1px] bg-[#eee3d3]"></div>
                       <div>
-                        <span className="text-slate-400 font-semibold block text-[10px]">DB 지원 정책</span>
-                        <span className="font-extrabold text-slate-800">{ga.dbSupport}</span>
+                        <span className="text-[#8a7a68] font-semibold block text-[10px]">DB 지원 정책</span>
+                        <span className="font-extrabold text-[#2b2621]">{ga.dbSupport}</span>
                       </div>
                     </div>
 
                     <button
                       onClick={() => alert(`${ga.name} 상세 스카우트 제안 및 수수료표 요청이 완료되었습니다.`)}
-                      className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-2 rounded-xl text-xs transition shadow-sm ml-auto"
+                      className="bg-[#d97a4d] hover:bg-[#b35a2e] text-white font-bold px-4 py-2 rounded-xl text-xs transition shadow-sm ml-auto"
                     >
                       상세 수수료표 및 이직 상담 신청
                     </button>
@@ -2204,8 +2204,8 @@ export default function App() {
                     <Megaphone className="w-3.5 h-3.5 text-amber-600 shrink-0 mt-0.5" />
                     <div>
                       <span className="text-amber-700 font-extrabold text-[11px]">이번 시즌 시책·포상금 (변동 가능)</span>
-                      <p className="text-slate-600 text-[11px] leading-relaxed mt-0.5">{ga.incentiveNote}</p>
-                      <p className="text-slate-400 text-[10px] mt-1">최근 업데이트: {ga.incentiveUpdatedAt}</p>
+                      <p className="text-[#57493c] text-[11px] leading-relaxed mt-0.5">{ga.incentiveNote}</p>
+                      <p className="text-[#8a7a68] text-[10px] mt-1">최근 업데이트: {ga.incentiveUpdatedAt}</p>
                     </div>
                   </div>
                 </div>
@@ -2217,23 +2217,23 @@ export default function App() {
         {/* 탭 3: 받은 역경매 제안함 */}
         {mainTab === "OFFERS_INBOX" && (
           <div className="space-y-4">
-            <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
+            <div className="bg-white p-4 rounded-2xl border border-[#eee3d3] shadow-sm flex items-center justify-between">
               <div>
-                <h2 className="text-base font-black text-slate-900">받은 이직/스카우트 제안 목록</h2>
-                <p className="text-slate-500 text-[11px]">GA 매니저들이 나의 익명 프로필을 확인하고 전달한 맞춤 제안서입니다.</p>
+                <h2 className="text-base font-black text-[#201b16]">받은 이직/스카우트 제안 목록</h2>
+                <p className="text-[#6b5d4f] text-[11px]">GA 매니저들이 나의 익명 프로필을 확인하고 전달한 맞춤 제안서입니다.</p>
               </div>
-              <span className="bg-blue-100 text-blue-700 font-extrabold px-3 py-1 rounded-full text-xs">
+              <span className="bg-[#fbeee0] text-[#b35a2e] font-extrabold px-3 py-1 rounded-full text-xs">
                 총 {MOCK_OFFERS_RECEIVED.length}건 수신
               </span>
             </div>
 
             <div className="space-y-4">
               {MOCK_OFFERS_RECEIVED.map((offer) => (
-                <div key={offer.id} className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:border-blue-300 transition space-y-4">
-                  <div className="flex justify-between items-start border-b border-slate-100 pb-3">
+                <div key={offer.id} className="bg-white p-5 rounded-2xl border border-[#eee3d3] shadow-sm hover:border-[#e9a374] transition space-y-4">
+                  <div className="flex justify-between items-start border-b border-[#f7f0e6] pb-3">
                     <div>
-                      <span className="text-[10px] text-slate-400 font-bold">{offer.date} 제안 수신</span>
-                      <h3 className="text-base font-black text-slate-900">{offer.gaName}</h3>
+                      <span className="text-[10px] text-[#8a7a68] font-bold">{offer.date} 제안 수신</span>
+                      <h3 className="text-base font-black text-[#201b16]">{offer.gaName}</h3>
                     </div>
                     <span className="bg-amber-100 text-amber-800 text-[10px] font-extrabold px-2.5 py-1 rounded-full">
                       {offer.status}
@@ -2241,22 +2241,22 @@ export default function App() {
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    <div className="bg-slate-50 p-3 rounded-xl border border-slate-100">
-                      <span className="text-[10px] font-bold text-slate-400 block">제안 수수료 조건</span>
-                      <span className="font-black text-slate-800 text-xs">{offer.offeredCommission}</span>
+                    <div className="bg-[#fdfaf5] p-3 rounded-xl border border-[#f7f0e6]">
+                      <span className="text-[10px] font-bold text-[#8a7a68] block">제안 수수료 조건</span>
+                      <span className="font-black text-[#2b2621] text-xs">{offer.offeredCommission}</span>
                     </div>
-                    <div className="bg-slate-50 p-3 rounded-xl border border-slate-100">
-                      <span className="text-[10px] font-bold text-slate-400 block">제안 정착지원금</span>
-                      <span className="font-black text-blue-600 text-xs">{offer.offeredSettlement}</span>
+                    <div className="bg-[#fdfaf5] p-3 rounded-xl border border-[#f7f0e6]">
+                      <span className="text-[10px] font-bold text-[#8a7a68] block">제안 정착지원금</span>
+                      <span className="font-black text-[#d97a4d] text-xs">{offer.offeredSettlement}</span>
                     </div>
-                    <div className="bg-slate-50 p-3 rounded-xl border border-slate-100">
-                      <span className="text-[10px] font-bold text-slate-400 block">제안 DB 지원</span>
+                    <div className="bg-[#fdfaf5] p-3 rounded-xl border border-[#f7f0e6]">
+                      <span className="text-[10px] font-bold text-[#8a7a68] block">제안 DB 지원</span>
                       <span className="font-black text-emerald-600 text-xs">{offer.offeredDb}</span>
                     </div>
                   </div>
 
-                  <div className="bg-blue-50/50 p-3.5 rounded-xl border border-blue-100 text-slate-700 text-[11px] leading-relaxed">
-                    <span className="font-bold text-blue-900 block mb-1">GA 매니저의 메시지:</span>
+                  <div className="bg-[#fdf3ea]/50 p-3.5 rounded-xl border border-[#fbeee0] text-[#453a2f] text-[11px] leading-relaxed">
+                    <span className="font-bold text-[#5c2814] block mb-1">GA 매니저의 메시지:</span>
                     "{offer.message}"
                   </div>
 
@@ -2264,20 +2264,20 @@ export default function App() {
                     <button
                       type="button"
                       onClick={() => setActiveMessageThread({ id: offer.id, title: offer.gaName })}
-                      className="px-4 py-2 bg-white border border-slate-200 hover:border-blue-300 text-slate-700 font-bold rounded-xl text-xs transition flex items-center gap-1.5"
+                      className="px-4 py-2 bg-white border border-[#eee3d3] hover:border-[#e9a374] text-[#453a2f] font-bold rounded-xl text-xs transition flex items-center gap-1.5"
                     >
                       <MessageSquare className="w-3.5 h-3.5" />
                       <span>메시지{messageThreads[offer.id]?.length ? ` (${messageThreads[offer.id].length})` : ""}</span>
                     </button>
                     <button
                       onClick={() => alert("제안을 거절하였습니다.")}
-                      className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold rounded-xl text-xs transition"
+                      className="px-4 py-2 bg-[#f7f0e6] hover:bg-[#eee3d3] text-[#57493c] font-bold rounded-xl text-xs transition"
                     >
                       거절하기
                     </button>
                     <button
                       onClick={() => alert("제안을 수락하였습니다! 담당 매니저가 매칭 대화방으로 안내해 드립니다.")}
-                      className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-extrabold rounded-xl text-xs transition shadow-md"
+                      className="px-5 py-2 bg-[#d97a4d] hover:bg-[#b35a2e] text-white font-extrabold rounded-xl text-xs transition shadow-md"
                     >
                       제안 수락 및 연락처 공개
                     </button>
@@ -2290,11 +2290,11 @@ export default function App() {
 
         {/* 탭 4: FC 익명 프로필 및 조건 설정 */}
         {mainTab === "FC_PROFILE" && (
-          <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
-            <div className="border-b border-slate-100 pb-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+          <div className="bg-white p-6 rounded-2xl border border-[#eee3d3] shadow-sm space-y-6">
+            <div className="border-b border-[#f7f0e6] pb-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
               <div>
-                <h2 className="text-lg font-black text-slate-900">내 익명 프로필 & 이직 희망 조건</h2>
-                <p className="text-slate-500 text-xs mt-0.5">
+                <h2 className="text-lg font-black text-[#201b16]">내 익명 프로필 & 이직 희망 조건</h2>
+                <p className="text-[#6b5d4f] text-xs mt-0.5">
                   검증된 경력과 실적 정보로 GA 매니저들에게 최고의 조건(수수료, 정착금, DB)을 제안받으세요.
                 </p>
               </div>
@@ -2319,33 +2319,33 @@ export default function App() {
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
-                <div className="flex items-center gap-1.5 text-slate-400 text-[10px] font-semibold">
+              <div className="bg-[#fdfaf5] p-3.5 rounded-xl border border-[#f7f0e6]">
+                <div className="flex items-center gap-1.5 text-[#8a7a68] text-[10px] font-semibold">
                   <Search className="w-3.5 h-3.5" />
                   <span>프로필 조회수 (이번 주)</span>
                 </div>
-                <p className="text-xl font-black text-slate-900 mt-1">46회</p>
+                <p className="text-xl font-black text-[#201b16] mt-1">46회</p>
               </div>
-              <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
-                <div className="flex items-center gap-1.5 text-slate-400 text-[10px] font-semibold">
+              <div className="bg-[#fdfaf5] p-3.5 rounded-xl border border-[#f7f0e6]">
+                <div className="flex items-center gap-1.5 text-[#8a7a68] text-[10px] font-semibold">
                   <Inbox className="w-3.5 h-3.5" />
                   <span>받은 제안</span>
                 </div>
-                <p className="text-xl font-black text-slate-900 mt-1">{MOCK_OFFERS_RECEIVED.length}건</p>
+                <p className="text-xl font-black text-[#201b16] mt-1">{MOCK_OFFERS_RECEIVED.length}건</p>
               </div>
-              <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
-                <div className="flex items-center gap-1.5 text-slate-400 text-[10px] font-semibold">
+              <div className="bg-[#fdfaf5] p-3.5 rounded-xl border border-[#f7f0e6]">
+                <div className="flex items-center gap-1.5 text-[#8a7a68] text-[10px] font-semibold">
                   <MessageSquare className="w-3.5 h-3.5" />
                   <span>진행중 대화</span>
                 </div>
-                <p className="text-xl font-black text-slate-900 mt-1">{Object.keys(messageThreads).length}건</p>
+                <p className="text-xl font-black text-[#201b16] mt-1">{Object.keys(messageThreads).length}건</p>
               </div>
-              <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-100">
-                <div className="flex items-center gap-1.5 text-slate-400 text-[10px] font-semibold">
+              <div className="bg-[#fdfaf5] p-3.5 rounded-xl border border-[#f7f0e6]">
+                <div className="flex items-center gap-1.5 text-[#8a7a68] text-[10px] font-semibold">
                   <UserCheck className="w-3.5 h-3.5" />
                   <span>실적 인증 상태</span>
                 </div>
-                <p className={`text-xl font-black mt-1 ${profile.isVerified ? "text-emerald-600" : "text-slate-400"}`}>
+                <p className={`text-xl font-black mt-1 ${profile.isVerified ? "text-emerald-600" : "text-[#8a7a68]"}`}>
                   {profile.isVerified ? "인증완료" : "미인증"}
                 </p>
               </div>
@@ -2354,28 +2354,28 @@ export default function App() {
             <form onSubmit={handleOpenPreview} className="space-y-6">
               <div className="space-y-4">
                 <div className="flex items-center gap-2">
-                  <UserCheck className="w-4 h-4 text-blue-600" />
-                  <h3 className="font-black text-sm text-slate-800">프로필 정보</h3>
-                  <span className="text-slate-400 text-[11px] font-medium">본인의 경력과 실적을 알려주세요</span>
+                  <UserCheck className="w-4 h-4 text-[#d97a4d]" />
+                  <h3 className="font-black text-sm text-[#2b2621]">프로필 정보</h3>
+                  <span className="text-[#8a7a68] text-[11px] font-medium">본인의 경력과 실적을 알려주세요</span>
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-extrabold text-slate-700 text-xs">익명 닉네임</label>
+                  <label className="font-extrabold text-[#453a2f] text-xs">익명 닉네임</label>
                   <input
                     type="text"
                     value={profile.nickname}
                     onChange={(e) => setProfile({ ...profile, nickname: e.target.value })}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#d97a4d]"
                   />
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1">
-                    <label className="font-extrabold text-slate-700 text-xs">경력 연차</label>
+                    <label className="font-extrabold text-[#453a2f] text-xs">경력 연차</label>
                     <select
                       value={profile.exp}
                       onChange={(e) => setProfile({ ...profile, exp: e.target.value })}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#d97a4d]"
                     >
                       {CAREER_OPTIONS.map((option) => (
                         <option key={option} value={option}>
@@ -2386,11 +2386,11 @@ export default function App() {
                   </div>
 
                   <div className="space-y-1">
-                    <label className="font-extrabold text-slate-700 text-xs">주력 영업 분야</label>
+                    <label className="font-extrabold text-[#453a2f] text-xs">주력 영업 분야</label>
                     <select
                       value={profile.mainField}
                       onChange={(e) => setProfile({ ...profile, mainField: e.target.value })}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#d97a4d]"
                     >
                       {MAIN_FIELD_OPTIONS.map((option) => (
                         <option key={option} value={option}>
@@ -2401,7 +2401,7 @@ export default function App() {
                   </div>
 
                   <div className="space-y-1">
-                    <label className="font-extrabold text-slate-700 text-xs flex items-center gap-1.5">
+                    <label className="font-extrabold text-[#453a2f] text-xs flex items-center gap-1.5">
                       <span>월 평균 매출 (업적)</span>
                       {profile.isVerified && (
                         <span className="inline-flex items-center gap-0.5 text-[10px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-full">
@@ -2414,12 +2414,12 @@ export default function App() {
                       type="text"
                       value={profile.salesRange}
                       onChange={(e) => setProfile({ ...profile, salesRange: e.target.value })}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#d97a4d]"
                     />
                   </div>
 
                   <div className="space-y-1">
-                    <label className="font-extrabold text-slate-700 text-xs flex items-center gap-1.5">
+                    <label className="font-extrabold text-[#453a2f] text-xs flex items-center gap-1.5">
                       <span>유지율</span>
                       {profile.isVerified && (
                         <span className="inline-flex items-center gap-0.5 text-[10px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-full">
@@ -2432,58 +2432,58 @@ export default function App() {
                       type="text"
                       value={profile.retentionRate}
                       onChange={(e) => setProfile({ ...profile, retentionRate: e.target.value })}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#d97a4d]"
                     />
                   </div>
                 </div>
               </div>
 
-              <div className="border-t border-slate-100 pt-5 space-y-4">
+              <div className="border-t border-[#f7f0e6] pt-5 space-y-4">
                 <div className="flex items-center gap-2">
-                  <Award className="w-4 h-4 text-blue-600" />
-                  <h3 className="font-black text-sm text-slate-800">이직 희망 조건</h3>
-                  <span className="text-slate-400 text-[11px] font-medium">GA에게 제안받고 싶은 조건을 알려주세요</span>
+                  <Award className="w-4 h-4 text-[#d97a4d]" />
+                  <h3 className="font-black text-sm text-[#2b2621]">이직 희망 조건</h3>
+                  <span className="text-[#8a7a68] text-[11px] font-medium">GA에게 제안받고 싶은 조건을 알려주세요</span>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1">
-                    <label className="font-extrabold text-slate-700 text-xs">희망 최소 수수료율</label>
+                    <label className="font-extrabold text-[#453a2f] text-xs">희망 최소 수수료율</label>
                     <input
                       type="text"
                       value={profile.minCommission}
                       onChange={(e) => setProfile({ ...profile, minCommission: e.target.value })}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#d97a4d]"
                     />
                   </div>
 
                   <div className="space-y-1">
-                    <label className="font-extrabold text-slate-700 text-xs">희망 최소 정착지원금</label>
+                    <label className="font-extrabold text-[#453a2f] text-xs">희망 최소 정착지원금</label>
                     <input
                       type="text"
                       value={profile.minSettlement}
                       onChange={(e) => setProfile({ ...profile, minSettlement: e.target.value })}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#d97a4d]"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-extrabold text-slate-700 text-xs">희망 근무 지역</label>
+                  <label className="font-extrabold text-[#453a2f] text-xs">희망 근무 지역</label>
                   <input
                     type="text"
                     value={profile.preferredRegion}
                     onChange={(e) => setProfile({ ...profile, preferredRegion: e.target.value })}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#d97a4d]"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-extrabold text-slate-700 text-xs">기타 요청사항 / 지점 지원 희망 조건</label>
+                  <label className="font-extrabold text-[#453a2f] text-xs">기타 요청사항 / 지점 지원 희망 조건</label>
                   <textarea
                     rows={3}
                     value={profile.memo}
                     onChange={(e) => setProfile({ ...profile, memo: e.target.value })}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-medium outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-medium outline-none focus:ring-2 focus:ring-[#d97a4d]"
                   />
                 </div>
               </div>
@@ -2491,7 +2491,7 @@ export default function App() {
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-extrabold py-3.5 rounded-xl text-xs transition shadow-lg"
+                  className="w-full bg-[#d97a4d] hover:bg-[#b35a2e] text-white font-extrabold py-3.5 rounded-xl text-xs transition shadow-lg"
                 >
                   익명 프로필 저장 및 GA 역경매 입찰 받기
                 </button>
@@ -2503,35 +2503,35 @@ export default function App() {
         {/* 탭 GA-0: 홈 대시보드 */}
         {mainTab === "GA_HOME" && (
           <div className="space-y-6">
-            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-              <h2 className="text-xl font-black text-slate-900">안녕하세요, {gaProfile.gaName} 매니저님</h2>
-              <p className="text-slate-500 text-sm mt-1.5">
+            <div className="bg-white p-6 rounded-2xl border border-[#eee3d3] shadow-sm">
+              <h2 className="text-xl font-black text-[#201b16]">안녕하세요, {gaProfile.gaName} 매니저님</h2>
+              <p className="text-[#6b5d4f] text-sm mt-1.5">
                 오늘도 좋은 인재와의 매칭을 응원합니다. 현재 활동 현황을 한눈에 확인하세요.
               </p>
             </div>
 
             {sentOffers.length === 0 && (
-              <div className="bg-blue-50/60 border border-blue-100 rounded-2xl p-6">
-                <h3 className="font-black text-base text-blue-900 mb-4">시작하기 전에 이 순서로 진행해보세요</h3>
+              <div className="bg-[#fdf3ea]/60 border border-[#fbeee0] rounded-2xl p-6">
+                <h3 className="font-black text-base text-[#5c2814] mb-4">시작하기 전에 이 순서로 진행해보세요</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  <div className="bg-white rounded-xl p-4 border border-blue-100 space-y-1.5">
-                    <span className="text-blue-600 font-black text-sm">STEP 1</span>
-                    <p className="font-bold text-slate-800 text-xs">GA 정보를 등록하세요</p>
-                    <p className="text-slate-500 text-[11px] leading-relaxed">
+                  <div className="bg-white rounded-xl p-4 border border-[#fbeee0] space-y-1.5">
+                    <span className="text-[#d97a4d] font-black text-sm">STEP 1</span>
+                    <p className="font-bold text-[#2b2621] text-xs">GA 정보를 등록하세요</p>
+                    <p className="text-[#6b5d4f] text-[11px] leading-relaxed">
                       설계사에게 노출될 우리 GA의 기본 정보를 채워주세요.
                     </p>
                   </div>
-                  <div className="bg-white rounded-xl p-4 border border-blue-100 space-y-1.5">
-                    <span className="text-blue-600 font-black text-sm">STEP 2</span>
-                    <p className="font-bold text-slate-800 text-xs">이직희망 설계사를 둘러보세요</p>
-                    <p className="text-slate-500 text-[11px] leading-relaxed">
+                  <div className="bg-white rounded-xl p-4 border border-[#fbeee0] space-y-1.5">
+                    <span className="text-[#d97a4d] font-black text-sm">STEP 2</span>
+                    <p className="font-bold text-[#2b2621] text-xs">이직희망 설계사를 둘러보세요</p>
+                    <p className="text-[#6b5d4f] text-[11px] leading-relaxed">
                       경력, 실적, 희망 조건을 확인하고 원하는 인재를 찾아보세요.
                     </p>
                   </div>
-                  <div className="bg-white rounded-xl p-4 border border-blue-100 space-y-1.5">
-                    <span className="text-blue-600 font-black text-sm">STEP 3</span>
-                    <p className="font-bold text-slate-800 text-xs">제안을 보내보세요</p>
-                    <p className="text-slate-500 text-[11px] leading-relaxed">
+                  <div className="bg-white rounded-xl p-4 border border-[#fbeee0] space-y-1.5">
+                    <span className="text-[#d97a4d] font-black text-sm">STEP 3</span>
+                    <p className="font-bold text-[#2b2621] text-xs">제안을 보내보세요</p>
+                    <p className="text-[#6b5d4f] text-[11px] leading-relaxed">
                       마음에 드는 후보에게 맞춤 조건으로 스카우트 제안을 보내세요.
                     </p>
                   </div>
@@ -2540,64 +2540,64 @@ export default function App() {
             )}
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-              <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-                <div className="flex items-center gap-1.5 text-slate-400 text-xs font-semibold">
+              <div className="bg-white p-5 rounded-2xl border border-[#eee3d3] shadow-sm">
+                <div className="flex items-center gap-1.5 text-[#8a7a68] text-xs font-semibold">
                   <UserCheck className="w-4 h-4" />
                   <span>활성 후보 수</span>
                 </div>
-                <p className="text-2xl font-black text-slate-900 mt-1.5">{MOCK_FC_CANDIDATES.length}명</p>
+                <p className="text-2xl font-black text-[#201b16] mt-1.5">{MOCK_FC_CANDIDATES.length}명</p>
               </div>
-              <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-                <div className="flex items-center gap-1.5 text-slate-400 text-xs font-semibold">
+              <div className="bg-white p-5 rounded-2xl border border-[#eee3d3] shadow-sm">
+                <div className="flex items-center gap-1.5 text-[#8a7a68] text-xs font-semibold">
                   <Inbox className="w-4 h-4" />
                   <span>보낸 제안</span>
                 </div>
-                <p className="text-2xl font-black text-slate-900 mt-1.5">{sentOffers.length}건</p>
+                <p className="text-2xl font-black text-[#201b16] mt-1.5">{sentOffers.length}건</p>
               </div>
-              <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-                <div className="flex items-center gap-1.5 text-slate-400 text-xs font-semibold">
+              <div className="bg-white p-5 rounded-2xl border border-[#eee3d3] shadow-sm">
+                <div className="flex items-center gap-1.5 text-[#8a7a68] text-xs font-semibold">
                   <Check className="w-4 h-4" />
                   <span>매칭 성사</span>
                 </div>
                 <p className="text-2xl font-black text-emerald-600 mt-1.5">{matchedOffersCount}건</p>
               </div>
-              <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-                <div className="flex items-center gap-1.5 text-slate-400 text-xs font-semibold">
+              <div className="bg-white p-5 rounded-2xl border border-[#eee3d3] shadow-sm">
+                <div className="flex items-center gap-1.5 text-[#8a7a68] text-xs font-semibold">
                   <TrendingUp className="w-4 h-4" />
                   <span>응답률</span>
                 </div>
-                <p className="text-2xl font-black text-blue-600 mt-1.5">{responseRateLabel}</p>
+                <p className="text-2xl font-black text-[#d97a4d] mt-1.5">{responseRateLabel}</p>
               </div>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
-              <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3.5">
+              <div className="bg-white p-6 rounded-2xl border border-[#eee3d3] shadow-sm space-y-3.5">
                 <div className="flex items-center justify-between">
-                  <h3 className="font-black text-base text-slate-900">최근 보낸 제안</h3>
+                  <h3 className="font-black text-base text-[#201b16]">최근 보낸 제안</h3>
                   <button
                     type="button"
                     onClick={() => setMainTab("SENT_OFFERS")}
-                    className="text-blue-600 text-xs font-bold hover:underline"
+                    className="text-[#d97a4d] text-xs font-bold hover:underline"
                   >
                     전체보기 →
                   </button>
                 </div>
                 {sentOffers.length === 0 ? (
-                  <p className="text-slate-400 text-xs py-7 text-center">아직 보낸 제안이 없습니다.</p>
+                  <p className="text-[#8a7a68] text-xs py-7 text-center">아직 보낸 제안이 없습니다.</p>
                 ) : (
                   <div className="space-y-2.5">
                     {sentOffers.slice(0, 3).map((offer) => (
-                      <div key={offer.id} className="flex items-center justify-between bg-slate-50 rounded-xl p-3.5">
+                      <div key={offer.id} className="flex items-center justify-between bg-[#fdfaf5] rounded-xl p-3.5">
                         <div>
-                          <p className="font-bold text-slate-800 text-xs">{offer.candidateNickname}</p>
-                          <p className="text-slate-400 text-[11px]">{offer.offeredCommission}</p>
+                          <p className="font-bold text-[#2b2621] text-xs">{offer.candidateNickname}</p>
+                          <p className="text-[#8a7a68] text-[11px]">{offer.offeredCommission}</p>
                         </div>
                         <span
                           className={`text-[11px] font-extrabold px-2 py-1 rounded-full shrink-0 ${
                             offer.status === "매칭 완료"
                               ? "bg-emerald-100 text-emerald-700"
                               : offer.status === "거절됨"
-                              ? "bg-slate-200 text-slate-600"
+                              ? "bg-[#eee3d3] text-[#57493c]"
                               : "bg-amber-100 text-amber-800"
                           }`}
                         >
@@ -2609,66 +2609,66 @@ export default function App() {
                 )}
               </div>
 
-              <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3.5">
+              <div className="bg-white p-6 rounded-2xl border border-[#eee3d3] shadow-sm space-y-3.5">
                 <div className="flex items-center justify-between">
-                  <h3 className="font-black text-base text-slate-900">추천 후보</h3>
+                  <h3 className="font-black text-base text-[#201b16]">추천 후보</h3>
                   <button
                     type="button"
                     onClick={() => setMainTab("FC_CANDIDATES")}
-                    className="text-blue-600 text-xs font-bold hover:underline"
+                    className="text-[#d97a4d] text-xs font-bold hover:underline"
                   >
                     전체보기 →
                   </button>
                 </div>
                 <div className="space-y-2.5">
                   {MOCK_FC_CANDIDATES.slice(0, 3).map((candidate) => (
-                    <div key={candidate.id} className="flex items-center justify-between bg-slate-50 rounded-xl p-3.5">
+                    <div key={candidate.id} className="flex items-center justify-between bg-[#fdfaf5] rounded-xl p-3.5">
                       <div>
-                        <p className="font-bold text-slate-800 text-xs">{candidate.nickname}</p>
-                        <p className="text-slate-400 text-[11px]">{candidate.mainField}</p>
+                        <p className="font-bold text-[#2b2621] text-xs">{candidate.nickname}</p>
+                        <p className="text-[#8a7a68] text-[11px]">{candidate.mainField}</p>
                       </div>
-                      <span className="font-bold text-blue-600 text-xs shrink-0">{candidate.minCommission}</span>
+                      <span className="font-bold text-[#d97a4d] text-xs shrink-0">{candidate.minCommission}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3.5">
+              <div className="bg-white p-6 rounded-2xl border border-[#eee3d3] shadow-sm space-y-3.5">
                 <div className="flex items-center justify-between">
-                  <h3 className="font-black text-base text-slate-900">우리 GA 프로필</h3>
+                  <h3 className="font-black text-base text-[#201b16]">우리 GA 프로필</h3>
                   <button
                     type="button"
                     onClick={() => setMainTab("GA_PROFILE")}
-                    className="text-blue-600 text-xs font-bold hover:underline"
+                    className="text-[#d97a4d] text-xs font-bold hover:underline"
                   >
                     수정하기 →
                   </button>
                 </div>
-                <div className="bg-slate-50 rounded-xl p-3.5 space-y-2">
+                <div className="bg-[#fdfaf5] rounded-xl p-3.5 space-y-2">
                   <div className="flex items-center gap-2.5">
-                    <div className="w-9 h-9 rounded-full bg-blue-100 flex items-center justify-center shrink-0">
-                      <Building2 className="w-4.5 h-4.5 text-blue-600" />
+                    <div className="w-9 h-9 rounded-full bg-[#fbeee0] flex items-center justify-center shrink-0">
+                      <Building2 className="w-4.5 h-4.5 text-[#d97a4d]" />
                     </div>
                     <div>
-                      <p className="font-bold text-slate-800 text-xs">{gaProfile.gaName}</p>
-                      <p className="text-slate-400 text-[11px]">{gaProfile.branch}</p>
+                      <p className="font-bold text-[#2b2621] text-xs">{gaProfile.gaName}</p>
+                      <p className="text-[#8a7a68] text-[11px]">{gaProfile.branch}</p>
                     </div>
                   </div>
-                  <p className="text-slate-500 text-[11px] leading-relaxed pt-1">{gaProfile.intro}</p>
+                  <p className="text-[#6b5d4f] text-[11px] leading-relaxed pt-1">{gaProfile.intro}</p>
                   <div className="flex flex-wrap gap-1.5 pt-1">
-                    <span className="bg-white border border-slate-200 text-slate-600 text-[10px] font-bold px-2 py-1 rounded-full">
+                    <span className="bg-white border border-[#eee3d3] text-[#57493c] text-[10px] font-bold px-2 py-1 rounded-full">
                       생보 {gaProfile.lifeCommissionMin}~{gaProfile.lifeCommissionMax}%
                     </span>
-                    <span className="bg-white border border-slate-200 text-slate-600 text-[10px] font-bold px-2 py-1 rounded-full">
+                    <span className="bg-white border border-[#eee3d3] text-[#57493c] text-[10px] font-bold px-2 py-1 rounded-full">
                       손보 {gaProfile.nonLifeCommissionMin}~{gaProfile.nonLifeCommissionMax}%
                     </span>
-                    <span className="bg-white border border-slate-200 text-slate-600 text-[10px] font-bold px-2 py-1 rounded-full">
+                    <span className="bg-white border border-[#eee3d3] text-[#57493c] text-[10px] font-bold px-2 py-1 rounded-full">
                       정착지원금{" "}
                       {Number(gaProfile.settlementSupportPercent) > 0
                         ? `직전업적 ${gaProfile.settlementSupportPercent}%까지`
                         : "미지원"}
                     </span>
-                    <span className="bg-white border border-slate-200 text-slate-600 text-[10px] font-bold px-2 py-1 rounded-full">
+                    <span className="bg-white border border-[#eee3d3] text-[#57493c] text-[10px] font-bold px-2 py-1 rounded-full">
                       DB {gaProfile.dbSupport}
                     </span>
                   </div>
@@ -2684,22 +2684,22 @@ export default function App() {
         {/* 탭 GA-1: 이직 희망 설계사 후보 리스트 */}
         {mainTab === "FC_CANDIDATES" && (
           <div className="space-y-4">
-            <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row justify-between items-center gap-3">
+            <div className="bg-white p-4 rounded-2xl border border-[#eee3d3] shadow-sm flex flex-col sm:flex-row justify-between items-center gap-3">
               <div className="flex items-center gap-2 w-full sm:w-auto flex-wrap">
                 <div className="relative flex-1 sm:w-56">
-                  <Search className="w-4 h-4 absolute left-3 top-2.5 text-slate-400" />
+                  <Search className="w-4 h-4 absolute left-3 top-2.5 text-[#8a7a68]" />
                   <input
                     type="text"
                     placeholder="닉네임, 분야, 지역 검색"
                     value={candidateSearchQuery}
                     onChange={(e) => setCandidateSearchQuery(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-lg pl-9 pr-3 py-2 text-xs focus:ring-2 focus:ring-blue-500 outline-none"
+                    className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-lg pl-9 pr-3 py-2 text-xs focus:ring-2 focus:ring-[#d97a4d] outline-none"
                   />
                 </div>
                 <select
                   value={candidateFieldFilter}
                   onChange={(e) => setCandidateFieldFilter(e.target.value)}
-                  className="bg-slate-50 border border-slate-200 rounded-lg p-2 text-xs font-bold text-slate-700 outline-none"
+                  className="bg-[#fdfaf5] border border-[#eee3d3] rounded-lg p-2 text-xs font-bold text-[#453a2f] outline-none"
                 >
                   <option value="ALL">전체 분야</option>
                   {MAIN_FIELD_OPTIONS.map((option) => (
@@ -2710,12 +2710,12 @@ export default function App() {
                 </select>
               </div>
 
-              <div className="flex items-center gap-2 text-slate-500 text-xs font-medium self-end sm:self-auto">
+              <div className="flex items-center gap-2 text-[#6b5d4f] text-xs font-medium self-end sm:self-auto">
                 <span>정렬 기준:</span>
                 <select
                   value={candidateSort}
                   onChange={(e) => setCandidateSort(e.target.value)}
-                  className="bg-slate-50 border border-slate-200 rounded-lg p-1.5 font-bold text-slate-800 outline-none"
+                  className="bg-[#fdfaf5] border border-[#eee3d3] rounded-lg p-1.5 font-bold text-[#2b2621] outline-none"
                 >
                   <option value="SALES_DESC">월 매출 높은순</option>
                   <option value="RETENTION_DESC">유지율 높은순</option>
@@ -2725,16 +2725,16 @@ export default function App() {
             </div>
 
             <div className="flex items-center justify-between px-1">
-              <span className="text-slate-500 text-[11px] font-semibold">
+              <span className="text-[#6b5d4f] text-[11px] font-semibold">
                 조건에 맞는 설계사에게 먼저 제안을 보내보세요. 이름/연락처는 제안 수락 전까지 비공개입니다.
               </span>
-              <span className="bg-blue-100 text-blue-700 font-extrabold px-3 py-1 rounded-full text-xs shrink-0">
+              <span className="bg-[#fbeee0] text-[#b35a2e] font-extrabold px-3 py-1 rounded-full text-xs shrink-0">
                 {filteredCandidates.length}명 검색됨
               </span>
             </div>
 
             {filteredCandidates.length === 0 ? (
-              <div className="bg-white p-10 rounded-2xl border border-slate-200 shadow-sm text-center text-slate-400 text-xs">
+              <div className="bg-white p-10 rounded-2xl border border-[#eee3d3] shadow-sm text-center text-[#8a7a68] text-xs">
                 검색 조건에 맞는 후보가 없습니다.
               </div>
             ) : (
@@ -2742,16 +2742,16 @@ export default function App() {
               {filteredCandidates.map((candidate) => (
                 <div
                   key={candidate.id}
-                  className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:border-blue-400 transition space-y-4"
+                  className="bg-white p-5 rounded-2xl border border-[#eee3d3] shadow-sm hover:border-[#e9a374] transition space-y-4"
                 >
-                  <div className="flex items-start justify-between border-b border-slate-100 pb-3">
+                  <div className="flex items-start justify-between border-b border-[#f7f0e6] pb-3">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center shrink-0">
-                        <UserCheck className="w-5 h-5 text-blue-600" />
+                      <div className="w-10 h-10 rounded-full bg-[#fbeee0] flex items-center justify-center shrink-0">
+                        <UserCheck className="w-5 h-5 text-[#d97a4d]" />
                       </div>
                       <div>
-                        <h3 className="font-black text-sm text-slate-900">{candidate.nickname}</h3>
-                        <p className="text-[11px] text-slate-500">
+                        <h3 className="font-black text-sm text-[#201b16]">{candidate.nickname}</h3>
+                        <p className="text-[11px] text-[#6b5d4f]">
                           {candidate.exp} · {candidate.mainField}
                         </p>
                       </div>
@@ -2766,25 +2766,25 @@ export default function App() {
 
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-[11px]">
                     <div>
-                      <span className="text-slate-400 font-semibold block">월 평균 매출</span>
-                      <span className="font-bold text-slate-800">{candidate.salesRange}</span>
+                      <span className="text-[#8a7a68] font-semibold block">월 평균 매출</span>
+                      <span className="font-bold text-[#2b2621]">{candidate.salesRange}</span>
                     </div>
                     <div>
-                      <span className="text-slate-400 font-semibold block">유지율</span>
-                      <span className="font-bold text-slate-800">{candidate.retentionRate}</span>
+                      <span className="text-[#8a7a68] font-semibold block">유지율</span>
+                      <span className="font-bold text-[#2b2621]">{candidate.retentionRate}</span>
                     </div>
                     <div>
-                      <span className="text-slate-400 font-semibold block">희망 최소 수수료율</span>
-                      <span className="font-bold text-blue-600">{candidate.minCommission}</span>
+                      <span className="text-[#8a7a68] font-semibold block">희망 최소 수수료율</span>
+                      <span className="font-bold text-[#d97a4d]">{candidate.minCommission}</span>
                     </div>
                     <div>
-                      <span className="text-slate-400 font-semibold block">희망 최소 정착지원금</span>
-                      <span className="font-bold text-blue-600">{candidate.minSettlement}</span>
+                      <span className="text-[#8a7a68] font-semibold block">희망 최소 정착지원금</span>
+                      <span className="font-bold text-[#d97a4d]">{candidate.minSettlement}</span>
                     </div>
                   </div>
 
-                  <div className="bg-slate-50 p-3 rounded-xl border border-slate-100 text-[11px] text-slate-600">
-                    <span className="font-bold text-slate-700 block mb-1">희망 근무 지역: {candidate.preferredRegion}</span>
+                  <div className="bg-[#fdfaf5] p-3 rounded-xl border border-[#f7f0e6] text-[11px] text-[#57493c]">
+                    <span className="font-bold text-[#453a2f] block mb-1">희망 근무 지역: {candidate.preferredRegion}</span>
                     <p className="leading-relaxed">{candidate.memo}</p>
                   </div>
 
@@ -2795,7 +2795,7 @@ export default function App() {
                         setOfferTarget(candidate);
                         setOfferForm({ commission: "", settlement: "", db: "", message: "" });
                       }}
-                      className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-2 rounded-xl text-xs transition shadow-sm"
+                      className="bg-[#d97a4d] hover:bg-[#b35a2e] text-white font-bold px-4 py-2 rounded-xl text-xs transition shadow-sm"
                     >
                       제안 보내기
                     </button>
@@ -2810,35 +2810,35 @@ export default function App() {
         {/* 탭 GA-2: 보낸 제안 관리 */}
         {mainTab === "SENT_OFFERS" && (
           <div className="space-y-4">
-            <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
+            <div className="bg-white p-4 rounded-2xl border border-[#eee3d3] shadow-sm flex items-center justify-between">
               <div>
-                <h2 className="text-base font-black text-slate-900">보낸 제안 관리</h2>
-                <p className="text-slate-500 text-[11px]">설계사 후보에게 보낸 스카우트 제안 현황입니다.</p>
+                <h2 className="text-base font-black text-[#201b16]">보낸 제안 관리</h2>
+                <p className="text-[#6b5d4f] text-[11px]">설계사 후보에게 보낸 스카우트 제안 현황입니다.</p>
               </div>
-              <span className="bg-blue-100 text-blue-700 font-extrabold px-3 py-1 rounded-full text-xs">
+              <span className="bg-[#fbeee0] text-[#b35a2e] font-extrabold px-3 py-1 rounded-full text-xs">
                 총 {sentOffers.length}건 발송
               </span>
             </div>
 
             {sentOffers.length === 0 ? (
-              <div className="bg-white p-10 rounded-2xl border border-slate-200 shadow-sm text-center text-slate-400 text-xs">
+              <div className="bg-white p-10 rounded-2xl border border-[#eee3d3] shadow-sm text-center text-[#8a7a68] text-xs">
                 아직 보낸 제안이 없습니다. "이직 희망 설계사 후보 리스트"에서 제안을 보내보세요.
               </div>
             ) : (
               <div className="space-y-4">
                 {sentOffers.map((offer) => (
-                  <div key={offer.id} className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
-                    <div className="flex justify-between items-start border-b border-slate-100 pb-3">
+                  <div key={offer.id} className="bg-white p-5 rounded-2xl border border-[#eee3d3] shadow-sm space-y-3">
+                    <div className="flex justify-between items-start border-b border-[#f7f0e6] pb-3">
                       <div>
-                        <span className="text-[10px] text-slate-400 font-bold">{offer.date} 발송</span>
-                        <h3 className="text-sm font-black text-slate-900">{offer.candidateNickname}</h3>
+                        <span className="text-[10px] text-[#8a7a68] font-bold">{offer.date} 발송</span>
+                        <h3 className="text-sm font-black text-[#201b16]">{offer.candidateNickname}</h3>
                       </div>
                       <span
                         className={`text-[10px] font-extrabold px-2.5 py-1 rounded-full ${
                           offer.status === "매칭 완료"
                             ? "bg-emerald-100 text-emerald-700"
                             : offer.status === "거절됨"
-                            ? "bg-slate-200 text-slate-600"
+                            ? "bg-[#eee3d3] text-[#57493c]"
                             : "bg-amber-100 text-amber-800"
                         }`}
                       >
@@ -2847,22 +2847,22 @@ export default function App() {
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-[11px]">
-                      <div className="bg-slate-50 p-3 rounded-xl border border-slate-100">
-                        <span className="text-slate-400 font-bold block">제안 수수료</span>
-                        <span className="font-black text-slate-800">{offer.offeredCommission}</span>
+                      <div className="bg-[#fdfaf5] p-3 rounded-xl border border-[#f7f0e6]">
+                        <span className="text-[#8a7a68] font-bold block">제안 수수료</span>
+                        <span className="font-black text-[#2b2621]">{offer.offeredCommission}</span>
                       </div>
-                      <div className="bg-slate-50 p-3 rounded-xl border border-slate-100">
-                        <span className="text-slate-400 font-bold block">정착지원금</span>
-                        <span className="font-black text-blue-600">{offer.offeredSettlement}</span>
+                      <div className="bg-[#fdfaf5] p-3 rounded-xl border border-[#f7f0e6]">
+                        <span className="text-[#8a7a68] font-bold block">정착지원금</span>
+                        <span className="font-black text-[#d97a4d]">{offer.offeredSettlement}</span>
                       </div>
-                      <div className="bg-slate-50 p-3 rounded-xl border border-slate-100">
-                        <span className="text-slate-400 font-bold block">DB 지원</span>
+                      <div className="bg-[#fdfaf5] p-3 rounded-xl border border-[#f7f0e6]">
+                        <span className="text-[#8a7a68] font-bold block">DB 지원</span>
                         <span className="font-black text-emerald-600">{offer.offeredDb}</span>
                       </div>
                     </div>
 
                     {offer.message && (
-                      <div className="bg-blue-50/50 p-3 rounded-xl border border-blue-100 text-slate-700 text-[11px] leading-relaxed">
+                      <div className="bg-[#fdf3ea]/50 p-3 rounded-xl border border-[#fbeee0] text-[#453a2f] text-[11px] leading-relaxed">
                         "{offer.message}"
                       </div>
                     )}
@@ -2870,7 +2870,7 @@ export default function App() {
                     <button
                       type="button"
                       onClick={() => setActiveMessageThread({ id: offer.id, title: offer.candidateNickname })}
-                      className="w-full sm:w-auto px-4 py-2 bg-white border border-slate-200 hover:border-blue-300 text-slate-700 font-bold rounded-xl text-[11px] transition flex items-center justify-center gap-1.5"
+                      className="w-full sm:w-auto px-4 py-2 bg-white border border-[#eee3d3] hover:border-[#e9a374] text-[#453a2f] font-bold rounded-xl text-[11px] transition flex items-center justify-center gap-1.5"
                     >
                       <MessageSquare className="w-3.5 h-3.5" />
                       <span>메시지{messageThreads[offer.id]?.length ? ` (${messageThreads[offer.id].length})` : ""}</span>
@@ -2884,12 +2884,12 @@ export default function App() {
                     )}
 
                     {offer.status === "대기중" && (
-                      <div className="space-y-1.5 pt-1 border-t border-slate-100">
+                      <div className="space-y-1.5 pt-1 border-t border-[#f7f0e6]">
                         <div className="flex gap-2 pt-2">
                           <button
                             type="button"
                             onClick={() => handleUpdateOfferStatus(offer.id, "거절됨")}
-                            className="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold py-2 rounded-xl text-[11px] transition"
+                            className="flex-1 bg-[#f7f0e6] hover:bg-[#eee3d3] text-[#57493c] font-bold py-2 rounded-xl text-[11px] transition"
                           >
                             (모의) 거절 처리
                           </button>
@@ -2901,7 +2901,7 @@ export default function App() {
                             (모의) 수락 처리
                           </button>
                         </div>
-                        <p className="text-[10px] text-slate-400">
+                        <p className="text-[10px] text-[#8a7a68]">
                           * 실제 서비스에서는 설계사가 직접 제안에 응답합니다. 위 버튼은 데모용입니다.
                         </p>
                       </div>
@@ -2915,10 +2915,10 @@ export default function App() {
 
         {/* 탭 GA-3: GA 정보 */}
         {mainTab === "GA_PROFILE" && (
-          <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
-            <div className="border-b border-slate-100 pb-4">
-              <h2 className="text-lg font-black text-slate-900">GA 정보</h2>
-              <p className="text-slate-500 text-xs mt-0.5">
+          <div className="bg-white p-6 rounded-2xl border border-[#eee3d3] shadow-sm space-y-6">
+            <div className="border-b border-[#f7f0e6] pb-4">
+              <h2 className="text-lg font-black text-[#201b16]">GA 정보</h2>
+              <p className="text-[#6b5d4f] text-xs mt-0.5">
                 설계사에게 노출되는 우리 GA의 기본 정보입니다. 후보별 최종 확정 조건은 설계사마다 달라 "제안 보내기"에서
                 개별로 입력하며, 아래 수수료율·정착지원금·DB 지원 범위는 설계사가 GA를 비교할 때 참고하는 어필 조건으로
                 비교·추천 화면에 공통으로 노출됩니다.
@@ -2928,126 +2928,126 @@ export default function App() {
             <form onSubmit={handleSaveGaProfile} className="space-y-5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1">
-                  <label className="font-extrabold text-slate-700 text-xs">GA명</label>
+                  <label className="font-extrabold text-[#453a2f] text-xs">GA명</label>
                   <input
                     type="text"
                     value={gaProfile.gaName}
                     onChange={(e) => setGaProfile({ ...gaProfile, gaName: e.target.value })}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#d97a4d]"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-extrabold text-slate-700 text-xs">지점/본부명</label>
+                  <label className="font-extrabold text-[#453a2f] text-xs">지점/본부명</label>
                   <input
                     type="text"
                     value={gaProfile.branch}
                     onChange={(e) => setGaProfile({ ...gaProfile, branch: e.target.value })}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#d97a4d]"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-extrabold text-slate-700 text-xs">담당자명</label>
+                  <label className="font-extrabold text-[#453a2f] text-xs">담당자명</label>
                   <input
                     type="text"
                     value={gaProfile.contactName}
                     onChange={(e) => setGaProfile({ ...gaProfile, contactName: e.target.value })}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#d97a4d]"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-extrabold text-slate-700 text-xs">연락처</label>
+                  <label className="font-extrabold text-[#453a2f] text-xs">연락처</label>
                   <input
                     type="text"
                     value={gaProfile.contactPhone}
                     onChange={(e) => setGaProfile({ ...gaProfile, contactPhone: e.target.value })}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#d97a4d]"
                   />
                 </div>
               </div>
 
-              <div className="space-y-4 border-t border-slate-100 pt-5">
+              <div className="space-y-4 border-t border-[#f7f0e6] pt-5">
                 <div>
-                  <h3 className="font-black text-sm text-slate-900">설계사 비교·추천 화면에 노출되는 어필 조건</h3>
-                  <p className="text-slate-400 text-[11px] mt-0.5 leading-relaxed">
+                  <h3 className="font-black text-sm text-[#201b16]">설계사 비교·추천 화면에 노출되는 어필 조건</h3>
+                  <p className="text-[#8a7a68] text-[11px] mt-0.5 leading-relaxed">
                     아래 항목은 확정된 최종 조건이 아니라 설계사가 GA를 비교할 때 참고하는 범위입니다. 실제 최종 조건은 후보별 "제안 보내기"에서 개별로 협의합니다.
                   </p>
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-extrabold text-slate-700 text-xs">생명보험(인보험) 수수료 지급률 (범위)</label>
+                  <label className="font-extrabold text-[#453a2f] text-xs">생명보험(인보험) 수수료 지급률 (범위)</label>
                   <div className="flex items-center gap-2">
                     <input
                       type="text"
                       value={gaProfile.lifeCommissionMin}
                       onChange={(e) => setGaProfile({ ...gaProfile, lifeCommissionMin: e.target.value })}
                       placeholder="최소 (예: 85)"
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#d97a4d]"
                     />
-                    <span className="text-slate-400 font-bold text-xs shrink-0">% ~</span>
+                    <span className="text-[#8a7a68] font-bold text-xs shrink-0">% ~</span>
                     <input
                       type="text"
                       value={gaProfile.lifeCommissionMax}
                       onChange={(e) => setGaProfile({ ...gaProfile, lifeCommissionMax: e.target.value })}
                       placeholder="최대 (예: 90.5)"
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#d97a4d]"
                     />
-                    <span className="text-slate-400 font-bold text-xs shrink-0">%</span>
+                    <span className="text-[#8a7a68] font-bold text-xs shrink-0">%</span>
                   </div>
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-extrabold text-slate-700 text-xs">손해보험(물보험) 수수료 지급률 (범위)</label>
+                  <label className="font-extrabold text-[#453a2f] text-xs">손해보험(물보험) 수수료 지급률 (범위)</label>
                   <div className="flex items-center gap-2">
                     <input
                       type="text"
                       value={gaProfile.nonLifeCommissionMin}
                       onChange={(e) => setGaProfile({ ...gaProfile, nonLifeCommissionMin: e.target.value })}
                       placeholder="최소 (예: 87)"
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#d97a4d]"
                     />
-                    <span className="text-slate-400 font-bold text-xs shrink-0">% ~</span>
+                    <span className="text-[#8a7a68] font-bold text-xs shrink-0">% ~</span>
                     <input
                       type="text"
                       value={gaProfile.nonLifeCommissionMax}
                       onChange={(e) => setGaProfile({ ...gaProfile, nonLifeCommissionMax: e.target.value })}
                       placeholder="최대 (예: 92.5)"
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#d97a4d]"
                     />
-                    <span className="text-slate-400 font-bold text-xs shrink-0">%</span>
+                    <span className="text-[#8a7a68] font-bold text-xs shrink-0">%</span>
                   </div>
-                  <p className="text-slate-400 text-[11px] leading-relaxed pt-0.5">
+                  <p className="text-[#8a7a68] text-[11px] leading-relaxed pt-0.5">
                     생보/손보 상품군별로 수수료 체계가 달라 두 범위를 나눠서 받고 있어요. 경력·실적에 따라 지급 가능한 범위를 여유 있게 입력해주세요.
                   </p>
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-extrabold text-slate-700 text-xs">정착지원금</label>
+                  <label className="font-extrabold text-[#453a2f] text-xs">정착지원금</label>
                   <div className="flex items-center gap-2">
-                    <span className="text-slate-500 font-bold text-xs shrink-0">직전 업적의</span>
+                    <span className="text-[#6b5d4f] font-bold text-xs shrink-0">직전 업적의</span>
                     <input
                       type="number"
                       min="0"
                       value={gaProfile.settlementSupportPercent}
                       onChange={(e) => setGaProfile({ ...gaProfile, settlementSupportPercent: e.target.value })}
                       placeholder="0"
-                      className="w-24 bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold text-center outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-24 bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold text-center outline-none focus:ring-2 focus:ring-[#d97a4d]"
                     />
-                    <span className="text-slate-500 font-bold text-xs shrink-0">% 까지 지원</span>
+                    <span className="text-[#6b5d4f] font-bold text-xs shrink-0">% 까지 지원</span>
                   </div>
-                  <p className="text-slate-400 text-[11px] leading-relaxed pt-0.5">
+                  <p className="text-[#8a7a68] text-[11px] leading-relaxed pt-0.5">
                     직전 업적 대비 지원 가능한 최대 비율을 입력해주세요. 0을 입력하면 "미지원"으로 표시됩니다.
                   </p>
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-extrabold text-slate-700 text-xs">DB 지원</label>
+                  <label className="font-extrabold text-[#453a2f] text-xs">DB 지원</label>
                   <select
                     value={gaProfile.dbSupport}
                     onChange={(e) => setGaProfile({ ...gaProfile, dbSupport: e.target.value })}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold text-slate-800 outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold text-[#2b2621] outline-none focus:ring-2 focus:ring-[#d97a4d]"
                   >
                     {DB_SUPPORT_OPTIONS.map((option) => (
                       <option key={option} value={option}>
@@ -3058,43 +3058,43 @@ export default function App() {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-extrabold text-slate-700 text-xs">이번 시즌 시책·포상금 (선택 입력)</label>
+                  <label className="font-extrabold text-[#453a2f] text-xs">이번 시즌 시책·포상금 (선택 입력)</label>
                   <textarea
                     rows={2}
                     value={gaProfile.incentiveNote}
                     onChange={(e) => setGaProfile({ ...gaProfile, incentiveNote: e.target.value })}
                     placeholder="예: OO보험사 신규 계약 시 대리점 추가시상 최대 OOO% (프로모션 기간 한정)"
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-medium outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-medium outline-none focus:ring-2 focus:ring-[#d97a4d]"
                   />
                   <div className="flex items-center gap-2 pt-1">
-                    <span className="text-slate-500 font-bold text-xs shrink-0">업데이트 기준월</span>
+                    <span className="text-[#6b5d4f] font-bold text-xs shrink-0">업데이트 기준월</span>
                     <input
                       type="month"
                       value={gaProfile.incentiveUpdatedAt}
                       onChange={(e) => setGaProfile({ ...gaProfile, incentiveUpdatedAt: e.target.value })}
-                      className="bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-xs font-bold outline-none focus:ring-2 focus:ring-blue-500"
+                      className="bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-2.5 text-xs font-bold outline-none focus:ring-2 focus:ring-[#d97a4d]"
                     />
                   </div>
-                  <p className="text-slate-400 text-[11px] leading-relaxed pt-0.5">
+                  <p className="text-[#8a7a68] text-[11px] leading-relaxed pt-0.5">
                     시책·포상금은 보험사·기간에 따라 자주 바뀌는 항목이라 정확한 %보다는 대표 시책과 기준월을 함께 안내해주세요. 설계사에게는 "참고용 스냅샷"으로 노출되며, 최종 조건은 개별 상담에서 확정됩니다.
                   </p>
                 </div>
               </div>
 
               <div className="space-y-1">
-                <label className="font-extrabold text-slate-700 text-xs">GA 소개</label>
+                <label className="font-extrabold text-[#453a2f] text-xs">GA 소개</label>
                 <textarea
                   rows={3}
                   value={gaProfile.intro}
                   onChange={(e) => setGaProfile({ ...gaProfile, intro: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-medium outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-medium outline-none focus:ring-2 focus:ring-[#d97a4d]"
                 />
               </div>
 
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-extrabold py-3.5 rounded-xl text-xs transition shadow-lg"
+                  className="w-full bg-[#d97a4d] hover:bg-[#b35a2e] text-white font-extrabold py-3.5 rounded-xl text-xs transition shadow-lg"
                 >
                   GA 정보 저장
                 </button>
@@ -3106,17 +3106,17 @@ export default function App() {
         {/* 탭: 커뮤니티 */}
         {mainTab === "COMMUNITY" && (
           <div className="space-y-5">
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="bg-white p-5 rounded-2xl border border-[#eee3d3] shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
-                <h2 className="text-lg font-black text-slate-900">커뮤니티</h2>
-                <p className="text-slate-500 text-xs mt-1">
+                <h2 className="text-lg font-black text-[#201b16]">커뮤니티</h2>
+                <p className="text-[#6b5d4f] text-xs mt-1">
                   설계사와 GA 파트너들이 이직·위촉 경험과 노하우를 나누는 공간입니다.
                 </p>
               </div>
               <button
                 type="button"
                 onClick={() => alert("글쓰기 기능은 준비 중입니다!")}
-                className="bg-blue-600 hover:bg-blue-700 text-white font-extrabold px-4 py-2.5 rounded-xl text-xs transition shadow-sm shrink-0"
+                className="bg-[#d97a4d] hover:bg-[#b35a2e] text-white font-extrabold px-4 py-2.5 rounded-xl text-xs transition shadow-sm shrink-0"
               >
                 글쓰기
               </button>
@@ -3124,34 +3124,34 @@ export default function App() {
 
             <div className="space-y-4">
               {communityPosts.map((post) => (
-                <div key={post.id} className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+                <div key={post.id} className="bg-white p-5 rounded-2xl border border-[#eee3d3] shadow-sm space-y-3">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2.5">
                       <div
                         className={`w-9 h-9 rounded-full flex items-center justify-center font-black text-xs shrink-0 ${
-                          post.role === "GA" ? "bg-slate-900 text-white" : "bg-blue-100 text-blue-700"
+                          post.role === "GA" ? "bg-[#201b16] text-white" : "bg-[#fbeee0] text-[#b35a2e]"
                         }`}
                       >
                         {post.author.slice(0, 1)}
                       </div>
                       <div>
-                        <p className="font-bold text-slate-800 text-xs">{post.author}</p>
-                        <p className="text-slate-400 text-[11px]">{post.badge}</p>
+                        <p className="font-bold text-[#2b2621] text-xs">{post.author}</p>
+                        <p className="text-[#8a7a68] text-[11px]">{post.badge}</p>
                       </div>
                     </div>
-                    <span className="text-slate-400 text-[11px]">{post.date}</span>
+                    <span className="text-[#8a7a68] text-[11px]">{post.date}</span>
                   </div>
 
                   <div>
-                    <h3 className="font-black text-slate-900 text-sm">{post.title}</h3>
-                    <p className="text-slate-600 text-xs leading-relaxed mt-1.5">{post.content}</p>
+                    <h3 className="font-black text-[#201b16] text-sm">{post.title}</h3>
+                    <p className="text-[#57493c] text-xs leading-relaxed mt-1.5">{post.content}</p>
                   </div>
 
                   <div className="flex items-center justify-between pt-1">
                     <span className="inline-block bg-emerald-50 text-emerald-700 text-[10px] font-bold px-2.5 py-1 rounded-full">
                       #{post.tag}
                     </span>
-                    <div className="flex items-center gap-3 text-slate-400 text-[11px] font-semibold">
+                    <div className="flex items-center gap-3 text-[#8a7a68] text-[11px] font-semibold">
                       <span>좋아요 {post.likes}</span>
                       <span>댓글 {post.comments}</span>
                     </div>
@@ -3165,30 +3165,30 @@ export default function App() {
         {/* 탭 관리자-0: 대시보드 */}
         {mainTab === "ADMIN_HOME" && (
           <div className="space-y-5">
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-              <h2 className="text-lg font-black text-slate-900">관리자 대시보드</h2>
-              <p className="text-slate-500 text-xs mt-1">
+            <div className="bg-white p-5 rounded-2xl border border-[#eee3d3] shadow-sm">
+              <h2 className="text-lg font-black text-[#201b16]">관리자 대시보드</h2>
+              <p className="text-[#6b5d4f] text-xs mt-1">
                 가입한 설계사·GA 현황과 처리가 필요한 항목을 한눈에 확인하세요.
               </p>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
-                <div className="flex items-center gap-1.5 text-slate-400 text-[11px] font-semibold">
+              <div className="bg-white p-4 rounded-2xl border border-[#eee3d3] shadow-sm">
+                <div className="flex items-center gap-1.5 text-[#8a7a68] text-[11px] font-semibold">
                   <UserCheck className="w-3.5 h-3.5" />
                   <span>가입 설계사</span>
                 </div>
-                <p className="text-xl font-black text-slate-900 mt-1">{adminFcUsers.length}명</p>
+                <p className="text-xl font-black text-[#201b16] mt-1">{adminFcUsers.length}명</p>
               </div>
-              <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
-                <div className="flex items-center gap-1.5 text-slate-400 text-[11px] font-semibold">
+              <div className="bg-white p-4 rounded-2xl border border-[#eee3d3] shadow-sm">
+                <div className="flex items-center gap-1.5 text-[#8a7a68] text-[11px] font-semibold">
                   <Building2 className="w-3.5 h-3.5" />
                   <span>가입 GA</span>
                 </div>
-                <p className="text-xl font-black text-slate-900 mt-1">{adminGaUsers.length}개사</p>
+                <p className="text-xl font-black text-[#201b16] mt-1">{adminGaUsers.length}개사</p>
               </div>
-              <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
-                <div className="flex items-center gap-1.5 text-slate-400 text-[11px] font-semibold">
+              <div className="bg-white p-4 rounded-2xl border border-[#eee3d3] shadow-sm">
+                <div className="flex items-center gap-1.5 text-[#8a7a68] text-[11px] font-semibold">
                   <Sparkles className="w-3.5 h-3.5" />
                   <span>노출 승인 대기</span>
                 </div>
@@ -3196,8 +3196,8 @@ export default function App() {
                   {adminGaUsers.filter((ga) => ga.exposureStatus === "승인대기").length}건
                 </p>
               </div>
-              <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
-                <div className="flex items-center gap-1.5 text-slate-400 text-[11px] font-semibold">
+              <div className="bg-white p-4 rounded-2xl border border-[#eee3d3] shadow-sm">
+                <div className="flex items-center gap-1.5 text-[#8a7a68] text-[11px] font-semibold">
                   <MessageSquare className="w-3.5 h-3.5" />
                   <span>신고된 게시글</span>
                 </div>
@@ -3208,33 +3208,33 @@ export default function App() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+              <div className="bg-white p-5 rounded-2xl border border-[#eee3d3] shadow-sm space-y-3">
                 <div className="flex items-center justify-between">
-                  <h3 className="font-black text-sm text-slate-900">GA 노출 승인 대기</h3>
+                  <h3 className="font-black text-sm text-[#201b16]">GA 노출 승인 대기</h3>
                   <button
                     type="button"
                     onClick={() => setMainTab("ADMIN_GA")}
-                    className="text-blue-600 text-[11px] font-bold hover:underline"
+                    className="text-[#d97a4d] text-[11px] font-bold hover:underline"
                   >
                     전체보기 →
                   </button>
                 </div>
                 {adminGaUsers.filter((ga) => ga.exposureStatus === "승인대기").length === 0 ? (
-                  <p className="text-slate-400 text-[11px] py-6 text-center">승인 대기 중인 GA가 없습니다.</p>
+                  <p className="text-[#8a7a68] text-[11px] py-6 text-center">승인 대기 중인 GA가 없습니다.</p>
                 ) : (
                   <div className="space-y-2">
                     {adminGaUsers
                       .filter((ga) => ga.exposureStatus === "승인대기")
                       .map((ga) => (
-                        <div key={ga.id} className="flex items-center justify-between bg-slate-50 rounded-xl p-3">
+                        <div key={ga.id} className="flex items-center justify-between bg-[#fdfaf5] rounded-xl p-3">
                           <div>
-                            <p className="font-bold text-slate-800 text-[11px]">{ga.gaName}</p>
-                            <p className="text-slate-400 text-[10px]">{ga.branch}</p>
+                            <p className="font-bold text-[#2b2621] text-[11px]">{ga.gaName}</p>
+                            <p className="text-[#8a7a68] text-[10px]">{ga.branch}</p>
                           </div>
                           <button
                             type="button"
                             onClick={() => handleUpdateGaExposure(ga.id, "노출중")}
-                            className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-[10px] px-2.5 py-1.5 rounded-lg transition shrink-0"
+                            className="bg-[#d97a4d] hover:bg-[#b35a2e] text-white font-bold text-[10px] px-2.5 py-1.5 rounded-lg transition shrink-0"
                           >
                             승인
                           </button>
@@ -3244,26 +3244,26 @@ export default function App() {
                 )}
               </div>
 
-              <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+              <div className="bg-white p-5 rounded-2xl border border-[#eee3d3] shadow-sm space-y-3">
                 <div className="flex items-center justify-between">
-                  <h3 className="font-black text-sm text-slate-900">신고된 커뮤니티 게시글</h3>
+                  <h3 className="font-black text-sm text-[#201b16]">신고된 커뮤니티 게시글</h3>
                   <button
                     type="button"
                     onClick={() => setMainTab("ADMIN_COMMUNITY")}
-                    className="text-blue-600 text-[11px] font-bold hover:underline"
+                    className="text-[#d97a4d] text-[11px] font-bold hover:underline"
                   >
                     전체보기 →
                   </button>
                 </div>
                 {communityPosts.filter((p) => p.reported).length === 0 ? (
-                  <p className="text-slate-400 text-[11px] py-6 text-center">신고된 게시글이 없습니다.</p>
+                  <p className="text-[#8a7a68] text-[11px] py-6 text-center">신고된 게시글이 없습니다.</p>
                 ) : (
                   <div className="space-y-2">
                     {communityPosts
                       .filter((p) => p.reported)
                       .map((post) => (
                         <div key={post.id} className="bg-red-50 border border-red-100 rounded-xl p-3">
-                          <p className="font-bold text-slate-800 text-[11px]">{post.title}</p>
+                          <p className="font-bold text-[#2b2621] text-[11px]">{post.title}</p>
                           <p className="text-red-600 text-[10px] mt-0.5">{post.reportReason}</p>
                         </div>
                       ))}
@@ -3277,15 +3277,15 @@ export default function App() {
         {/* 탭 관리자-1: 설계사 계정 관리 */}
         {mainTab === "ADMIN_FC" && (
           <div className="space-y-4">
-            <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+            <div className="bg-white p-4 rounded-2xl border border-[#eee3d3] shadow-sm">
               <div className="relative sm:w-72">
-                <Search className="w-4 h-4 absolute left-3 top-2.5 text-slate-400" />
+                <Search className="w-4 h-4 absolute left-3 top-2.5 text-[#8a7a68]" />
                 <input
                   type="text"
                   placeholder="닉네임 또는 분야 검색"
                   value={adminFcSearchQuery}
                   onChange={(e) => setAdminFcSearchQuery(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-lg pl-9 pr-3 py-2 text-xs focus:ring-2 focus:ring-blue-500 outline-none"
+                  className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-lg pl-9 pr-3 py-2 text-xs focus:ring-2 focus:ring-[#d97a4d] outline-none"
                 />
               </div>
             </div>
@@ -3294,17 +3294,17 @@ export default function App() {
               {filteredAdminFcUsers.map((fc) => (
                 <div
                   key={fc.id}
-                  className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+                  className="bg-white p-4 rounded-2xl border border-[#eee3d3] shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-full bg-blue-100 flex items-center justify-center shrink-0">
-                      <UserCheck className="w-4.5 h-4.5 text-blue-600" />
+                    <div className="w-9 h-9 rounded-full bg-[#fbeee0] flex items-center justify-center shrink-0">
+                      <UserCheck className="w-4.5 h-4.5 text-[#d97a4d]" />
                     </div>
                     <div>
                       <div className="flex items-center gap-1.5 flex-wrap">
-                        <p className="font-bold text-slate-800 text-xs">{fc.nickname}</p>
+                        <p className="font-bold text-[#2b2621] text-xs">{fc.nickname}</p>
                         {fc.verified && (
-                          <span className="bg-blue-50 text-blue-700 text-[10px] font-bold px-2 py-0.5 rounded-full">
+                          <span className="bg-[#fdf3ea] text-[#b35a2e] text-[10px] font-bold px-2 py-0.5 rounded-full">
                             인증됨
                           </span>
                         )}
@@ -3314,13 +3314,13 @@ export default function App() {
                               ? "bg-emerald-50 text-emerald-700"
                               : fc.status === "정지"
                               ? "bg-red-50 text-red-700"
-                              : "bg-slate-100 text-slate-500"
+                              : "bg-[#f7f0e6] text-[#6b5d4f]"
                           }`}
                         >
                           {fc.status}
                         </span>
                       </div>
-                      <p className="text-slate-400 text-[11px] mt-0.5">
+                      <p className="text-[#8a7a68] text-[11px] mt-0.5">
                         {fc.mainField} · {fc.exp} · 가입일 {fc.joinedDate}
                       </p>
                     </div>
@@ -3329,7 +3329,7 @@ export default function App() {
                     <button
                       type="button"
                       onClick={() => setAdminDetailTarget({ type: "FC", id: fc.id })}
-                      className="bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-[11px] px-3 py-2 rounded-lg transition"
+                      className="bg-[#f7f0e6] hover:bg-[#eee3d3] text-[#57493c] font-bold text-[11px] px-3 py-2 rounded-lg transition"
                     >
                       상세보기
                     </button>
@@ -3338,7 +3338,7 @@ export default function App() {
                       onClick={() => handleToggleFcStatus(fc.id)}
                       className={`font-bold text-[11px] px-3 py-2 rounded-lg transition ${
                         fc.status === "정지"
-                          ? "bg-blue-600 hover:bg-blue-700 text-white"
+                          ? "bg-[#d97a4d] hover:bg-[#b35a2e] text-white"
                           : "bg-red-50 hover:bg-red-100 text-red-600"
                       }`}
                     >
@@ -3348,7 +3348,7 @@ export default function App() {
                 </div>
               ))}
               {filteredAdminFcUsers.length === 0 && (
-                <div className="bg-white p-8 rounded-2xl border border-slate-200 text-center text-slate-400 text-xs">
+                <div className="bg-white p-8 rounded-2xl border border-[#eee3d3] text-center text-[#8a7a68] text-xs">
                   검색 조건에 맞는 설계사가 없습니다.
                 </div>
               )}
@@ -3359,17 +3359,17 @@ export default function App() {
         {/* 탭 관리자-1B: 설계사 인증 심사 */}
         {mainTab === "ADMIN_VERIFICATION" && (
           <div className="space-y-4">
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-              <h2 className="text-lg font-black text-slate-900">설계사 인증 심사</h2>
-              <p className="text-slate-500 text-xs mt-1">
+            <div className="bg-white p-5 rounded-2xl border border-[#eee3d3] shadow-sm">
+              <h2 className="text-lg font-black text-[#201b16]">설계사 인증 심사</h2>
+              <p className="text-[#6b5d4f] text-xs mt-1">
                 설계사가 제출한 경력·실적 자료를 검토하고 인증 여부를 결정하세요.
               </p>
             </div>
 
             <div className="space-y-3">
-              <h3 className="font-black text-xs text-slate-700 px-1">심사 대기 ({adminFcUsers.filter((fc) => fc.verificationStatus === "심사중").length}건)</h3>
+              <h3 className="font-black text-xs text-[#453a2f] px-1">심사 대기 ({adminFcUsers.filter((fc) => fc.verificationStatus === "심사중").length}건)</h3>
               {adminFcUsers.filter((fc) => fc.verificationStatus === "심사중").length === 0 ? (
-                <div className="bg-white p-8 rounded-2xl border border-slate-200 text-center text-slate-400 text-xs">
+                <div className="bg-white p-8 rounded-2xl border border-[#eee3d3] text-center text-[#8a7a68] text-xs">
                   심사 대기 중인 설계사가 없습니다.
                 </div>
               ) : (
@@ -3378,8 +3378,8 @@ export default function App() {
                   .map((fc) => (
                     <div key={fc.id} className="bg-amber-50/60 border border-amber-100 p-4 rounded-2xl space-y-3">
                       <div>
-                        <p className="font-bold text-slate-800 text-xs">{fc.nickname}</p>
-                        <p className="text-slate-500 text-[11px] mt-0.5">
+                        <p className="font-bold text-[#2b2621] text-xs">{fc.nickname}</p>
+                        <p className="text-[#6b5d4f] text-[11px] mt-0.5">
                           {fc.mainField} · {fc.exp} · 매출 {fc.salesRange} · 유지율 {fc.retentionRate}
                         </p>
                       </div>
@@ -3387,7 +3387,7 @@ export default function App() {
                         <button
                           type="button"
                           onClick={() => handleReviewVerification(fc.id, "승인됨")}
-                          className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-[11px] px-3 py-2 rounded-lg transition"
+                          className="bg-[#d97a4d] hover:bg-[#b35a2e] text-white font-bold text-[11px] px-3 py-2 rounded-lg transition"
                         >
                           인증 승인
                         </button>
@@ -3405,15 +3405,15 @@ export default function App() {
             </div>
 
             <div className="space-y-3">
-              <h3 className="font-black text-xs text-slate-700 px-1">심사 완료 이력</h3>
+              <h3 className="font-black text-xs text-[#453a2f] px-1">심사 완료 이력</h3>
               {adminFcUsers
                 .filter((fc) => fc.verificationStatus !== "심사중")
                 .map((fc) => (
                   <div
                     key={fc.id}
-                    className="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between"
+                    className="bg-white p-3.5 rounded-2xl border border-[#eee3d3] shadow-sm flex items-center justify-between"
                   >
-                    <p className="font-bold text-slate-800 text-xs">{fc.nickname}</p>
+                    <p className="font-bold text-[#2b2621] text-xs">{fc.nickname}</p>
                     <span
                       className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
                         fc.verificationStatus === "승인됨"
@@ -3432,43 +3432,43 @@ export default function App() {
         {/* 탭 관리자-2: GA 계정 관리 */}
         {mainTab === "ADMIN_GA" && (
           <div className="space-y-4">
-            <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+            <div className="bg-white p-4 rounded-2xl border border-[#eee3d3] shadow-sm">
               <div className="relative sm:w-72">
-                <Search className="w-4 h-4 absolute left-3 top-2.5 text-slate-400" />
+                <Search className="w-4 h-4 absolute left-3 top-2.5 text-[#8a7a68]" />
                 <input
                   type="text"
                   placeholder="GA명 또는 지점 검색"
                   value={adminGaSearchQuery}
                   onChange={(e) => setAdminGaSearchQuery(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-lg pl-9 pr-3 py-2 text-xs focus:ring-2 focus:ring-blue-500 outline-none"
+                  className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-lg pl-9 pr-3 py-2 text-xs focus:ring-2 focus:ring-[#d97a4d] outline-none"
                 />
               </div>
             </div>
 
             <div className="space-y-3">
               {filteredAdminGaUsers.map((ga) => (
-                <div key={ga.id} className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+                <div key={ga.id} className="bg-white p-4 rounded-2xl border border-[#eee3d3] shadow-sm space-y-3">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                     <div>
                       <div className="flex items-center gap-1.5 flex-wrap">
-                        <p className="font-bold text-slate-800 text-xs">{ga.gaName}</p>
-                        <span className="text-slate-400 text-[11px] font-bold">({ga.branch})</span>
+                        <p className="font-bold text-[#2b2621] text-xs">{ga.gaName}</p>
+                        <span className="text-[#8a7a68] text-[11px] font-bold">({ga.branch})</span>
                         <span
                           className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
                             ga.exposureStatus === "노출중"
                               ? "bg-emerald-50 text-emerald-700"
                               : ga.exposureStatus === "승인대기"
                               ? "bg-amber-50 text-amber-700"
-                              : "bg-slate-100 text-slate-500"
+                              : "bg-[#f7f0e6] text-[#6b5d4f]"
                           }`}
                         >
                           {ga.exposureStatus}
                         </span>
                       </div>
-                      <p className="text-slate-400 text-[11px] mt-0.5">
+                      <p className="text-[#8a7a68] text-[11px] mt-0.5">
                         담당자 {ga.contactName} · {ga.contactPhone} · 가입일 {ga.joinedDate}
                       </p>
-                      <p className="text-slate-500 text-[11px] mt-0.5 font-bold">
+                      <p className="text-[#6b5d4f] text-[11px] mt-0.5 font-bold">
                         수수료 {ga.commissionMin}~{ga.commissionMax}%
                       </p>
                     </div>
@@ -3476,7 +3476,7 @@ export default function App() {
                       <select
                         value={ga.exposurePlan}
                         onChange={(e) => handleUpdateGaPlan(ga.id, e.target.value)}
-                        className="bg-slate-50 border border-slate-200 rounded-lg p-2 text-[11px] font-bold text-slate-700 outline-none"
+                        className="bg-[#fdfaf5] border border-[#eee3d3] rounded-lg p-2 text-[11px] font-bold text-[#453a2f] outline-none"
                       >
                         {EXPOSURE_PLANS.map((plan) => (
                           <option key={plan.id} value={plan.id}>
@@ -3487,7 +3487,7 @@ export default function App() {
                       <button
                         type="button"
                         onClick={() => setAdminDetailTarget({ type: "GA", id: ga.id })}
-                        className="bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-[11px] px-3 py-2 rounded-lg transition"
+                        className="bg-[#f7f0e6] hover:bg-[#eee3d3] text-[#57493c] font-bold text-[11px] px-3 py-2 rounded-lg transition"
                       >
                         상세보기
                       </button>
@@ -3495,7 +3495,7 @@ export default function App() {
                         <button
                           type="button"
                           onClick={() => handleUpdateGaExposure(ga.id, "노출중")}
-                          className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-[11px] px-3 py-2 rounded-lg transition"
+                          className="bg-[#d97a4d] hover:bg-[#b35a2e] text-white font-bold text-[11px] px-3 py-2 rounded-lg transition"
                         >
                           노출 승인
                         </button>
@@ -3504,7 +3504,7 @@ export default function App() {
                         <button
                           type="button"
                           onClick={() => handleUpdateGaExposure(ga.id, "보류/비노출")}
-                          className="bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-[11px] px-3 py-2 rounded-lg transition"
+                          className="bg-[#f7f0e6] hover:bg-[#eee3d3] text-[#57493c] font-bold text-[11px] px-3 py-2 rounded-lg transition"
                         >
                           노출 보류
                         </button>
@@ -3514,7 +3514,7 @@ export default function App() {
                 </div>
               ))}
               {filteredAdminGaUsers.length === 0 && (
-                <div className="bg-white p-8 rounded-2xl border border-slate-200 text-center text-slate-400 text-xs">
+                <div className="bg-white p-8 rounded-2xl border border-[#eee3d3] text-center text-[#8a7a68] text-xs">
                   검색 조건에 맞는 GA가 없습니다.
                 </div>
               )}
@@ -3525,24 +3525,24 @@ export default function App() {
         {/* 탭 관리자-2B: 노출 상품(요금제) 관리 */}
         {mainTab === "ADMIN_PLANS" && (
           <div className="space-y-4">
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-              <h2 className="text-lg font-black text-slate-900">노출 상품 관리</h2>
-              <p className="text-slate-500 text-xs mt-1">
+            <div className="bg-white p-5 rounded-2xl border border-[#eee3d3] shadow-sm">
+              <h2 className="text-lg font-black text-[#201b16]">노출 상품 관리</h2>
+              <p className="text-[#6b5d4f] text-xs mt-1">
                 GA가 구매할 수 있는 노출 요금제입니다. "GA 관리" 탭에서 각 GA에 적용된 플랜을 변경할 수 있습니다.
               </p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {EXPOSURE_PLANS.map((plan) => (
-                <div key={plan.id} className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2.5">
+                <div key={plan.id} className="bg-white p-5 rounded-2xl border border-[#eee3d3] shadow-sm space-y-2.5">
                   <div className="flex items-center justify-between">
-                    <h3 className="font-black text-sm text-slate-900">{plan.name}</h3>
-                    <span className="bg-blue-50 text-blue-700 text-[10px] font-bold px-2 py-1 rounded-full">
+                    <h3 className="font-black text-sm text-[#201b16]">{plan.name}</h3>
+                    <span className="bg-[#fdf3ea] text-[#b35a2e] text-[10px] font-bold px-2 py-1 rounded-full">
                       {adminGaUsers.filter((ga) => ga.exposurePlan === plan.id).length}개사 이용중
                     </span>
                   </div>
-                  <p className="font-black text-blue-600 text-base">{plan.price}</p>
-                  <p className="text-slate-500 text-[11px] leading-relaxed">{plan.desc}</p>
+                  <p className="font-black text-[#d97a4d] text-base">{plan.price}</p>
+                  <p className="text-[#6b5d4f] text-[11px] leading-relaxed">{plan.desc}</p>
                 </div>
               ))}
             </div>
@@ -3552,15 +3552,15 @@ export default function App() {
         {/* 탭 관리자-2C: 매출/정산 관리 */}
         {mainTab === "ADMIN_BILLING" && (
           <div className="space-y-4">
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-              <h2 className="text-lg font-black text-slate-900">매출/정산 관리</h2>
-              <p className="text-slate-500 text-xs mt-1">GA 노출 상품 결제 현황과 미납 계정을 관리하세요.</p>
+            <div className="bg-white p-5 rounded-2xl border border-[#eee3d3] shadow-sm">
+              <h2 className="text-lg font-black text-[#201b16]">매출/정산 관리</h2>
+              <p className="text-[#6b5d4f] text-xs mt-1">GA 노출 상품 결제 현황과 미납 계정을 관리하세요.</p>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-              <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
-                <p className="text-slate-400 text-[11px] font-semibold">이번달 매출 합계</p>
-                <p className="text-xl font-black text-slate-900 mt-1">
+              <div className="bg-white p-4 rounded-2xl border border-[#eee3d3] shadow-sm">
+                <p className="text-[#8a7a68] text-[11px] font-semibold">이번달 매출 합계</p>
+                <p className="text-xl font-black text-[#201b16] mt-1">
                   {adminInvoices
                     .filter((inv) => inv.status === "결제완료")
                     .reduce((sum, inv) => sum + inv.amount, 0)
@@ -3568,8 +3568,8 @@ export default function App() {
                   원
                 </p>
               </div>
-              <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
-                <p className="text-slate-400 text-[11px] font-semibold">미납 금액</p>
+              <div className="bg-white p-4 rounded-2xl border border-[#eee3d3] shadow-sm">
+                <p className="text-[#8a7a68] text-[11px] font-semibold">미납 금액</p>
                 <p className="text-xl font-black text-red-600 mt-1">
                   {adminInvoices
                     .filter((inv) => inv.status === "미납")
@@ -3578,8 +3578,8 @@ export default function App() {
                   원
                 </p>
               </div>
-              <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
-                <p className="text-slate-400 text-[11px] font-semibold">미납 건수</p>
+              <div className="bg-white p-4 rounded-2xl border border-[#eee3d3] shadow-sm">
+                <p className="text-[#8a7a68] text-[11px] font-semibold">미납 건수</p>
                 <p className="text-xl font-black text-amber-600 mt-1">
                   {adminInvoices.filter((inv) => inv.status === "미납").length}건
                 </p>
@@ -3590,24 +3590,24 @@ export default function App() {
               {adminInvoices.map((inv) => (
                 <div
                   key={inv.id}
-                  className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-2"
+                  className="bg-white p-4 rounded-2xl border border-[#eee3d3] shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-2"
                 >
                   <div>
                     <div className="flex items-center gap-2 flex-wrap">
-                      <p className="font-bold text-slate-800 text-xs">{inv.gaName}</p>
+                      <p className="font-bold text-[#2b2621] text-xs">{inv.gaName}</p>
                       <span
                         className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
                           inv.status === "결제완료"
                             ? "bg-emerald-50 text-emerald-700"
                             : inv.status === "미납"
                             ? "bg-red-50 text-red-700"
-                            : "bg-slate-100 text-slate-500"
+                            : "bg-[#f7f0e6] text-[#6b5d4f]"
                         }`}
                       >
                         {inv.status}
                       </span>
                     </div>
-                    <p className="text-slate-400 text-[11px] mt-0.5">
+                    <p className="text-[#8a7a68] text-[11px] mt-0.5">
                       {inv.plan} · {inv.amount.toLocaleString()}원 · 청구일 {inv.billingDate}
                     </p>
                   </div>
@@ -3615,7 +3615,7 @@ export default function App() {
                     <button
                       type="button"
                       onClick={() => handleConfirmPayment(inv.id)}
-                      className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-[11px] px-3 py-2 rounded-lg transition shrink-0"
+                      className="bg-[#d97a4d] hover:bg-[#b35a2e] text-white font-bold text-[11px] px-3 py-2 rounded-lg transition shrink-0"
                     >
                       결제 확인
                     </button>
@@ -3629,13 +3629,13 @@ export default function App() {
         {/* 탭 관리자-2D: 통계 대시보드 */}
         {mainTab === "ADMIN_STATS" && (
           <div className="space-y-4">
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-              <h2 className="text-lg font-black text-slate-900">통계</h2>
-              <p className="text-slate-500 text-xs mt-1">가입 추이와 매칭 현황을 한눈에 확인하세요.</p>
+            <div className="bg-white p-5 rounded-2xl border border-[#eee3d3] shadow-sm">
+              <h2 className="text-lg font-black text-[#201b16]">통계</h2>
+              <p className="text-[#6b5d4f] text-xs mt-1">가입 추이와 매칭 현황을 한눈에 확인하세요.</p>
             </div>
 
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-              <h3 className="font-black text-sm text-slate-900">월별 가입 추이</h3>
+            <div className="bg-white p-5 rounded-2xl border border-[#eee3d3] shadow-sm space-y-4">
+              <h3 className="font-black text-sm text-[#201b16]">월별 가입 추이</h3>
               <div className="flex items-end justify-between gap-3 h-40">
                 {MOCK_SIGNUP_TREND.map((row) => {
                   const max = Math.max(...MOCK_SIGNUP_TREND.map((r) => r.fc + r.ga));
@@ -3645,7 +3645,7 @@ export default function App() {
                     <div key={row.month} className="flex-1 flex flex-col items-center gap-1.5">
                       <div className="w-full flex items-end justify-center gap-1 h-32">
                         <div
-                          className="w-1/2 bg-blue-500 rounded-t-md"
+                          className="w-1/2 bg-[#d97a4d] rounded-t-md"
                           style={{ height: `${fcHeight}%` }}
                           title={`설계사 ${row.fc}명`}
                         />
@@ -3655,14 +3655,14 @@ export default function App() {
                           title={`GA ${row.ga}개사`}
                         />
                       </div>
-                      <span className="text-slate-400 text-[10px] font-bold">{row.month}</span>
+                      <span className="text-[#8a7a68] text-[10px] font-bold">{row.month}</span>
                     </div>
                   );
                 })}
               </div>
-              <div className="flex items-center gap-4 text-[11px] font-semibold text-slate-500">
+              <div className="flex items-center gap-4 text-[11px] font-semibold text-[#6b5d4f]">
                 <span className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-blue-500" /> 설계사 가입
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#d97a4d]" /> 설계사 가입
                 </span>
                 <span className="flex items-center gap-1.5">
                   <span className="w-2.5 h-2.5 rounded-full bg-amber-400" /> GA 가입
@@ -3670,8 +3670,8 @@ export default function App() {
               </div>
             </div>
 
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-              <h3 className="font-black text-sm text-slate-900">제안 매칭 현황</h3>
+            <div className="bg-white p-5 rounded-2xl border border-[#eee3d3] shadow-sm space-y-4">
+              <h3 className="font-black text-sm text-[#201b16]">제안 매칭 현황</h3>
               {(() => {
                 const total = MOCK_MATCH_STATS.pending + MOCK_MATCH_STATS.matched + MOCK_MATCH_STATS.rejected;
                 const pendingPct = Math.round((MOCK_MATCH_STATS.pending / total) * 100);
@@ -3682,9 +3682,9 @@ export default function App() {
                     <div className="w-full h-4 rounded-full overflow-hidden flex">
                       <div className="bg-amber-400" style={{ width: `${pendingPct}%` }} />
                       <div className="bg-emerald-500" style={{ width: `${matchedPct}%` }} />
-                      <div className="bg-slate-300" style={{ width: `${rejectedPct}%` }} />
+                      <div className="bg-[#ddd0ba]" style={{ width: `${rejectedPct}%` }} />
                     </div>
-                    <div className="flex flex-wrap items-center gap-4 text-[11px] font-semibold text-slate-500">
+                    <div className="flex flex-wrap items-center gap-4 text-[11px] font-semibold text-[#6b5d4f]">
                       <span className="flex items-center gap-1.5">
                         <span className="w-2.5 h-2.5 rounded-full bg-amber-400" /> 대기중 {MOCK_MATCH_STATS.pending}건 ({pendingPct}%)
                       </span>
@@ -3692,7 +3692,7 @@ export default function App() {
                         <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" /> 매칭 완료 {MOCK_MATCH_STATS.matched}건 ({matchedPct}%)
                       </span>
                       <span className="flex items-center gap-1.5">
-                        <span className="w-2.5 h-2.5 rounded-full bg-slate-300" /> 거절됨 {MOCK_MATCH_STATS.rejected}건 ({rejectedPct}%)
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#ddd0ba]" /> 거절됨 {MOCK_MATCH_STATS.rejected}건 ({rejectedPct}%)
                       </span>
                     </div>
                   </>
@@ -3705,9 +3705,9 @@ export default function App() {
         {/* 탭 관리자-3: 커뮤니티 관리 */}
         {mainTab === "ADMIN_COMMUNITY" && (
           <div className="space-y-4">
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-              <h2 className="text-lg font-black text-slate-900">커뮤니티 관리</h2>
-              <p className="text-slate-500 text-xs mt-1">신고 접수된 게시글을 우선 검토하고 조치하세요.</p>
+            <div className="bg-white p-5 rounded-2xl border border-[#eee3d3] shadow-sm">
+              <h2 className="text-lg font-black text-[#201b16]">커뮤니티 관리</h2>
+              <p className="text-[#6b5d4f] text-xs mt-1">신고 접수된 게시글을 우선 검토하고 조치하세요.</p>
             </div>
 
             <div className="space-y-3">
@@ -3715,13 +3715,13 @@ export default function App() {
                 <div
                   key={post.id}
                   className={`bg-white p-4 rounded-2xl border shadow-sm space-y-2 ${
-                    post.reported ? "border-red-200" : "border-slate-200"
+                    post.reported ? "border-red-200" : "border-[#eee3d3]"
                   }`}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <span className="font-bold text-slate-800 text-xs">{post.author}</span>
-                      <span className="bg-slate-100 text-slate-500 text-[10px] font-bold px-2 py-0.5 rounded-full">
+                      <span className="font-bold text-[#2b2621] text-xs">{post.author}</span>
+                      <span className="bg-[#f7f0e6] text-[#6b5d4f] text-[10px] font-bold px-2 py-0.5 rounded-full">
                         {post.role}
                       </span>
                       {post.reported && (
@@ -3730,17 +3730,17 @@ export default function App() {
                         </span>
                       )}
                     </div>
-                    <span className="text-slate-400 text-[11px]">{post.date}</span>
+                    <span className="text-[#8a7a68] text-[11px]">{post.date}</span>
                   </div>
-                  <p className="font-black text-slate-900 text-sm">{post.title}</p>
-                  <p className="text-slate-600 text-xs leading-relaxed">{post.content}</p>
+                  <p className="font-black text-[#201b16] text-sm">{post.title}</p>
+                  <p className="text-[#57493c] text-xs leading-relaxed">{post.content}</p>
                   {post.reported && <p className="text-red-600 text-[11px] font-semibold">{post.reportReason}</p>}
                   <div className="flex items-center gap-2 pt-1">
                     {post.reported && (
                       <button
                         type="button"
                         onClick={() => handleDismissReport(post.id)}
-                        className="bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-[11px] px-3 py-1.5 rounded-lg transition"
+                        className="bg-[#f7f0e6] hover:bg-[#eee3d3] text-[#57493c] font-bold text-[11px] px-3 py-1.5 rounded-lg transition"
                       >
                         신고 해제
                       </button>
@@ -3756,7 +3756,7 @@ export default function App() {
                 </div>
               ))}
               {communityPosts.length === 0 && (
-                <div className="bg-white p-8 rounded-2xl border border-slate-200 text-center text-slate-400 text-xs">
+                <div className="bg-white p-8 rounded-2xl border border-[#eee3d3] text-center text-[#8a7a68] text-xs">
                   게시글이 없습니다.
                 </div>
               )}
@@ -3767,28 +3767,28 @@ export default function App() {
         {/* 탭 관리자-4: 공지사항 관리 */}
         {mainTab === "ADMIN_ANNOUNCEMENTS" && (
           <div className="space-y-4">
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-              <h2 className="text-lg font-black text-slate-900">공지사항 관리</h2>
-              <p className="text-slate-500 text-xs mt-1">설계사·GA에게 노출되는 공지사항과 배너를 관리하세요.</p>
+            <div className="bg-white p-5 rounded-2xl border border-[#eee3d3] shadow-sm">
+              <h2 className="text-lg font-black text-[#201b16]">공지사항 관리</h2>
+              <p className="text-[#6b5d4f] text-xs mt-1">설계사·GA에게 노출되는 공지사항과 배너를 관리하세요.</p>
             </div>
 
             <form
               onSubmit={handleAddAnnouncement}
-              className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3"
+              className="bg-white p-5 rounded-2xl border border-[#eee3d3] shadow-sm space-y-3"
             >
-              <h3 className="font-black text-sm text-slate-900">새 공지 등록</h3>
+              <h3 className="font-black text-sm text-[#201b16]">새 공지 등록</h3>
               <div className="grid grid-cols-1 sm:grid-cols-[1fr_140px] gap-3">
                 <input
                   type="text"
                   placeholder="공지 제목을 입력하세요"
                   value={newAnnouncement.title}
                   onChange={(e) => setNewAnnouncement({ ...newAnnouncement, title: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#d97a4d]"
                 />
                 <select
                   value={newAnnouncement.target}
                   onChange={(e) => setNewAnnouncement({ ...newAnnouncement, target: e.target.value })}
-                  className="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold text-slate-700 outline-none"
+                  className="bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold text-[#453a2f] outline-none"
                 >
                   <option value="전체">전체</option>
                   <option value="FC">FC</option>
@@ -3797,7 +3797,7 @@ export default function App() {
               </div>
               <button
                 type="submit"
-                className="bg-blue-600 hover:bg-blue-700 text-white font-extrabold px-5 py-2.5 rounded-xl text-xs transition shadow-sm"
+                className="bg-[#d97a4d] hover:bg-[#b35a2e] text-white font-extrabold px-5 py-2.5 rounded-xl text-xs transition shadow-sm"
               >
                 공지 등록
               </button>
@@ -3807,29 +3807,29 @@ export default function App() {
               {announcements.map((a) => (
                 <div
                   key={a.id}
-                  className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between gap-3"
+                  className="bg-white p-4 rounded-2xl border border-[#eee3d3] shadow-sm flex items-center justify-between gap-3"
                 >
                   <div>
                     <div className="flex items-center gap-2 flex-wrap">
-                      <p className="font-bold text-slate-800 text-xs">{a.title}</p>
-                      <span className="bg-slate-100 text-slate-500 text-[10px] font-bold px-2 py-0.5 rounded-full">
+                      <p className="font-bold text-[#2b2621] text-xs">{a.title}</p>
+                      <span className="bg-[#f7f0e6] text-[#6b5d4f] text-[10px] font-bold px-2 py-0.5 rounded-full">
                         {a.target}
                       </span>
                       <span
                         className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                          a.active ? "bg-emerald-50 text-emerald-700" : "bg-slate-100 text-slate-500"
+                          a.active ? "bg-emerald-50 text-emerald-700" : "bg-[#f7f0e6] text-[#6b5d4f]"
                         }`}
                       >
                         {a.active ? "노출중" : "비노출"}
                       </span>
                     </div>
-                    <p className="text-slate-400 text-[11px] mt-0.5">등록일 {a.date}</p>
+                    <p className="text-[#8a7a68] text-[11px] mt-0.5">등록일 {a.date}</p>
                   </div>
                   <div className="flex items-center gap-2 shrink-0">
                     <button
                       type="button"
                       onClick={() => handleToggleAnnouncement(a.id)}
-                      className="bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-[11px] px-3 py-2 rounded-lg transition"
+                      className="bg-[#f7f0e6] hover:bg-[#eee3d3] text-[#57493c] font-bold text-[11px] px-3 py-2 rounded-lg transition"
                     >
                       {a.active ? "비노출로 전환" : "노출로 전환"}
                     </button>
@@ -3850,35 +3850,35 @@ export default function App() {
         {/* 탭 관리자-5: 관리자 계정 관리 */}
         {mainTab === "ADMIN_ACCOUNTS" && (
           <div className="space-y-4">
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-              <h2 className="text-lg font-black text-slate-900">관리자 계정 관리</h2>
-              <p className="text-slate-500 text-xs mt-1">운영진 계정과 권한을 관리하세요.</p>
+            <div className="bg-white p-5 rounded-2xl border border-[#eee3d3] shadow-sm">
+              <h2 className="text-lg font-black text-[#201b16]">관리자 계정 관리</h2>
+              <p className="text-[#6b5d4f] text-xs mt-1">운영진 계정과 권한을 관리하세요.</p>
             </div>
 
             <form
               onSubmit={handleInviteAdmin}
-              className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3"
+              className="bg-white p-5 rounded-2xl border border-[#eee3d3] shadow-sm space-y-3"
             >
-              <h3 className="font-black text-sm text-slate-900">관리자 초대</h3>
+              <h3 className="font-black text-sm text-[#201b16]">관리자 초대</h3>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <input
                   type="text"
                   placeholder="이름"
                   value={newAdminAccount.name}
                   onChange={(e) => setNewAdminAccount({ ...newAdminAccount, name: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#d97a4d]"
                 />
                 <input
                   type="email"
                   placeholder="이메일"
                   value={newAdminAccount.email}
                   onChange={(e) => setNewAdminAccount({ ...newAdminAccount, email: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#d97a4d]"
                 />
                 <select
                   value={newAdminAccount.role}
                   onChange={(e) => setNewAdminAccount({ ...newAdminAccount, role: e.target.value })}
-                  className="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold text-slate-700 outline-none"
+                  className="bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold text-[#453a2f] outline-none"
                 >
                   <option value="운영진">운영진</option>
                   <option value="모더레이터">모더레이터</option>
@@ -3887,7 +3887,7 @@ export default function App() {
               </div>
               <button
                 type="submit"
-                className="bg-blue-600 hover:bg-blue-700 text-white font-extrabold px-5 py-2.5 rounded-xl text-xs transition shadow-sm"
+                className="bg-[#d97a4d] hover:bg-[#b35a2e] text-white font-extrabold px-5 py-2.5 rounded-xl text-xs transition shadow-sm"
               >
                 초대하기
               </button>
@@ -3897,29 +3897,29 @@ export default function App() {
               {adminAccounts.map((a) => (
                 <div
                   key={a.id}
-                  className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between gap-3"
+                  className="bg-white p-4 rounded-2xl border border-[#eee3d3] shadow-sm flex items-center justify-between gap-3"
                 >
                   <div>
                     <div className="flex items-center gap-2 flex-wrap">
-                      <p className="font-bold text-slate-800 text-xs">{a.name}</p>
-                      <span className="bg-blue-50 text-blue-700 text-[10px] font-bold px-2 py-0.5 rounded-full">
+                      <p className="font-bold text-[#2b2621] text-xs">{a.name}</p>
+                      <span className="bg-[#fdf3ea] text-[#b35a2e] text-[10px] font-bold px-2 py-0.5 rounded-full">
                         {a.role}
                       </span>
                       <span
                         className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                          a.status === "활성" ? "bg-emerald-50 text-emerald-700" : "bg-slate-100 text-slate-500"
+                          a.status === "활성" ? "bg-emerald-50 text-emerald-700" : "bg-[#f7f0e6] text-[#6b5d4f]"
                         }`}
                       >
                         {a.status}
                       </span>
                     </div>
-                    <p className="text-slate-400 text-[11px] mt-0.5">{a.email}</p>
+                    <p className="text-[#8a7a68] text-[11px] mt-0.5">{a.email}</p>
                   </div>
                   {a.role !== "최고관리자" && (
                     <button
                       type="button"
                       onClick={() => handleToggleAdminStatus(a.id)}
-                      className="bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-[11px] px-3 py-2 rounded-lg transition shrink-0"
+                      className="bg-[#f7f0e6] hover:bg-[#eee3d3] text-[#57493c] font-bold text-[11px] px-3 py-2 rounded-lg transition shrink-0"
                     >
                       {a.status === "활성" ? "비활성화" : "활성화"}
                     </button>
@@ -3933,28 +3933,28 @@ export default function App() {
         {/* 탭 관리자-6: 활동 로그 */}
         {mainTab === "ADMIN_LOG" && (
           <div className="space-y-4">
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-              <h2 className="text-lg font-black text-slate-900">활동 로그</h2>
-              <p className="text-slate-500 text-xs mt-1">관리자 조치 이력을 시간순으로 확인할 수 있습니다.</p>
+            <div className="bg-white p-5 rounded-2xl border border-[#eee3d3] shadow-sm">
+              <h2 className="text-lg font-black text-[#201b16]">활동 로그</h2>
+              <p className="text-[#6b5d4f] text-xs mt-1">관리자 조치 이력을 시간순으로 확인할 수 있습니다.</p>
             </div>
 
             <div className="space-y-2">
               {activityLog.map((log) => (
                 <div
                   key={log.id}
-                  className="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm flex items-start justify-between gap-3"
+                  className="bg-white p-3.5 rounded-2xl border border-[#eee3d3] shadow-sm flex items-start justify-between gap-3"
                 >
                   <div className="flex items-start gap-2.5">
-                    <div className="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center shrink-0 font-bold text-slate-500 text-[10px]">
+                    <div className="w-7 h-7 rounded-full bg-[#f7f0e6] flex items-center justify-center shrink-0 font-bold text-[#6b5d4f] text-[10px]">
                       {log.actor.slice(0, 1)}
                     </div>
                     <div>
-                      <p className="text-slate-800 text-xs">
+                      <p className="text-[#2b2621] text-xs">
                         <span className="font-bold">{log.actor}</span>님이 {log.action}
                       </p>
                     </div>
                   </div>
-                  <span className="text-slate-400 text-[10px] shrink-0">{log.timestamp}</span>
+                  <span className="text-[#8a7a68] text-[10px] shrink-0">{log.timestamp}</span>
                 </div>
               ))}
             </div>
@@ -4003,8 +4003,8 @@ export default function App() {
             <div className="p-5 space-y-4">
               {isAutoSyncing ? (
                 <div className="py-8 flex flex-col items-center justify-center gap-3">
-                  <RefreshCw className="w-7 h-7 text-blue-600 animate-spin" />
-                  <p className="text-slate-600 text-xs font-bold">
+                  <RefreshCw className="w-7 h-7 text-[#d97a4d] animate-spin" />
+                  <p className="text-[#57493c] text-xs font-bold">
                     {socialProvider === "naver" ? "네이버" : "카카오"} 인증 및 실적 데이터 조회 중...
                   </p>
                 </div>
@@ -4014,27 +4014,27 @@ export default function App() {
                     <div className="flex items-start gap-2.5">
                       <Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
                       <div>
-                        <p className="text-slate-800 text-xs font-bold">본인 확인 정보</p>
-                        <p className="text-slate-400 text-[11px]">이름, 생년월일 등 기본 인증 정보</p>
+                        <p className="text-[#2b2621] text-xs font-bold">본인 확인 정보</p>
+                        <p className="text-[#8a7a68] text-[11px]">이름, 생년월일 등 기본 인증 정보</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-2.5">
                       <Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
                       <div>
-                        <p className="text-slate-800 text-xs font-bold">국세청 사업소득(3.3%) 신고 내역</p>
-                        <p className="text-slate-400 text-[11px]">월 평균 매출(업적) 확인 목적</p>
+                        <p className="text-[#2b2621] text-xs font-bold">국세청 사업소득(3.3%) 신고 내역</p>
+                        <p className="text-[#8a7a68] text-[11px]">월 평균 매출(업적) 확인 목적</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-2.5">
                       <Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
                       <div>
-                        <p className="text-slate-800 text-xs font-bold">보험협회 등록 경력·유지율 정보</p>
-                        <p className="text-slate-400 text-[11px]">경력 연차 및 계약 유지율 확인 목적</p>
+                        <p className="text-[#2b2621] text-xs font-bold">보험협회 등록 경력·유지율 정보</p>
+                        <p className="text-[#8a7a68] text-[11px]">경력 연차 및 계약 유지율 확인 목적</p>
                       </div>
                     </div>
                   </div>
 
-                  <p className="text-slate-400 text-[10px] leading-relaxed border-t border-slate-100 pt-3">
+                  <p className="text-[#8a7a68] text-[10px] leading-relaxed border-t border-[#f7f0e6] pt-3">
                     동의하신 정보는 실적 인증 목적으로만 사용되며, GA 매니저에게는 인증 뱃지와 요약된 범위 정보만
                     공개되고 원본 데이터는 공유되지 않습니다.
                   </p>
@@ -4043,7 +4043,7 @@ export default function App() {
                     <button
                       type="button"
                       onClick={() => setShowAuthPopup(false)}
-                      className="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold py-3 rounded-xl text-xs transition"
+                      className="flex-1 bg-[#f7f0e6] hover:bg-[#eee3d3] text-[#57493c] font-bold py-3 rounded-xl text-xs transition"
                     >
                       취소
                     </button>
@@ -4069,12 +4069,12 @@ export default function App() {
       {activeMessageThread && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
           <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md h-[80vh] max-h-[600px] flex flex-col overflow-hidden">
-            <div className="p-4 border-b border-slate-100 flex items-center justify-between shrink-0">
+            <div className="p-4 border-b border-[#f7f0e6] flex items-center justify-between shrink-0">
               <div>
-                <p className="text-[10px] text-slate-400 font-bold">
+                <p className="text-[10px] text-[#8a7a68] font-bold">
                   {userRole === "GA" ? "설계사 후보와의 대화" : "GA 매니저와의 대화"}
                 </p>
-                <h3 className="font-black text-sm text-slate-900">{activeMessageThread.title}</h3>
+                <h3 className="font-black text-sm text-[#201b16]">{activeMessageThread.title}</h3>
               </div>
               <button
                 type="button"
@@ -4082,15 +4082,15 @@ export default function App() {
                   setActiveMessageThread(null);
                   setMessageDraft("");
                 }}
-                className="text-slate-400 hover:text-slate-600 transition"
+                className="text-[#8a7a68] hover:text-[#57493c] transition"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-slate-50">
+            <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-[#fdfaf5]">
               {(messageThreads[activeMessageThread.id] || []).length === 0 && (
-                <p className="text-slate-400 text-xs text-center pt-8">
+                <p className="text-[#8a7a68] text-xs text-center pt-8">
                   아직 주고받은 메시지가 없습니다. 조건 관련 궁금한 점을 편하게 물어보세요.
                 </p>
               )}
@@ -4102,30 +4102,30 @@ export default function App() {
                       <div
                         className={`px-3.5 py-2.5 rounded-2xl text-xs leading-relaxed ${
                           isMine
-                            ? "bg-blue-600 text-white rounded-br-sm"
-                            : "bg-white border border-slate-200 text-slate-700 rounded-bl-sm"
+                            ? "bg-[#d97a4d] text-white rounded-br-sm"
+                            : "bg-white border border-[#eee3d3] text-[#453a2f] rounded-bl-sm"
                         }`}
                       >
                         {msg.text}
                       </div>
-                      <span className="text-slate-400 text-[10px] px-1">{msg.time}</span>
+                      <span className="text-[#8a7a68] text-[10px] px-1">{msg.time}</span>
                     </div>
                   </div>
                 );
               })}
             </div>
 
-            <form onSubmit={handleSendMessage} className="p-3 border-t border-slate-100 flex items-center gap-2 shrink-0">
+            <form onSubmit={handleSendMessage} className="p-3 border-t border-[#f7f0e6] flex items-center gap-2 shrink-0">
               <input
                 type="text"
                 value={messageDraft}
                 onChange={(e) => setMessageDraft(e.target.value)}
                 placeholder="메시지를 입력하세요 (실명·연락처는 노출되지 않아요)"
-                className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs outline-none focus:ring-2 focus:ring-blue-500"
+                className="flex-1 bg-[#fdfaf5] border border-[#eee3d3] rounded-xl px-3.5 py-2.5 text-xs outline-none focus:ring-2 focus:ring-[#d97a4d]"
               />
               <button
                 type="submit"
-                className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-2.5 rounded-xl text-xs transition shrink-0"
+                className="bg-[#d97a4d] hover:bg-[#b35a2e] text-white font-bold px-4 py-2.5 rounded-xl text-xs transition shrink-0"
               >
                 전송
               </button>
@@ -4140,74 +4140,74 @@ export default function App() {
             <div className="p-6 space-y-5">
               <div className="flex items-start justify-between">
                 <div>
-                  <h3 className="text-base font-black text-slate-900">제안 보내기</h3>
-                  <p className="text-slate-500 text-[11px] mt-0.5">
+                  <h3 className="text-base font-black text-[#201b16]">제안 보내기</h3>
+                  <p className="text-[#6b5d4f] text-[11px] mt-0.5">
                     {offerTarget.nickname}님에게 보낼 스카우트 조건을 입력하세요.
                   </p>
                 </div>
                 <button
                   type="button"
                   onClick={() => setOfferTarget(null)}
-                  className="text-slate-400 hover:text-slate-600 transition"
+                  className="text-[#8a7a68] hover:text-[#57493c] transition"
                 >
                   <X className="w-5 h-5" />
                 </button>
               </div>
 
-              <div className="bg-slate-50 border border-slate-200 rounded-xl p-3 text-[11px] text-slate-600 space-y-1">
+              <div className="bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-[11px] text-[#57493c] space-y-1">
                 <p>
-                  <span className="font-bold text-slate-800">희망 조건:</span> 수수료 {offerTarget.minCommission} · 정착지원금{" "}
+                  <span className="font-bold text-[#2b2621]">희망 조건:</span> 수수료 {offerTarget.minCommission} · 정착지원금{" "}
                   {offerTarget.minSettlement}
                 </p>
                 <p>
-                  <span className="font-bold text-slate-800">희망 지역:</span> {offerTarget.preferredRegion}
+                  <span className="font-bold text-[#2b2621]">희망 지역:</span> {offerTarget.preferredRegion}
                 </p>
               </div>
 
               <form onSubmit={handleSendOffer} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1">
-                    <label className="font-extrabold text-slate-700 text-xs">제안 수수료 조건</label>
+                    <label className="font-extrabold text-[#453a2f] text-xs">제안 수수료 조건</label>
                     <input
                       type="text"
                       value={offerForm.commission}
                       onChange={(e) => setOfferForm({ ...offerForm, commission: e.target.value })}
                       placeholder="예: 총 93.5% (손보 95% / 생보 92%)"
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#d97a4d]"
                     />
                   </div>
 
                   <div className="space-y-1">
-                    <label className="font-extrabold text-slate-700 text-xs">제안 정착지원금</label>
+                    <label className="font-extrabold text-[#453a2f] text-xs">제안 정착지원금</label>
                     <input
                       type="text"
                       value={offerForm.settlement}
                       onChange={(e) => setOfferForm({ ...offerForm, settlement: e.target.value })}
                       placeholder="예: 1,500만원 (첫 달 500만 지급)"
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#d97a4d]"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-extrabold text-slate-700 text-xs">DB 지원 조건</label>
+                  <label className="font-extrabold text-[#453a2f] text-xs">DB 지원 조건</label>
                   <input
                     type="text"
                     value={offerForm.db}
                     onChange={(e) => setOfferForm({ ...offerForm, db: e.target.value })}
                     placeholder="예: 월 35개 고품질 DB 무료 분배"
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#d97a4d]"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-extrabold text-slate-700 text-xs">전달 메시지</label>
+                  <label className="font-extrabold text-[#453a2f] text-xs">전달 메시지</label>
                   <textarea
                     rows={3}
                     value={offerForm.message}
                     onChange={(e) => setOfferForm({ ...offerForm, message: e.target.value })}
                     placeholder="선생님의 경력과 실적을 보고 연락드립니다..."
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-medium outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-medium outline-none focus:ring-2 focus:ring-[#d97a4d]"
                   />
                 </div>
 
@@ -4215,13 +4215,13 @@ export default function App() {
                   <button
                     type="button"
                     onClick={() => setOfferTarget(null)}
-                    className="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold py-3 rounded-xl text-xs transition"
+                    className="flex-1 bg-[#f7f0e6] hover:bg-[#eee3d3] text-[#57493c] font-bold py-3 rounded-xl text-xs transition"
                   >
                     취소
                   </button>
                   <button
                     type="submit"
-                    className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-extrabold py-3 rounded-xl text-xs transition shadow-lg"
+                    className="flex-1 bg-[#d97a4d] hover:bg-[#b35a2e] text-white font-extrabold py-3 rounded-xl text-xs transition shadow-lg"
                   >
                     제안 보내기
                   </button>
@@ -4238,27 +4238,27 @@ export default function App() {
             <div className="p-6 space-y-5">
               <div className="flex items-start justify-between">
                 <div>
-                  <h3 className="text-base font-black text-slate-900">GA 매니저에게 이렇게 보여집니다</h3>
-                  <p className="text-slate-500 text-[11px] mt-0.5">아래 내용으로 익명 프로필을 등록할까요?</p>
+                  <h3 className="text-base font-black text-[#201b16]">GA 매니저에게 이렇게 보여집니다</h3>
+                  <p className="text-[#6b5d4f] text-[11px] mt-0.5">아래 내용으로 익명 프로필을 등록할까요?</p>
                 </div>
                 <button
                   type="button"
                   onClick={() => setShowPreviewModal(false)}
-                  className="text-slate-400 hover:text-slate-600 transition"
+                  className="text-[#8a7a68] hover:text-[#57493c] transition"
                 >
                   <X className="w-5 h-5" />
                 </button>
               </div>
 
-              <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-4">
-                <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+              <div className="bg-[#fdfaf5] border border-[#eee3d3] rounded-2xl p-4 space-y-4">
+                <div className="flex items-center justify-between border-b border-[#eee3d3] pb-3">
                   <div className="flex items-center gap-2">
-                    <div className="w-9 h-9 rounded-full bg-blue-100 flex items-center justify-center shrink-0">
-                      <UserCheck className="w-4 h-4 text-blue-600" />
+                    <div className="w-9 h-9 rounded-full bg-[#fbeee0] flex items-center justify-center shrink-0">
+                      <UserCheck className="w-4 h-4 text-[#d97a4d]" />
                     </div>
                     <div>
-                      <p className="font-black text-sm text-slate-900">{profile.nickname}</p>
-                      <p className="text-[11px] text-slate-500">
+                      <p className="font-black text-sm text-[#201b16]">{profile.nickname}</p>
+                      <p className="text-[11px] text-[#6b5d4f]">
                         {profile.exp} · {profile.mainField}
                       </p>
                     </div>
@@ -4273,31 +4273,31 @@ export default function App() {
 
                 <div className="grid grid-cols-2 gap-3 text-[11px]">
                   <div>
-                    <span className="text-slate-400 font-semibold block">월 평균 매출</span>
-                    <span className="font-bold text-slate-800">{profile.salesRange}</span>
+                    <span className="text-[#8a7a68] font-semibold block">월 평균 매출</span>
+                    <span className="font-bold text-[#2b2621]">{profile.salesRange}</span>
                   </div>
                   <div>
-                    <span className="text-slate-400 font-semibold block">유지율</span>
-                    <span className="font-bold text-slate-800">{profile.retentionRate}</span>
+                    <span className="text-[#8a7a68] font-semibold block">유지율</span>
+                    <span className="font-bold text-[#2b2621]">{profile.retentionRate}</span>
                   </div>
                   <div>
-                    <span className="text-slate-400 font-semibold block">희망 최소 수수료율</span>
-                    <span className="font-bold text-blue-600">{profile.minCommission}</span>
+                    <span className="text-[#8a7a68] font-semibold block">희망 최소 수수료율</span>
+                    <span className="font-bold text-[#d97a4d]">{profile.minCommission}</span>
                   </div>
                   <div>
-                    <span className="text-slate-400 font-semibold block">희망 최소 정착지원금</span>
-                    <span className="font-bold text-blue-600">{profile.minSettlement}</span>
+                    <span className="text-[#8a7a68] font-semibold block">희망 최소 정착지원금</span>
+                    <span className="font-bold text-[#d97a4d]">{profile.minSettlement}</span>
                   </div>
                   <div className="col-span-2">
-                    <span className="text-slate-400 font-semibold block">희망 근무 지역</span>
-                    <span className="font-bold text-slate-800">{profile.preferredRegion}</span>
+                    <span className="text-[#8a7a68] font-semibold block">희망 근무 지역</span>
+                    <span className="font-bold text-[#2b2621]">{profile.preferredRegion}</span>
                   </div>
                 </div>
 
                 {profile.memo && (
-                  <div className="bg-white border border-slate-200 rounded-xl p-3">
-                    <span className="text-slate-400 font-semibold text-[10px] block mb-1">기타 요청사항</span>
-                    <p className="text-slate-700 text-[11px] leading-relaxed">{profile.memo}</p>
+                  <div className="bg-white border border-[#eee3d3] rounded-xl p-3">
+                    <span className="text-[#8a7a68] font-semibold text-[10px] block mb-1">기타 요청사항</span>
+                    <p className="text-[#453a2f] text-[11px] leading-relaxed">{profile.memo}</p>
                   </div>
                 )}
               </div>
@@ -4306,14 +4306,14 @@ export default function App() {
                 <button
                   type="button"
                   onClick={() => setShowPreviewModal(false)}
-                  className="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold py-3 rounded-xl text-xs transition"
+                  className="flex-1 bg-[#f7f0e6] hover:bg-[#eee3d3] text-[#57493c] font-bold py-3 rounded-xl text-xs transition"
                 >
                   다시 수정하기
                 </button>
                 <button
                   type="button"
                   onClick={handleConfirmSubmit}
-                  className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-extrabold py-3 rounded-xl text-xs transition shadow-lg"
+                  className="flex-1 bg-[#d97a4d] hover:bg-[#b35a2e] text-white font-extrabold py-3 rounded-xl text-xs transition shadow-lg"
                 >
                   이 내용으로 등록하기
                 </button>
@@ -4328,11 +4328,11 @@ export default function App() {
           <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[85vh] overflow-y-auto">
             <div className="p-6 space-y-5">
               <div className="flex items-start justify-between">
-                <h3 className="text-base font-black text-slate-900">계정 상세 정보</h3>
+                <h3 className="text-base font-black text-[#201b16]">계정 상세 정보</h3>
                 <button
                   type="button"
                   onClick={() => setAdminDetailTarget(null)}
-                  className="text-slate-400 hover:text-slate-600 transition"
+                  className="text-[#8a7a68] hover:text-[#57493c] transition"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -4341,43 +4341,43 @@ export default function App() {
               {adminDetailTarget.type === "FC" &&
                 (() => {
                   const fc = adminFcUsers.find((u) => u.id === adminDetailTarget.id);
-                  if (!fc) return <p className="text-slate-400 text-xs">계정을 찾을 수 없습니다.</p>;
+                  if (!fc) return <p className="text-[#8a7a68] text-xs">계정을 찾을 수 없습니다.</p>;
                   return (
                     <div className="space-y-4">
-                      <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-2">
+                      <div className="bg-[#fdfaf5] border border-[#eee3d3] rounded-2xl p-4 space-y-2">
                         <div className="flex items-center gap-2 flex-wrap">
-                          <p className="font-black text-sm text-slate-900">{fc.nickname}</p>
+                          <p className="font-black text-sm text-[#201b16]">{fc.nickname}</p>
                           <span
                             className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
                               fc.status === "활성"
                                 ? "bg-emerald-50 text-emerald-700"
                                 : fc.status === "정지"
                                 ? "bg-red-50 text-red-700"
-                                : "bg-slate-100 text-slate-500"
+                                : "bg-[#f7f0e6] text-[#6b5d4f]"
                             }`}
                           >
                             {fc.status}
                           </span>
                         </div>
-                        <p className="text-slate-500 text-[11px]">{fc.mainField} · {fc.exp} · 가입일 {fc.joinedDate}</p>
+                        <p className="text-[#6b5d4f] text-[11px]">{fc.mainField} · {fc.exp} · 가입일 {fc.joinedDate}</p>
                         <div className="grid grid-cols-2 gap-2 pt-2 text-[11px]">
-                          <div className="bg-white border border-slate-200 rounded-xl p-2.5">
-                            <span className="text-slate-400 font-semibold block">매출 실적</span>
-                            <span className="font-bold text-slate-800">{fc.salesRange}</span>
+                          <div className="bg-white border border-[#eee3d3] rounded-xl p-2.5">
+                            <span className="text-[#8a7a68] font-semibold block">매출 실적</span>
+                            <span className="font-bold text-[#2b2621]">{fc.salesRange}</span>
                           </div>
-                          <div className="bg-white border border-slate-200 rounded-xl p-2.5">
-                            <span className="text-slate-400 font-semibold block">유지율</span>
-                            <span className="font-bold text-slate-800">{fc.retentionRate}</span>
+                          <div className="bg-white border border-[#eee3d3] rounded-xl p-2.5">
+                            <span className="text-[#8a7a68] font-semibold block">유지율</span>
+                            <span className="font-bold text-[#2b2621]">{fc.retentionRate}</span>
                           </div>
-                          <div className="bg-white border border-slate-200 rounded-xl p-2.5 col-span-2">
-                            <span className="text-slate-400 font-semibold block">인증 심사 상태</span>
-                            <span className="font-bold text-slate-800">{fc.verificationStatus}</span>
+                          <div className="bg-white border border-[#eee3d3] rounded-xl p-2.5 col-span-2">
+                            <span className="text-[#8a7a68] font-semibold block">인증 심사 상태</span>
+                            <span className="font-bold text-[#2b2621]">{fc.verificationStatus}</span>
                           </div>
                         </div>
                       </div>
                       <div className="space-y-2">
-                        <h4 className="font-black text-xs text-slate-700">활동 이력</h4>
-                        <div className="space-y-1.5 text-[11px] text-slate-500">
+                        <h4 className="font-black text-xs text-[#453a2f]">활동 이력</h4>
+                        <div className="space-y-1.5 text-[11px] text-[#6b5d4f]">
                           <p>· {fc.joinedDate} 익명 프로필 등록 및 카카오 간편인증 완료</p>
                           <p>· GA 역경매 제안 수신 대기 중</p>
                           <p>· 최근 로그인: {fc.joinedDate} 이후 활동 기록 없음 (목업 데이터)</p>
@@ -4390,48 +4390,48 @@ export default function App() {
               {adminDetailTarget.type === "GA" &&
                 (() => {
                   const ga = adminGaUsers.find((u) => u.id === adminDetailTarget.id);
-                  if (!ga) return <p className="text-slate-400 text-xs">계정을 찾을 수 없습니다.</p>;
+                  if (!ga) return <p className="text-[#8a7a68] text-xs">계정을 찾을 수 없습니다.</p>;
                   const planName = EXPOSURE_PLANS.find((p) => p.id === ga.exposurePlan)?.name ?? ga.exposurePlan;
                   const relatedInvoices = adminInvoices.filter((inv) => inv.gaName === ga.gaName);
                   return (
                     <div className="space-y-4">
-                      <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-2">
+                      <div className="bg-[#fdfaf5] border border-[#eee3d3] rounded-2xl p-4 space-y-2">
                         <div className="flex items-center gap-2 flex-wrap">
-                          <p className="font-black text-sm text-slate-900">{ga.gaName}</p>
-                          <span className="text-slate-400 text-[11px] font-bold">({ga.branch})</span>
+                          <p className="font-black text-sm text-[#201b16]">{ga.gaName}</p>
+                          <span className="text-[#8a7a68] text-[11px] font-bold">({ga.branch})</span>
                         </div>
-                        <p className="text-slate-500 text-[11px]">
+                        <p className="text-[#6b5d4f] text-[11px]">
                           담당자 {ga.contactName} · {ga.contactPhone} · 가입일 {ga.joinedDate}
                         </p>
                         <div className="grid grid-cols-2 gap-2 pt-2 text-[11px]">
-                          <div className="bg-white border border-slate-200 rounded-xl p-2.5">
-                            <span className="text-slate-400 font-semibold block">수수료 범위</span>
-                            <span className="font-bold text-slate-800">
+                          <div className="bg-white border border-[#eee3d3] rounded-xl p-2.5">
+                            <span className="text-[#8a7a68] font-semibold block">수수료 범위</span>
+                            <span className="font-bold text-[#2b2621]">
                               {ga.commissionMin}~{ga.commissionMax}%
                             </span>
                           </div>
-                          <div className="bg-white border border-slate-200 rounded-xl p-2.5">
-                            <span className="text-slate-400 font-semibold block">노출 상태</span>
-                            <span className="font-bold text-slate-800">{ga.exposureStatus}</span>
+                          <div className="bg-white border border-[#eee3d3] rounded-xl p-2.5">
+                            <span className="text-[#8a7a68] font-semibold block">노출 상태</span>
+                            <span className="font-bold text-[#2b2621]">{ga.exposureStatus}</span>
                           </div>
-                          <div className="bg-white border border-slate-200 rounded-xl p-2.5 col-span-2">
-                            <span className="text-slate-400 font-semibold block">노출 상품</span>
-                            <span className="font-bold text-slate-800">{planName}</span>
+                          <div className="bg-white border border-[#eee3d3] rounded-xl p-2.5 col-span-2">
+                            <span className="text-[#8a7a68] font-semibold block">노출 상품</span>
+                            <span className="font-bold text-[#2b2621]">{planName}</span>
                           </div>
                         </div>
                       </div>
                       <div className="space-y-2">
-                        <h4 className="font-black text-xs text-slate-700">정산 내역</h4>
+                        <h4 className="font-black text-xs text-[#453a2f]">정산 내역</h4>
                         {relatedInvoices.length === 0 ? (
-                          <p className="text-slate-400 text-[11px]">정산 내역이 없습니다.</p>
+                          <p className="text-[#8a7a68] text-[11px]">정산 내역이 없습니다.</p>
                         ) : (
                           <div className="space-y-1.5">
                             {relatedInvoices.map((inv) => (
                               <div
                                 key={inv.id}
-                                className="flex items-center justify-between bg-slate-50 rounded-xl p-2.5 text-[11px]"
+                                className="flex items-center justify-between bg-[#fdfaf5] rounded-xl p-2.5 text-[11px]"
                               >
-                                <span className="text-slate-600">
+                                <span className="text-[#57493c]">
                                   {inv.plan} · {inv.billingDate}
                                 </span>
                                 <span
@@ -4440,7 +4440,7 @@ export default function App() {
                                       ? "text-emerald-600"
                                       : inv.status === "미납"
                                       ? "text-red-600"
-                                      : "text-slate-400"
+                                      : "text-[#8a7a68]"
                                   }`}
                                 >
                                   {inv.amount.toLocaleString()}원 ({inv.status})
