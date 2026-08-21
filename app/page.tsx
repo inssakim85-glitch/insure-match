@@ -24,7 +24,13 @@ import {
   Sparkles,
   MessageSquare,
   BarChart3,
-  Megaphone
+  Megaphone,
+  Flag,
+  ShieldAlert,
+  ShieldCheck,
+  AlertTriangle,
+  Ban,
+  Paperclip
 } from "lucide-react";
 
 // ==========================================
@@ -52,7 +58,8 @@ const MOCK_GA_FULL_LIST = [
       "강남역 도보 3분 단독 오피스 제공",
       "전문 손해사정사 & 세무사 상주 지원"
     ],
-    tags: ["강남권", "단독석제공", "DB무료지원", "초기정착금"]
+    tags: ["강남권", "단독석제공", "DB무료지원", "초기정착금"],
+    strengths: ["settlement", "commission"]
   },
   {
     id: 2,
@@ -74,7 +81,8 @@ const MOCK_GA_FULL_LIST = [
       "당일 수수료 산정 및 익월 10일 정시 지급",
       "초보 설계사 1:1 전담 코칭 시스템"
     ],
-    tags: ["서초/교대", "DB최다", "수수료당일지급"]
+    tags: ["서초/교대", "DB최다", "수수료당일지급"],
+    strengths: ["db_support", "education"]
   },
   {
     id: 3,
@@ -95,7 +103,8 @@ const MOCK_GA_FULL_LIST = [
       "법인 컨설팅 및 VIP 영업 전문 지원",
       "변액보험 및 연금 수수료 최고 비율"
     ],
-    tags: ["여의도", "법인컨설팅", "VIP DB"]
+    tags: ["여의도", "법인컨설팅", "VIP DB"],
+    strengths: ["commission", "succession"]
   }
 ];
 
@@ -134,6 +143,7 @@ const MOCK_AI_MATCHES = [
 const MOCK_OFFERS_RECEIVED = [
   {
     id: 101,
+    gaId: 1,
     gaName: "서밋 웰스 파트너스 GA (강남본부)",
     offeredCommission: "총 93.5% (손보 95.0% / 생보 92.0%)",
     offeredSettlement: "정착지원금 1,500만원 (첫 달 500만 지급)",
@@ -144,6 +154,7 @@ const MOCK_OFFERS_RECEIVED = [
   },
   {
     id: 102,
+    gaId: 2,
     gaName: "프리미어 쉴드 GA (서초지점)",
     offeredCommission: "총 92.0% (손보 93.5% / 생보 90.5%)",
     offeredSettlement: "정착지원금 1,200만원 (매월 200만x6개월)",
@@ -326,6 +337,21 @@ const GA_CTA_STATS = [
 ];
 
 // ==========================================
+// FC 이직 희망 조건 - 우선순위 후보군
+// ==========================================
+const TRANSFER_PRIORITY_OPTIONS = [
+  { key: "commission", label: "수수료율" },
+  { key: "incentive", label: "시책금 / 포상금" },
+  { key: "settlement", label: "정착지원금" },
+  { key: "db_support", label: "DB(계약자 데이터) 지원" },
+  { key: "location", label: "근무지 위치 및 환경" },
+  { key: "system", label: "전산시스템 / 업무 편의성" },
+  { key: "education", label: "교육 / 육성 프로그램" },
+  { key: "succession", label: "계약 승계 조건" },
+  { key: "other", label: "그 외" }
+];
+
+// ==========================================
 // MOCK DATA : 커뮤니티 게시글
 // ==========================================
 const MOCK_COMMUNITY_POSTS = [
@@ -459,7 +485,10 @@ const MOCK_ADMIN_GA_USERS = [
     commissionMin: "88",
     commissionMax: "93.5",
     exposureStatus: "노출중",
-    exposurePlan: "TOP"
+    exposurePlan: "TOP",
+    strikeCount: 0,
+    blacklisted: false,
+    successfulMatches: 14
   },
   {
     id: 2,
@@ -471,7 +500,10 @@ const MOCK_ADMIN_GA_USERS = [
     commissionMin: "85",
     commissionMax: "91.5",
     exposureStatus: "노출중",
-    exposurePlan: "TOP"
+    exposurePlan: "TOP",
+    strikeCount: 1,
+    blacklisted: false,
+    successfulMatches: 9
   },
   {
     id: 3,
@@ -483,7 +515,10 @@ const MOCK_ADMIN_GA_USERS = [
     commissionMin: "86",
     commissionMax: "92.0",
     exposureStatus: "노출중",
-    exposurePlan: "STANDARD"
+    exposurePlan: "STANDARD",
+    strikeCount: 0,
+    blacklisted: false,
+    successfulMatches: 5
   },
   {
     id: 4,
@@ -495,7 +530,51 @@ const MOCK_ADMIN_GA_USERS = [
     commissionMin: "80",
     commissionMax: "88.0",
     exposureStatus: "승인대기",
-    exposurePlan: "STANDARD"
+    exposurePlan: "STANDARD",
+    strikeCount: 0,
+    blacklisted: false,
+    successfulMatches: 0
+  }
+];
+
+// ==========================================
+// MOCK DATA : 관리자 - 허위 정보 신고 접수 내역 (관리자만 열람 가능)
+// ==========================================
+const FALSE_INFO_REPORT_CATEGORIES = [
+  "수수료율 조건 상이",
+  "정착지원금 조건 상이",
+  "DB지원 조건 상이",
+  "시책금/포상금 조건 상이",
+  "기타"
+];
+
+const MOCK_ADMIN_REPORTS = [
+  {
+    id: 1,
+    gaId: 2,
+    gaName: "프리미어 쉴드 GA",
+    branch: "서초 지점",
+    reporterNickname: "분당 4년차 생보라이징",
+    category: "정착지원금 조건 상이",
+    description:
+      "입사 전 제안받은 정착지원금은 1,200만원(매월 200만원x6개월)이었는데, 실제 위촉 계약서에는 800만원(매월 200만원x4개월)으로 기재되어 있었습니다.",
+    evidenceFileName: "위촉계약서_스캔본.pdf",
+    reportedAt: "2026-08-10",
+    status: "접수",
+    adminNote: ""
+  },
+  {
+    id: 2,
+    gaId: 1,
+    gaName: "서밋 웰스 파트너스 GA",
+    branch: "강남 테헤란 본부",
+    reporterNickname: "강남 7년차 손보에이스",
+    category: "수수료율 조건 상이",
+    description: "제안 당시 손보 95.0% 수수료를 약속받았으나, 실제 첫 정산 내역서에는 91.0%로 지급되었습니다.",
+    evidenceFileName: "8월_수수료_정산내역.png",
+    reportedAt: "2026-08-06",
+    status: "조사중",
+    adminNote: "GA측에 소명 자료 요청함 (2026-08-07)"
   }
 ];
 
@@ -616,11 +695,12 @@ export default function App() {
   const [authView, setAuthView] = useState<"LANDING" | "LOGIN">("LANDING");
   const loginCardRef = useRef<HTMLDivElement>(null);
   const [userRole, setUserRole] = useState<"FC" | "GA" | "ADMIN">("FC");
-  const [socialProvider, setSocialProvider] = useState<"kakao" | "naver" | null>(null);
+  const [socialProvider, setSocialProvider] = useState<"kakao" | "naver" | "google" | null>(null);
   const [mainTab, setMainTab] = useState<
     | "AI_MATCH"
     | "GA_LIST"
     | "OFFERS_INBOX"
+    | "FC_REPORTS"
     | "FC_PROFILE"
     | "GA_HOME"
     | "FC_CANDIDATES"
@@ -631,6 +711,7 @@ export default function App() {
     | "ADMIN_FC"
     | "ADMIN_VERIFICATION"
     | "ADMIN_GA"
+    | "ADMIN_REPORTS"
     | "ADMIN_PLANS"
     | "ADMIN_BILLING"
     | "ADMIN_STATS"
@@ -642,16 +723,30 @@ export default function App() {
   const [isAutoSyncing, setIsAutoSyncing] = useState(false);
   const [showAuthPopup, setShowAuthPopup] = useState(false);
   // 최초 회원가입/로그인 시 뜨는 카카오·네이버 인증 팝업 (TODO: 실제 서비스 전환 시 카카오/네이버 로그인 SDK의 실제 OAuth 팝업으로 교체)
-  const [loginPopupProvider, setLoginPopupProvider] = useState<"kakao" | "naver" | null>(null);
+  const [loginPopupProvider, setLoginPopupProvider] = useState<"kakao" | "naver" | "google" | null>(null);
   const [isSocialLoginLoading, setIsSocialLoginLoading] = useState(false);
   const [showPreviewModal, setShowPreviewModal] = useState(false);
 
   // 주요 GA 탭 전용 검색 State (전체 제휴 GA 대상 검색)
   const [gaListSearchQuery, setGaListSearchQuery] = useState("");
 
-  // GA 로그인 Form State
-  const [gaBusinessNum, setGaBusinessNum] = useState("");
-  const [gaCode, setGaCode] = useState("");
+  // GA 로그인 Form State (GA사명 · 담당자명 · 담당자 연락처로 기가입된 GA 계정과 매칭하여 로그인)
+  const [gaLoginName, setGaLoginName] = useState("");
+  const [gaLoginContactName, setGaLoginContactName] = useState("");
+  const [gaLoginContactPhone, setGaLoginContactPhone] = useState("");
+
+  // GA 신규 등록 신청 (회원가입) — 여기서 등록한 GA사명·담당자명·담당자 연락처가 그대로 로그인 정보가 됨
+  const [showGaSignupModal, setShowGaSignupModal] = useState(false);
+  const [gaSignupSubmitted, setGaSignupSubmitted] = useState(false);
+  const [gaSignupForm, setGaSignupForm] = useState({
+    gaName: "",
+    branch: "",
+    businessNum: "",
+    contactName: "",
+    contactPhone: "",
+    contactEmail: "",
+    agreeTerms: false
+  });
 
   // 관리자 로그인 Form State
   const [adminId, setAdminId] = useState("");
@@ -662,14 +757,28 @@ export default function App() {
     nickname: "강남 7년차 손보에이스",
     exp: "7년차",
     mainField: "손해보험 전문 (장기/인보험/자동차)",
-    salesRange: "월 평균 185만원 (국세청 홈택스 연동)",
-    retentionRate: "13회차 90.1% (e-클린보험 연동)",
-    isVerified: true,
-    minCommission: "92% 이상",
-    minSettlement: "1,000만원 이상",
-    preferredRegion: "서울 강남 / 서초 / 송파",
-    memo: "단독석 제공 및 초기 정착지원 우수 지점 선호합니다."
+    salesRange: "",
+    retentionRate: "",
+    isVerified: false,
+    desiredPriorities: ["commission", "settlement", "db_support"] as string[],
+    desiredPriorityOther: "",
+    preferredRegion: "",
+    memo: ""
   });
+
+  const handleToggleDesiredPriority = (key: string) => {
+    setProfile((prev) => {
+      const has = prev.desiredPriorities.includes(key);
+      const nextPriorities = has
+        ? prev.desiredPriorities.filter((k) => k !== key)
+        : [...prev.desiredPriorities, key];
+      return {
+        ...prev,
+        desiredPriorities: nextPriorities,
+        desiredPriorityOther: key === "other" && has ? "" : prev.desiredPriorityOther
+      };
+    });
+  };
 
   // AI 추천 GA 탭 - 원하는 조건 선택 State
   const [aiPreferences, setAiPreferences] = useState({
@@ -685,7 +794,7 @@ export default function App() {
   };
 
   // 카카오/네이버 FC 로그인 팝업에서 "동의하고 계속하기"를 눌렀을 때 실제 로그인 처리
-  const handleSocialLogin = (provider: "kakao" | "naver") => {
+  const handleSocialLogin = (provider: "kakao" | "naver" | "google") => {
     setIsSocialLoginLoading(true);
     setTimeout(() => {
       setIsSocialLoginLoading(false);
@@ -702,15 +811,86 @@ export default function App() {
     setAuthView("LOGIN");
   };
 
-  // GA 로그인
+  // GA 로그인 — GA사명·담당자명·담당자 연락처가 등록된(관리자 승인 신청 시 입력한) 정보와 일치하는지 확인
   const handleGaLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!gaBusinessNum || !gaCode) {
-      alert("사업자등록번호와 GA 승인 코드를 모두 입력해 주세요.");
+    if (!gaLoginName.trim() || !gaLoginContactName.trim() || !gaLoginContactPhone.trim()) {
+      alert("GA사명, 담당자명, 담당자 연락처를 모두 입력해 주세요.");
+      return;
+    }
+    const normalizePhone = (v: string) => v.replace(/[^0-9]/g, "");
+    // 띄어쓰기 차이로 로그인이 막히지 않도록 공백은 전부 무시하고 비교 (예: "프리미어 쉴드 GA" === "프리미어쉴드GA")
+    const normalizeName = (v: string) => v.replace(/\s|매니저/g, "");
+    const matched = adminGaUsers.find(
+      (ga) =>
+        normalizeName(ga.gaName) === normalizeName(gaLoginName) &&
+        normalizeName(ga.contactName) === normalizeName(gaLoginContactName) &&
+        normalizePhone(ga.contactPhone) === normalizePhone(gaLoginContactPhone)
+    );
+    if (!matched) {
+      alert(
+        "입력하신 정보와 일치하는 GA 계정을 찾을 수 없습니다. GA사명·담당자명·담당자 연락처를 다시 확인해 주세요.\n아직 등록하지 않으셨다면 'GA 등록 신청'을 먼저 진행해 주세요."
+      );
+      return;
+    }
+    if (matched.blacklisted) {
+      alert(`'${matched.gaName}'은(는) 허위 정보 신고 누적으로 이용이 정지된 계정입니다. 자세한 사항은 고객센터로 문의해 주세요.`);
       return;
     }
     setIsLoggedIn(true);
     setMainTab("GA_HOME");
+  };
+
+  // GA 신규 등록 신청 제출 — 즉시 로그인되지 않고, 관리자 승인 대기 목록에 접수됨
+  const handleSubmitGaSignup = (e: React.FormEvent) => {
+    e.preventDefault();
+    const { gaName, branch, businessNum, contactName, contactPhone, contactEmail, agreeTerms } = gaSignupForm;
+    if (!gaName.trim() || !branch.trim() || !businessNum.trim() || !contactName.trim() || !contactPhone.trim() || !contactEmail.trim()) {
+      alert("모든 항목을 입력해 주세요.");
+      return;
+    }
+    if (!agreeTerms) {
+      alert("이용약관 및 개인정보 처리방침에 동의해 주세요.");
+      return;
+    }
+    const today = new Date();
+    const pad = (n: number) => String(n).padStart(2, "0");
+    const dateStr = `${today.getFullYear()}-${pad(today.getMonth() + 1)}-${pad(today.getDate())}`;
+    setAdminGaUsers((prev) => [
+      ...prev,
+      {
+        id: prev.length ? Math.max(...prev.map((g) => g.id)) + 1 : 1,
+        gaName: gaName.trim(),
+        branch: branch.trim(),
+        contactName: contactName.trim(),
+        contactPhone: contactPhone.trim(),
+        joinedDate: dateStr,
+        commissionMin: "0",
+        commissionMax: "0",
+        exposureStatus: "승인대기",
+        exposurePlan: "STANDARD",
+        strikeCount: 0,
+        blacklisted: false,
+        successfulMatches: 0
+      }
+    ]);
+    logActivity(`신규 GA '${gaName.trim()} (${branch.trim()})'이(가) 가입 신청했습니다. (담당자: ${contactName.trim()}, ${contactPhone.trim()})`);
+    setGaSignupSubmitted(true);
+  };
+
+  // GA 등록 신청 모달 닫기 (폼 초기화)
+  const handleCloseGaSignupModal = () => {
+    setShowGaSignupModal(false);
+    setGaSignupSubmitted(false);
+    setGaSignupForm({
+      gaName: "",
+      branch: "",
+      businessNum: "",
+      contactName: "",
+      contactPhone: "",
+      contactEmail: "",
+      agreeTerms: false
+    });
   };
 
   // 관리자 로그인
@@ -727,15 +907,15 @@ export default function App() {
   // 실적 인증 팝업에서 "동의하고 계속하기"를 눌렀을 때 실제 데이터 연동 처리
   const handleAutoFetchData = () => {
     setIsAutoSyncing(true);
-    const providerLabel = socialProvider === "naver" ? "네이버" : "카카오";
+    const providerLabel = socialProvider === "naver" ? "네이버" : socialProvider === "google" ? "구글" : "카카오";
     setTimeout(() => {
       setIsAutoSyncing(false);
       setShowAuthPopup(false);
       setProfile((prev) => ({
         ...prev,
         exp: "7년차",
-        salesRange: `월 평균 185만원 (국세청 홈택스 연동)`,
-        retentionRate: "13회차 90.1% (e-클린보험 연동)",
+        salesRange: "185",
+        retentionRate: "90.1",
         isVerified: true
       }));
       alert(
@@ -755,6 +935,12 @@ export default function App() {
     setShowPreviewModal(false);
     alert("익명 프로필 저장 및 역경매 등록이 완료되었습니다!\nGA 전체 현황 비교 화면으로 이동합니다.");
     setMainTab("GA_LIST");
+  };
+
+  // 프로필 하단 "AI 추천 받기" - 공개 등록 없이 지금 설정한 이직 희망 조건으로 바로 AI 추천 화면으로 이동
+  const handleGoToAiMatch = () => {
+    setMainTab("AI_MATCH");
+    setShowAiMatches(true);
   };
 
   // ==========================================
@@ -800,6 +986,24 @@ export default function App() {
   });
   const [activeMessageThread, setActiveMessageThread] = useState<{ id: number; title: string } | null>(null);
   const [messageDraft, setMessageDraft] = useState("");
+  // 상대방(GA/FC)이 보낸 메시지 중 내가 "읽음" 처리한 개수 (제안 id별). 대화창을 열면 그 시점까지의 상대방 메시지 수로 갱신됩니다.
+  const [messageReadCounts, setMessageReadCounts] = useState<Record<number, number>>({});
+
+  // 특정 제안(offer)의 안읽은 메시지 개수 — 상대방이 보낸 메시지 중 아직 대화창을 열어보지 않은 것만 셉니다.
+  const getUnreadMessageCount = (offerId: number) => {
+    const viewerSender: "FC" | "GA" = userRole === "GA" ? "GA" : "FC";
+    const counterpartCount = (messageThreads[offerId] || []).filter((m) => m.sender !== viewerSender).length;
+    const readCount = messageReadCounts[offerId] ?? 0;
+    return Math.max(0, counterpartCount - readCount);
+  };
+
+  // 대화창 열기 + 상대방 메시지를 읽음 처리
+  const handleOpenMessageThread = (offerId: number, title: string) => {
+    setActiveMessageThread({ id: offerId, title });
+    const viewerSender: "FC" | "GA" = userRole === "GA" ? "GA" : "FC";
+    const counterpartCount = (messageThreads[offerId] || []).filter((m) => m.sender !== viewerSender).length;
+    setMessageReadCounts((prev) => ({ ...prev, [offerId]: counterpartCount }));
+  };
 
   // 메시지 전송 (현재 로그인 역할을 발신자로 기록)
   const handleSendMessage = (e: React.FormEvent) => {
@@ -818,22 +1022,28 @@ export default function App() {
     setMessageDraft("");
   };
 
-  // 우리 GA 기본 정보 (최종 제안 조건은 설계사마다 달라 여기서는 어필 가능한 범위만 관리)
+  // 우리 GA 기본 정보 (최종 제안 조건은 설계사마다 달라 여기서는 어필 가능한 분야만 관리)
   const [gaProfile, setGaProfile] = useState({
     gaName: "프리미어 쉴드 GA",
     branch: "서초 지점",
     contactName: "김민준 매니저",
     contactPhone: "010-1234-5678",
-    lifeCommissionMin: "85",
-    lifeCommissionMax: "90.5",
-    nonLifeCommissionMin: "87",
-    nonLifeCommissionMax: "92.5",
-    settlementSupportPercent: "100",
-    dbSupport: "월 30개 무료 지원",
-    incentiveNote: "삼성화재 장기보장성 익월 시상 280% + 신인 정착 지원금 별도 지급 (2026년 3분기 한정)",
-    incentiveUpdatedAt: "2026-08",
+    strengths: ["db_support", "education"] as string[],
+    strengthOther: "",
     intro: "설계사 개개인의 경력과 실적에 맞춰 최적의 조건을 개별 제안드립니다."
   });
+
+  const handleToggleGaStrength = (key: string) => {
+    setGaProfile((prev) => {
+      const has = prev.strengths.includes(key);
+      const nextStrengths = has ? prev.strengths.filter((k) => k !== key) : [...prev.strengths, key];
+      return {
+        ...prev,
+        strengths: nextStrengths,
+        strengthOther: key === "other" && has ? "" : prev.strengthOther
+      };
+    });
+  };
 
   // 설계사 후보 리스트 검색 · 필터 · 정렬 State
   const [candidateSearchQuery, setCandidateSearchQuery] = useState("");
@@ -855,6 +1065,14 @@ export default function App() {
   const [newAdminAccount, setNewAdminAccount] = useState({ name: "", email: "", role: "운영진" });
   const [activityLog, setActivityLog] = useState(MOCK_ACTIVITY_LOG);
   const [adminDetailTarget, setAdminDetailTarget] = useState<{ type: "FC" | "GA"; id: number } | null>(null);
+  // 허위 정보 신고 (FC → 관리자, 관리자만 열람 가능) — "허위 신고" 탭에서 위촉 이후 실제 경험을 기준으로 제출
+  const [adminReports, setAdminReports] = useState(MOCK_ADMIN_REPORTS);
+  const [reportForm, setReportForm] = useState({
+    gaId: "",
+    category: FALSE_INFO_REPORT_CATEGORIES[0],
+    description: "",
+    evidenceFileName: ""
+  });
 
   // 관리자 활동 로그 기록
   const logActivity = (action: string) => {
@@ -889,6 +1107,94 @@ export default function App() {
       const planName = EXPOSURE_PLANS.find((p) => p.id === plan)?.name ?? plan;
       logActivity(`GA '${target.gaName}'의 노출 상품을 '${planName}'(으)로 변경했습니다.`);
     }
+  };
+
+  // FC: 허위 정보 신고 제출 (증빙 파일명 포함) — 관리자만 열람 가능한 신고함으로 접수됨
+  const handleSubmitReport = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!reportForm.gaId) {
+      alert("신고할 GA를 선택해 주세요.");
+      return;
+    }
+    if (!reportForm.description.trim()) {
+      alert("신고 내용을 구체적으로 입력해 주세요.");
+      return;
+    }
+    const today = new Date();
+    const pad = (n: number) => String(n).padStart(2, "0");
+    const dateStr = `${today.getFullYear()}-${pad(today.getMonth() + 1)}-${pad(today.getDate())}`;
+    const gaIdNum = Number(reportForm.gaId);
+    const targetGa = adminGaUsers.find((ga) => ga.id === gaIdNum);
+    const targetGaPublic = MOCK_GA_FULL_LIST.find((ga) => ga.id === gaIdNum);
+    setAdminReports((prev) => [
+      {
+        id: prev.length ? Math.max(...prev.map((r) => r.id)) + 1 : 1,
+        gaId: gaIdNum,
+        gaName: targetGa?.gaName ?? targetGaPublic?.name ?? "",
+        branch: targetGa?.branch ?? targetGaPublic?.branch ?? "",
+        reporterNickname: profile.nickname,
+        category: reportForm.category,
+        description: reportForm.description.trim(),
+        evidenceFileName: reportForm.evidenceFileName || "첨부 없음",
+        reportedAt: dateStr,
+        status: "접수",
+        adminNote: ""
+      },
+      ...prev
+    ]);
+    setReportForm({ gaId: "", category: FALSE_INFO_REPORT_CATEGORIES[0], description: "", evidenceFileName: "" });
+    alert("신고가 접수되었습니다. 신고 내용은 관리자만 확인하며, 검토 후 조치됩니다.");
+  };
+
+  // 관리자: 허위 정보 신고 처리 (조사중 전환 / 허위 확인(경고 부여, 3진아웃 시 이용정지) / 혐의없음 처리)
+  const handleUpdateReportStatus = (id: number, status: "조사중" | "허위 확인" | "혐의없음") => {
+    const report = adminReports.find((r) => r.id === id);
+    if (!report) return;
+    setAdminReports((prev) => prev.map((r) => (r.id === id ? { ...r, status } : r)));
+
+    if (status === "허위 확인") {
+      const target = adminGaUsers.find((ga) => ga.id === report.gaId);
+      const nextStrikes = (target?.strikeCount ?? 0) + 1;
+      const nowBlacklisted = nextStrikes >= 3;
+      setAdminGaUsers((prev) =>
+        prev.map((ga) =>
+          ga.id === report.gaId
+            ? {
+                ...ga,
+                strikeCount: nextStrikes,
+                blacklisted: nowBlacklisted ? true : ga.blacklisted,
+                exposureStatus: nowBlacklisted ? "이용정지" : ga.exposureStatus
+              }
+            : ga
+        )
+      );
+      if (nowBlacklisted) {
+        logActivity(
+          `[삼진아웃] GA '${report.gaName}'이(가) 허위 정보 신고 누적 3회로 이용정지 및 블랙리스트 등록되었습니다. GA 본사 통보가 필요합니다.`
+        );
+      } else {
+        logActivity(`GA '${report.gaName}'의 신고 건(#${id})을 '허위 확인' 처리하고 경고를 부여했습니다. (경고 ${nextStrikes}/3)`);
+      }
+    } else if (status === "혐의없음") {
+      logActivity(`GA '${report.gaName}'의 신고 건(#${id})을 검토 결과 '혐의없음'으로 종결했습니다.`);
+    } else if (status === "조사중") {
+      logActivity(`GA '${report.gaName}'의 신고 건(#${id})을 '조사중'으로 전환했습니다.`);
+    }
+  };
+
+  // 관리자: GA 이용정지(블랙리스트) 수동 처리 / 해제
+  const handleToggleGaBlacklist = (id: number) => {
+    const target = adminGaUsers.find((ga) => ga.id === id);
+    if (!target) return;
+    const nextBlacklisted = !target.blacklisted;
+    setAdminGaUsers((prev) =>
+      prev.map((ga) =>
+        ga.id === id
+          ? { ...ga, blacklisted: nextBlacklisted, exposureStatus: nextBlacklisted ? "이용정지" : "보류/비노출" }
+          : ga
+      )
+    );
+    logActivity(`GA '${target.gaName}'을(를) ${nextBlacklisted ? "이용정지(블랙리스트 등록)" : "정지 해제"} 처리했습니다.`);
   };
 
   // 설계사 인증 서류 심사 처리
@@ -987,6 +1293,13 @@ export default function App() {
     return ga.gaName.toLowerCase().includes(query) || ga.branch.toLowerCase().includes(query);
   });
 
+  // 허위 신고 없이 성공적으로 이직을 완료시킨 이력이 충분한 리크루터에게 부여되는 신뢰 뱃지
+  const isVerifiedRecruiter = (ga: { successfulMatches: number; strikeCount: number; blacklisted: boolean }) =>
+    ga.successfulMatches >= 3 && ga.strikeCount === 0 && !ga.blacklisted;
+
+  const pendingReportCount = adminReports.filter((r) => r.status === "접수" || r.status === "조사중").length;
+  const myReports = adminReports.filter((r) => r.reporterNickname === profile.nickname);
+
   const extractNumber = (value: string) => parseInt(value.replace(/[^0-9]/g, ""), 10) || 0;
 
   const filteredCandidates = MOCK_FC_CANDIDATES.filter(
@@ -1059,6 +1372,150 @@ export default function App() {
     e.preventDefault();
     alert("GA 정보가 저장되었습니다!\n설계사에게 노출되는 GA 정보에 반영됩니다.");
   };
+
+  // GA 신규 등록 신청 모달 (로그인/랜딩 화면 양쪽에서 공용으로 사용)
+  const gaSignupModal = showGaSignupModal && (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md max-h-[85vh] overflow-y-auto">
+        {gaSignupSubmitted ? (
+          <div className="p-8 text-center space-y-4">
+            <div className="w-14 h-14 rounded-full bg-emerald-50 flex items-center justify-center mx-auto">
+              <Check className="w-7 h-7 text-emerald-500" />
+            </div>
+            <div>
+              <h3 className="text-sm font-black text-[#201b16]">신청이 접수되었습니다</h3>
+              <p className="text-[#6b5d4f] text-[11px] leading-relaxed mt-2">
+                영업일 기준 1~2일 내 심사 후, 등록하신 담당자 연락처로 승인 여부를 안내드립니다. 승인이 완료되면
+                지금 입력하신 GA사명·담당자명·담당자 연락처 그대로 GA 매니저 로그인을 진행하실 수 있어요.
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => {
+                handleCloseGaSignupModal();
+                openLogin("GA");
+              }}
+              className="w-full bg-[#d97a4d] hover:bg-[#b35a2e] text-white font-extrabold py-3 rounded-xl text-xs transition shadow-md"
+            >
+              로그인 화면으로 이동
+            </button>
+            <button
+              type="button"
+              onClick={handleCloseGaSignupModal}
+              className="w-full text-[#8a7a68] hover:text-[#57493c] text-[11px] font-bold transition"
+            >
+              닫기
+            </button>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmitGaSignup} className="p-6 space-y-4">
+            <div className="flex items-start justify-between">
+              <div>
+                <h3 className="text-sm font-black text-[#201b16]">GA 등록 신청</h3>
+                <p className="text-[#8a7a68] text-[11px] mt-0.5">
+                  아직 등록하지 않은 GA이신가요? 아래 정보를 남겨 주시면 심사 후 로그인이 가능하도록 안내드립니다.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={handleCloseGaSignupModal}
+                className="text-[#8a7a68] hover:text-[#57493c] transition shrink-0"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label className="text-[11px] font-bold text-[#57493c] mb-1 block">GA사명</label>
+                <input
+                  type="text"
+                  placeholder="예: 인슈어매치 파트너스 GA"
+                  value={gaSignupForm.gaName}
+                  onChange={(e) => setGaSignupForm((prev) => ({ ...prev, gaName: e.target.value }))}
+                  className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-lg p-2.5 text-xs outline-none focus:ring-2 focus:ring-[#d97a4d] placeholder:text-[#b3a692]"
+                />
+              </div>
+              <div>
+                <label className="text-[11px] font-bold text-[#57493c] mb-1 block">지점명</label>
+                <input
+                  type="text"
+                  placeholder="예: 강남 지점"
+                  value={gaSignupForm.branch}
+                  onChange={(e) => setGaSignupForm((prev) => ({ ...prev, branch: e.target.value }))}
+                  className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-lg p-2.5 text-xs outline-none focus:ring-2 focus:ring-[#d97a4d] placeholder:text-[#b3a692]"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="text-[11px] font-bold text-[#57493c] mb-1 block">사업자등록번호</label>
+              <input
+                type="text"
+                placeholder="000-00-00000 ('-' 제외 가능)"
+                value={gaSignupForm.businessNum}
+                onChange={(e) => setGaSignupForm((prev) => ({ ...prev, businessNum: e.target.value }))}
+                className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-lg p-2.5 text-xs outline-none focus:ring-2 focus:ring-[#d97a4d] placeholder:text-[#b3a692]"
+              />
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label className="text-[11px] font-bold text-[#57493c] mb-1 block">담당자명</label>
+                <input
+                  type="text"
+                  placeholder="담당 매니저 성함"
+                  value={gaSignupForm.contactName}
+                  onChange={(e) => setGaSignupForm((prev) => ({ ...prev, contactName: e.target.value }))}
+                  className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-lg p-2.5 text-xs outline-none focus:ring-2 focus:ring-[#d97a4d] placeholder:text-[#b3a692]"
+                />
+              </div>
+              <div>
+                <label className="text-[11px] font-bold text-[#57493c] mb-1 block">담당자 연락처</label>
+                <input
+                  type="text"
+                  placeholder="010-0000-0000"
+                  value={gaSignupForm.contactPhone}
+                  onChange={(e) => setGaSignupForm((prev) => ({ ...prev, contactPhone: e.target.value }))}
+                  className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-lg p-2.5 text-xs outline-none focus:ring-2 focus:ring-[#d97a4d] placeholder:text-[#b3a692]"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="text-[11px] font-bold text-[#57493c] mb-1 block">담당자 이메일</label>
+              <input
+                type="email"
+                placeholder="manager@example.com"
+                value={gaSignupForm.contactEmail}
+                onChange={(e) => setGaSignupForm((prev) => ({ ...prev, contactEmail: e.target.value }))}
+                className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-lg p-2.5 text-xs outline-none focus:ring-2 focus:ring-[#d97a4d] placeholder:text-[#b3a692]"
+              />
+            </div>
+
+            <label className="flex items-start gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={gaSignupForm.agreeTerms}
+                onChange={(e) => setGaSignupForm((prev) => ({ ...prev, agreeTerms: e.target.checked }))}
+                className="mt-0.5 accent-[#d97a4d]"
+              />
+              <span className="text-[11px] text-[#6b5d4f] leading-relaxed">
+                (필수) 이용약관 및 개인정보 처리방침에 동의합니다. 입력하신 정보는 GA 등록 심사 목적으로만 사용됩니다.
+              </span>
+            </label>
+
+            <button
+              type="submit"
+              className="w-full bg-[#d97a4d] hover:bg-[#b35a2e] text-white font-extrabold py-3 rounded-xl text-xs transition shadow-md"
+            >
+              신청서 제출하기
+            </button>
+          </form>
+        )}
+      </div>
+    </div>
+  );
 
   // ==========================================
   // 1. 로그인 화면
@@ -1185,7 +1642,7 @@ export default function App() {
                     <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
                       <path d="M12 3c-4.97 0-9 3.185-9 7.115 0 2.557 1.707 4.8 4.27 6.054-.188.702-.682 2.545-.78 2.94-.122.49.178.483.376.351.155-.103 2.466-1.675 3.464-2.353.557.08 1.13.123 1.67.123 4.97 0 9-3.186 9-7.115C21 6.185 16.97 3 12 3z" />
                     </svg>
-                    <span>카카오로 3초 만에 시작하기</span>
+                    <span>카카오로 시작하기</span>
                   </button>
 
                   <button
@@ -1195,34 +1652,71 @@ export default function App() {
                     <span className="font-extrabold text-sm leading-none">N</span>
                     <span>네이버로 시작하기</span>
                   </button>
+
+                  <button
+                    onClick={() => setLoginPopupProvider("google")}
+                    className="w-full bg-white hover:bg-[#f7f0e6] text-[#3c4043] font-black py-3.5 rounded-xl text-xs flex items-center justify-center gap-2 transition shadow-md border border-[#eee3d3]"
+                  >
+                    <svg className="w-4 h-4" viewBox="0 0 48 48">
+                      <path
+                        fill="#EA4335"
+                        d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"
+                      />
+                      <path
+                        fill="#4285F4"
+                        d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.9-2.26 5.36-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"
+                      />
+                      <path
+                        fill="#FBBC05"
+                        d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"
+                      />
+                      <path
+                        fill="#34A853"
+                        d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"
+                      />
+                    </svg>
+                    <span>구글로 시작하기</span>
+                  </button>
                 </div>
               </div>
             )}
 
             {userRole === "GA" && (
               <form onSubmit={handleGaLogin} className="space-y-3 pt-1">
+                <div className="bg-[#fdf3ea]/60 border border-[#f3ddc4] rounded-xl p-3 text-[10px] text-[#8a3c1f] leading-relaxed">
+                  데모 체험용 계정: <span className="font-bold">프리미어 쉴드 GA</span> · 담당자{" "}
+                  <span className="font-bold">김민준</span> · 연락처 <span className="font-bold">010-1234-5678</span>
+                </div>
+
                 <div>
-                  <label className="text-[11px] font-bold text-[#57493c] mb-1 block">
-                    GA 사업자등록번호
-                  </label>
+                  <label className="text-[11px] font-bold text-[#57493c] mb-1 block">GA사명</label>
                   <input
                     type="text"
-                    placeholder="000-00-00000 ('-' 제외 가능)"
-                    value={gaBusinessNum}
-                    onChange={(e) => setGaBusinessNum(e.target.value)}
+                    placeholder="예: 프리미어 쉴드 GA"
+                    value={gaLoginName}
+                    onChange={(e) => setGaLoginName(e.target.value)}
                     className="w-full bg-[#faf6ef] border border-[#eee3d3] text-[#2b2621] rounded-xl p-3 text-xs focus:border-[#d97a4d] outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="text-[11px] font-bold text-[#57493c] mb-1 block">
-                    GA 승인 코드 (지사 전용 코드)
-                  </label>
+                  <label className="text-[11px] font-bold text-[#57493c] mb-1 block">담당자명</label>
                   <input
-                    type="password"
-                    placeholder="GA 고유 인증 코드를 입력하세요"
-                    value={gaCode}
-                    onChange={(e) => setGaCode(e.target.value)}
+                    type="text"
+                    placeholder="예: 김민준"
+                    value={gaLoginContactName}
+                    onChange={(e) => setGaLoginContactName(e.target.value)}
+                    className="w-full bg-[#faf6ef] border border-[#eee3d3] text-[#2b2621] rounded-xl p-3 text-xs focus:border-[#d97a4d] outline-none"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-[11px] font-bold text-[#57493c] mb-1 block">담당자 연락처</label>
+                  <input
+                    type="text"
+                    placeholder="010-0000-0000"
+                    value={gaLoginContactPhone}
+                    onChange={(e) => setGaLoginContactPhone(e.target.value)}
                     className="w-full bg-[#faf6ef] border border-[#eee3d3] text-[#2b2621] rounded-xl p-3 text-xs focus:border-[#d97a4d] outline-none"
                   />
                 </div>
@@ -1232,6 +1726,14 @@ export default function App() {
                   className="w-full bg-[#d97a4d] hover:bg-[#c96a3d] text-white font-extrabold py-3.5 rounded-xl text-xs transition shadow-lg mt-2"
                 >
                   GA 매니저 인증 로그인
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setShowGaSignupModal(true)}
+                  className="w-full text-center text-[#8a7a68] hover:text-[#d97a4d] text-[11px] font-bold transition pt-1"
+                >
+                  아직 등록하지 않으셨나요? 신규 GA 등록 신청하기 →
                 </button>
               </form>
             )}
@@ -1277,104 +1779,133 @@ export default function App() {
             )}
           </div>
         </div>
-      {/* 최초 회원가입/로그인용 카카오·네이버 인증 팝업 (TODO: 실제 서비스 전환 시 카카오/네이버 로그인 SDK의 실제 OAuth 팝업으로 교체) */}
-      {loginPopupProvider && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm overflow-hidden">
-            <div
-              className={`p-5 flex items-center gap-3 ${
-                loginPopupProvider === "naver" ? "bg-[#03c75a]" : "bg-[#fee500]"
-              }`}
-            >
-              {loginPopupProvider === "naver" ? (
-                <div className="w-9 h-9 rounded-full bg-white flex items-center justify-center shrink-0 font-black text-[#03c75a] text-base">
-                  N
+      {/* 최초 회원가입/로그인용 카카오·네이버·구글 인증 팝업 (TODO: 실제 서비스 전환 시 각 소셜 로그인 SDK의 실제 OAuth 팝업으로 교체) */}
+      {loginPopupProvider &&
+        (() => {
+          const meta = {
+            kakao: {
+              label: "카카오",
+              headerBg: "bg-[#fee500]",
+              headerText: "text-[#191919]",
+              headerSubText: "text-[#191919]/70",
+              idLabel: "카카오계정(이메일)",
+              ctaClass: "bg-[#fee500] hover:bg-[#fada00] text-[#191919]"
+            },
+            naver: {
+              label: "네이버",
+              headerBg: "bg-[#03c75a]",
+              headerText: "text-white",
+              headerSubText: "text-white/80",
+              idLabel: "네이버 아이디(이메일)",
+              ctaClass: "bg-[#03c75a] hover:bg-[#02b351] text-white"
+            },
+            google: {
+              label: "구글",
+              headerBg: "bg-white border-b border-[#eee3d3]",
+              headerText: "text-[#201b16]",
+              headerSubText: "text-[#8a7a68]",
+              idLabel: "구글 계정(이메일)",
+              ctaClass: "bg-white hover:bg-[#f7f0e6] text-[#3c4043] border border-[#eee3d3]"
+            }
+          }[loginPopupProvider];
+
+          return (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+              <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm overflow-hidden">
+                <div className={`p-5 flex items-center gap-3 ${meta.headerBg}`}>
+                  {loginPopupProvider === "naver" ? (
+                    <div className="w-9 h-9 rounded-full bg-white flex items-center justify-center shrink-0 font-black text-[#03c75a] text-base">
+                      N
+                    </div>
+                  ) : loginPopupProvider === "google" ? (
+                    <div className="w-9 h-9 rounded-full bg-[#fdfaf5] border border-[#eee3d3] flex items-center justify-center shrink-0">
+                      <svg className="w-5 h-5" viewBox="0 0 48 48">
+                        <path
+                          fill="#EA4335"
+                          d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"
+                        />
+                        <path
+                          fill="#4285F4"
+                          d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.9-2.26 5.36-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"
+                        />
+                        <path
+                          fill="#FBBC05"
+                          d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"
+                        />
+                        <path
+                          fill="#34A853"
+                          d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"
+                        />
+                      </svg>
+                    </div>
+                  ) : (
+                    <div className="w-9 h-9 rounded-full bg-[#191919] flex items-center justify-center shrink-0">
+                      <svg className="w-5 h-5 fill-[#fee500]" viewBox="0 0 24 24">
+                        <path d="M12 3c-4.97 0-9 3.185-9 7.115 0 2.557 1.707 4.8 4.27 6.054-.188.702-.682 2.545-.78 2.94-.122.49.178.483.376.351.155-.103 2.466-1.675 3.464-2.353.557.08 1.13.123 1.67.123 4.97 0 9-3.186 9-7.115C21 6.185 16.97 3 12 3z" />
+                      </svg>
+                    </div>
+                  )}
+                  <div>
+                    <p className={`font-black text-sm ${meta.headerText}`}>{meta.label} 계정으로 로그인</p>
+                    <p className={`text-[11px] ${meta.headerSubText}`}>인슈어매치가 아래 정보를 요청합니다</p>
+                  </div>
                 </div>
-              ) : (
-                <div className="w-9 h-9 rounded-full bg-[#191919] flex items-center justify-center shrink-0">
-                  <svg className="w-5 h-5 fill-[#fee500]" viewBox="0 0 24 24">
-                    <path d="M12 3c-4.97 0-9 3.185-9 7.115 0 2.557 1.707 4.8 4.27 6.054-.188.702-.682 2.545-.78 2.94-.122.49.178.483.376.351.155-.103 2.466-1.675 3.464-2.353.557.08 1.13.123 1.67.123 4.97 0 9-3.186 9-7.115C21 6.185 16.97 3 12 3z" />
-                  </svg>
+
+                <div className="p-5 space-y-4">
+                  {isSocialLoginLoading ? (
+                    <div className="py-8 flex flex-col items-center justify-center gap-3">
+                      <RefreshCw className="w-7 h-7 text-[#d97a4d] animate-spin" />
+                      <p className="text-[#57493c] text-xs font-bold">{meta.label} 계정 확인 중...</p>
+                    </div>
+                  ) : (
+                    <>
+                      <div className="space-y-2.5">
+                        <div className="flex items-start gap-2.5">
+                          <Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                          <div>
+                            <p className="text-[#2b2621] text-xs font-bold">닉네임 · 프로필 사진</p>
+                            <p className="text-[#8a7a68] text-[11px]">익명 프로필 표시용 (실명은 사용하지 않아요)</p>
+                          </div>
+                        </div>
+                        <div className="flex items-start gap-2.5">
+                          <Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                          <div>
+                            <p className="text-[#2b2621] text-xs font-bold">{meta.idLabel}</p>
+                            <p className="text-[#8a7a68] text-[11px]">본인 확인 및 계정 식별 목적</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <p className="text-[#8a7a68] text-[10px] leading-relaxed border-t border-[#f7f0e6] pt-3">
+                        동의하신 정보는 회원가입 및 본인 확인 목적으로만 사용되며, 실명·연락처는 GA 매니저에게 절대
+                        공개되지 않습니다.
+                      </p>
+
+                      <div className="flex items-center gap-2 pt-1">
+                        <button
+                          type="button"
+                          onClick={() => setLoginPopupProvider(null)}
+                          className="flex-1 bg-[#f7f0e6] hover:bg-[#eee3d3] text-[#57493c] font-bold py-3 rounded-xl text-xs transition"
+                        >
+                          취소
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleSocialLogin(loginPopupProvider)}
+                          className={`flex-1 font-black py-3 rounded-xl text-xs transition ${meta.ctaClass}`}
+                        >
+                          동의하고 계속하기
+                        </button>
+                      </div>
+                    </>
+                  )}
                 </div>
-              )}
-              <div>
-                <p
-                  className={`font-black text-sm ${
-                    loginPopupProvider === "naver" ? "text-white" : "text-[#191919]"
-                  }`}
-                >
-                  {loginPopupProvider === "naver" ? "네이버" : "카카오"} 계정으로 로그인
-                </p>
-                <p
-                  className={`text-[11px] ${
-                    loginPopupProvider === "naver" ? "text-white/80" : "text-[#191919]/70"
-                  }`}
-                >
-                  인슈어매치가 아래 정보를 요청합니다
-                </p>
               </div>
             </div>
+          );
+        })()}
 
-            <div className="p-5 space-y-4">
-              {isSocialLoginLoading ? (
-                <div className="py-8 flex flex-col items-center justify-center gap-3">
-                  <RefreshCw className="w-7 h-7 text-[#d97a4d] animate-spin" />
-                  <p className="text-[#57493c] text-xs font-bold">
-                    {loginPopupProvider === "naver" ? "네이버" : "카카오"} 계정 확인 중...
-                  </p>
-                </div>
-              ) : (
-                <>
-                  <div className="space-y-2.5">
-                    <div className="flex items-start gap-2.5">
-                      <Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
-                      <div>
-                        <p className="text-[#2b2621] text-xs font-bold">닉네임 · 프로필 사진</p>
-                        <p className="text-[#8a7a68] text-[11px]">익명 프로필 표시용 (실명은 사용하지 않아요)</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-2.5">
-                      <Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
-                      <div>
-                        <p className="text-[#2b2621] text-xs font-bold">
-                          {loginPopupProvider === "naver" ? "네이버 아이디(이메일)" : "카카오계정(이메일)"}
-                        </p>
-                        <p className="text-[#8a7a68] text-[11px]">본인 확인 및 계정 식별 목적</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <p className="text-[#8a7a68] text-[10px] leading-relaxed border-t border-[#f7f0e6] pt-3">
-                    동의하신 정보는 회원가입 및 본인 확인 목적으로만 사용되며, 실명·연락처는 GA 매니저에게 절대
-                    공개되지 않습니다.
-                  </p>
-
-                  <div className="flex items-center gap-2 pt-1">
-                    <button
-                      type="button"
-                      onClick={() => setLoginPopupProvider(null)}
-                      className="flex-1 bg-[#f7f0e6] hover:bg-[#eee3d3] text-[#57493c] font-bold py-3 rounded-xl text-xs transition"
-                    >
-                      취소
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => handleSocialLogin(loginPopupProvider)}
-                      className={`flex-1 font-black py-3 rounded-xl text-xs transition ${
-                        loginPopupProvider === "naver"
-                          ? "bg-[#03c75a] hover:bg-[#02b351] text-white"
-                          : "bg-[#fee500] hover:bg-[#fada00] text-[#191919]"
-                      }`}
-                    >
-                      동의하고 계속하기
-                    </button>
-                  </div>
-                </>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
+      {gaSignupModal}
 
       </div>
     );
@@ -1410,7 +1941,7 @@ export default function App() {
               </button>
               <button
                 type="button"
-                onClick={() => openLogin("GA")}
+                onClick={() => setShowGaSignupModal(true)}
                 className="bg-white hover:bg-[#f7f0e6] text-[#4a3f35] text-xs font-bold px-3 sm:px-4 py-2 rounded-lg border border-[#eee3d3] transition whitespace-nowrap"
               >
                 GA 회원가입
@@ -1582,7 +2113,7 @@ export default function App() {
               </div>
               <button
                 type="button"
-                onClick={() => openLogin("GA")}
+                onClick={() => setShowGaSignupModal(true)}
                 className="bg-[#e9a374] hover:bg-[#dd8f5c] text-[#2b2621] font-black px-6 py-3.5 rounded-xl text-sm transition shadow-lg mt-2"
               >
                 GA사 등록 문의하기 →
@@ -1610,6 +2141,8 @@ export default function App() {
             관리자 로그인
           </button>
         </footer>
+
+        {gaSignupModal}
       </div>
     );
   }
@@ -1682,6 +2215,18 @@ export default function App() {
               </button>
 
               <button
+                onClick={() => setMainTab("FC_PROFILE")}
+                className={`py-3.5 border-b-2 transition flex items-center gap-2 whitespace-nowrap ${
+                  mainTab === "FC_PROFILE"
+                    ? "border-[#d97a4d] text-[#d97a4d] font-black"
+                    : "border-transparent text-[#6b5d4f] hover:text-[#2b2621]"
+                }`}
+              >
+                <FileText className="w-4 h-4" />
+                <span>내 익명 프로필 & 조건 설정</span>
+              </button>
+
+              <button
                 onClick={() => setMainTab("AI_MATCH")}
                 className={`py-3.5 border-b-2 transition flex items-center gap-2 whitespace-nowrap ${
                   mainTab === "AI_MATCH"
@@ -1706,15 +2251,15 @@ export default function App() {
               </button>
 
               <button
-                onClick={() => setMainTab("FC_PROFILE")}
+                onClick={() => setMainTab("FC_REPORTS")}
                 className={`py-3.5 border-b-2 transition flex items-center gap-2 whitespace-nowrap ${
-                  mainTab === "FC_PROFILE"
+                  mainTab === "FC_REPORTS"
                     ? "border-[#d97a4d] text-[#d97a4d] font-black"
                     : "border-transparent text-[#6b5d4f] hover:text-[#2b2621]"
                 }`}
               >
-                <FileText className="w-4 h-4" />
-                <span>내 익명 프로필 & 조건 설정</span>
+                <Flag className="w-4 h-4" />
+                <span>허위 신고</span>
               </button>
             </>
           )}
@@ -1731,6 +2276,18 @@ export default function App() {
               >
                 <LayoutDashboard className="w-4 h-4" />
                 <span>홈</span>
+              </button>
+
+              <button
+                onClick={() => setMainTab("GA_PROFILE")}
+                className={`py-3.5 border-b-2 transition flex items-center gap-2 whitespace-nowrap ${
+                  mainTab === "GA_PROFILE"
+                    ? "border-[#d97a4d] text-[#d97a4d] font-black"
+                    : "border-transparent text-[#6b5d4f] hover:text-[#2b2621]"
+                }`}
+              >
+                <Building2 className="w-4 h-4" />
+                <span>GA 정보</span>
               </button>
 
               <button
@@ -1755,18 +2312,6 @@ export default function App() {
               >
                 <Inbox className="w-4 h-4" />
                 <span>보낸 제안 관리 ({sentOffers.length})</span>
-              </button>
-
-              <button
-                onClick={() => setMainTab("GA_PROFILE")}
-                className={`py-3.5 border-b-2 transition flex items-center gap-2 whitespace-nowrap ${
-                  mainTab === "GA_PROFILE"
-                    ? "border-[#d97a4d] text-[#d97a4d] font-black"
-                    : "border-transparent text-[#6b5d4f] hover:text-[#2b2621]"
-                }`}
-              >
-                <Building2 className="w-4 h-4" />
-                <span>GA 정보</span>
               </button>
             </>
           )}
@@ -1838,6 +2383,19 @@ export default function App() {
               >
                 <Building2 className="w-4 h-4" />
                 <span>GA 관리 ({adminGaUsers.length})</span>
+              </button>
+            </div>
+
+            <div className="space-y-1">
+              <p className="px-2 mb-1.5 text-[11px] font-black text-[#8a7a68] tracking-wide">신뢰·신고</p>
+              <button
+                onClick={() => setMainTab("ADMIN_REPORTS")}
+                className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs sm:text-sm font-bold transition ${
+                  mainTab === "ADMIN_REPORTS" ? "bg-[#fdf3ea] text-[#d97a4d]" : "text-[#57493c] hover:bg-[#fdfaf5]"
+                }`}
+              >
+                <ShieldAlert className="w-4 h-4" />
+                <span>허위 신고 관리{pendingReportCount > 0 ? ` (${pendingReportCount})` : ""}</span>
               </button>
             </div>
 
@@ -1934,6 +2492,7 @@ export default function App() {
               <option value="ADMIN_FC">회원 관리 · 설계사 관리</option>
               <option value="ADMIN_VERIFICATION">회원 관리 · 인증 심사</option>
               <option value="ADMIN_GA">회원 관리 · GA 관리</option>
+              <option value="ADMIN_REPORTS">신뢰·신고 · 허위 신고 관리</option>
               <option value="ADMIN_PLANS">노출·매출 · 노출 상품</option>
               <option value="ADMIN_BILLING">노출·매출 · 매출 관리</option>
               <option value="ADMIN_STATS">노출·매출 · 통계</option>
@@ -1963,16 +2522,105 @@ export default function App() {
               <div>
                 <h2 className="font-black text-base sm:text-lg">AI가 분석한 나에게 맞는 GA</h2>
                 <p className="text-[#fbeee0] text-xs sm:text-sm mt-1 leading-relaxed">
-                  아직 어떤 조건을 원하시는지 알 수 없으니, 아래에서 원하는 조건을 먼저 선택해주세요.
+                  {profile.desiredPriorities.length > 0
+                    ? "내 익명 프로필에서 설정한 이직 희망 조건을 기준으로 추천해드려요."
+                    : "아직 어떤 조건을 원하시는지 알 수 없으니, 아래에서 원하는 조건을 먼저 선택해주세요."}
                 </p>
               </div>
             </div>
+
+            {profile.desiredPriorities.length > 0 && (
+              <div className="bg-white p-5 rounded-2xl border border-[#eee3d3] shadow-sm space-y-4">
+                <div className="flex items-center justify-between gap-2 flex-wrap">
+                  <div className="flex items-center gap-2">
+                    <UserCheck className="w-4 h-4 text-[#d97a4d]" />
+                    <h3 className="font-black text-sm text-[#201b16]">내 이직 희망 조건 기반 추천</h3>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setMainTab("FC_PROFILE")}
+                    className="text-[#8a7a68] text-[11px] font-bold hover:text-[#d97a4d] hover:underline"
+                  >
+                    조건 수정하기 →
+                  </button>
+                </div>
+
+                <div className="flex flex-wrap gap-1.5">
+                  {profile.desiredPriorities.map((key) => {
+                    const opt = TRANSFER_PRIORITY_OPTIONS.find((o) => o.key === key);
+                    if (!opt) return null;
+                    return (
+                      <span
+                        key={key}
+                        className="inline-flex items-center bg-[#fdf3ea] text-[#b35a2e] text-[11px] font-bold px-2.5 py-1 rounded-full"
+                      >
+                        {opt.label}
+                      </span>
+                    );
+                  })}
+                </div>
+
+                <div className="space-y-3">
+                  {MOCK_GA_FULL_LIST.map((ga) => ({
+                    ga,
+                    matchedKeys: ga.strengths.filter((s) => profile.desiredPriorities.includes(s))
+                  }))
+                    .filter((item) => item.matchedKeys.length > 0)
+                    .sort((a, b) => b.matchedKeys.length - a.matchedKeys.length)
+                    .map(({ ga, matchedKeys }) => (
+                      <div
+                        key={ga.id}
+                        className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3.5"
+                      >
+                        <div>
+                          <p className="font-black text-sm text-[#201b16]">
+                            {ga.name} <span className="text-[#8a7a68] text-[11px] font-bold">({ga.branch})</span>
+                          </p>
+                          <div className="flex flex-wrap gap-1.5 mt-1.5">
+                            {matchedKeys.map((key) => {
+                              const opt = TRANSFER_PRIORITY_OPTIONS.find((o) => o.key === key);
+                              return (
+                                <span
+                                  key={key}
+                                  className="inline-flex items-center gap-1 bg-emerald-50 text-emerald-700 text-[10px] font-bold px-2 py-0.5 rounded-full"
+                                >
+                                  <Check className="w-2.5 h-2.5" />
+                                  {opt?.label} 강점
+                                </span>
+                              );
+                            })}
+                          </div>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => setMainTab("GA_LIST")}
+                          className="text-[#d97a4d] text-xs font-bold hover:underline shrink-0 text-left sm:text-right"
+                        >
+                          자세히 보기 →
+                        </button>
+                      </div>
+                    ))}
+
+                  {MOCK_GA_FULL_LIST.every(
+                    (ga) => ga.strengths.filter((s) => profile.desiredPriorities.includes(s)).length === 0
+                  ) && (
+                    <p className="text-[#8a7a68] text-xs">
+                      선택하신 조건과 뚜렷하게 강점이 겹치는 GA가 아직 없어요. 전체 GA 리스트에서 직접 비교해보세요.
+                    </p>
+                  )}
+                </div>
+              </div>
+            )}
 
             <form
               onSubmit={handleFindAiMatches}
               className="bg-white p-5 rounded-2xl border border-[#eee3d3] shadow-sm space-y-4"
             >
-              <h3 className="font-black text-sm text-[#201b16]">어떤 조건의 GA를 찾고 계신가요?</h3>
+              <h3 className="font-black text-sm text-[#201b16]">
+                {profile.desiredPriorities.length > 0
+                  ? "조건을 더 구체적으로 입력해서 다시 찾기"
+                  : "어떤 조건의 GA를 찾고 계신가요?"}
+              </h3>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="space-y-1">
                   <label className="font-extrabold text-[#453a2f] text-xs">희망 근무 지역</label>
@@ -2263,11 +2911,16 @@ export default function App() {
                   <div className="flex gap-2 justify-end pt-1">
                     <button
                       type="button"
-                      onClick={() => setActiveMessageThread({ id: offer.id, title: offer.gaName })}
-                      className="px-4 py-2 bg-white border border-[#eee3d3] hover:border-[#e9a374] text-[#453a2f] font-bold rounded-xl text-xs transition flex items-center gap-1.5"
+                      onClick={() => handleOpenMessageThread(offer.id, offer.gaName)}
+                      className="relative px-4 py-2 bg-white border border-[#eee3d3] hover:border-[#e9a374] text-[#453a2f] font-bold rounded-xl text-xs transition flex items-center gap-1.5"
                     >
                       <MessageSquare className="w-3.5 h-3.5" />
-                      <span>메시지{messageThreads[offer.id]?.length ? ` (${messageThreads[offer.id].length})` : ""}</span>
+                      <span>메시지</span>
+                      {getUnreadMessageCount(offer.id) > 0 && (
+                        <span className="absolute -top-2 -right-2 min-w-[18px] h-[18px] px-1 flex items-center justify-center rounded-full rounded-bl-sm bg-[#d97a4d] text-white text-[10px] font-extrabold leading-none shadow-sm">
+                          {getUnreadMessageCount(offer.id)}
+                        </span>
+                      )}
                     </button>
                     <button
                       onClick={() => alert("제안을 거절하였습니다.")}
@@ -2288,6 +2941,124 @@ export default function App() {
           </div>
         )}
 
+        {/* 탭 3B: 허위 정보 신고 (위촉/이직 후 실제 조건이 달랐던 경우) */}
+        {mainTab === "FC_REPORTS" && (
+          <div className="space-y-4">
+            <div className="bg-white p-4 rounded-2xl border border-[#eee3d3] shadow-sm">
+              <div className="flex items-center gap-2">
+                <Flag className="w-4 h-4 text-[#d97a4d]" />
+                <h2 className="text-base font-black text-[#201b16]">허위 정보 신고</h2>
+              </div>
+              <p className="text-[#6b5d4f] text-[11px] mt-1 leading-relaxed">
+                제시받은 조건과 실제 위촉/입사 후 지급된 조건이 다른 경우, 증빙과 함께 신고해 주세요. 신고 내용은
+                관리자만 확인하며, GA 매니저에게는 신고 사실이나 신고자 정보가 전달되지 않습니다.
+              </p>
+            </div>
+
+            <form onSubmit={handleSubmitReport} className="bg-white p-5 rounded-2xl border border-[#eee3d3] shadow-sm space-y-4">
+              <div>
+                <label className="text-[11px] font-bold text-[#57493c] mb-1 block">신고 대상 GA</label>
+                <select
+                  value={reportForm.gaId}
+                  onChange={(e) => setReportForm((prev) => ({ ...prev, gaId: e.target.value }))}
+                  className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-lg p-2.5 text-xs outline-none focus:ring-2 focus:ring-[#d97a4d]"
+                >
+                  <option value="">위촉/이직했던 GA를 선택하세요</option>
+                  {MOCK_GA_FULL_LIST.map((ga) => (
+                    <option key={ga.id} value={ga.id}>
+                      {ga.name} ({ga.branch})
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="text-[11px] font-bold text-[#57493c] mb-1 block">신고 유형</label>
+                <select
+                  value={reportForm.category}
+                  onChange={(e) => setReportForm((prev) => ({ ...prev, category: e.target.value }))}
+                  className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-lg p-2.5 text-xs outline-none focus:ring-2 focus:ring-[#d97a4d]"
+                >
+                  {FALSE_INFO_REPORT_CATEGORIES.map((cat) => (
+                    <option key={cat} value={cat}>
+                      {cat}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="text-[11px] font-bold text-[#57493c] mb-1 block">신고 내용</label>
+                <textarea
+                  value={reportForm.description}
+                  onChange={(e) => setReportForm((prev) => ({ ...prev, description: e.target.value }))}
+                  rows={4}
+                  placeholder="예: 위촉 당시 정착지원금 1,200만원을 약속받았으나, 실제 계약서에는 800만원으로 기재되어 있었습니다."
+                  className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-lg p-2.5 text-xs outline-none focus:ring-2 focus:ring-[#d97a4d] placeholder:text-[#b3a692] resize-none"
+                />
+              </div>
+
+              <div>
+                <label className="text-[11px] font-bold text-[#57493c] mb-1 block">증빙 자료 첨부</label>
+                <label className="flex items-center gap-2 w-full bg-[#fdfaf5] border border-dashed border-[#ddd0ba] rounded-lg p-2.5 text-xs text-[#8a7a68] cursor-pointer hover:border-[#e9a374] transition">
+                  <Paperclip className="w-3.5 h-3.5 shrink-0" />
+                  <span className="truncate">{reportForm.evidenceFileName || "파일 선택 (계약서, 정산내역 캡처 등)"}</span>
+                  <input
+                    type="file"
+                    className="hidden"
+                    onChange={(e) =>
+                      setReportForm((prev) => ({ ...prev, evidenceFileName: e.target.files?.[0]?.name ?? "" }))
+                    }
+                  />
+                </label>
+              </div>
+
+              <button
+                type="submit"
+                className="w-full bg-[#d97a4d] hover:bg-[#b35a2e] text-white font-extrabold py-3 rounded-xl text-xs transition shadow-md"
+              >
+                신고 제출하기
+              </button>
+            </form>
+
+            <div className="bg-white p-5 rounded-2xl border border-[#eee3d3] shadow-sm space-y-3">
+              <h3 className="font-black text-xs text-[#453a2f]">내가 제출한 신고 내역</h3>
+              {myReports.length === 0 ? (
+                <p className="text-[#8a7a68] text-[11px] py-6 text-center">아직 제출한 신고가 없습니다.</p>
+              ) : (
+                <div className="space-y-2">
+                  {myReports.map((report) => (
+                    <div key={report.id} className="bg-[#fdfaf5] border border-[#f7f0e6] rounded-xl p-3 space-y-1">
+                      <div className="flex items-center justify-between gap-2 flex-wrap">
+                        <p className="font-bold text-[#2b2621] text-[11px]">
+                          {report.gaName} <span className="text-[#8a7a68] font-bold">({report.branch})</span>
+                        </p>
+                        <span
+                          className={`text-[10px] font-bold px-2 py-0.5 rounded-full shrink-0 ${
+                            report.status === "허위 확인"
+                              ? "bg-red-100 text-red-700"
+                              : report.status === "혐의없음"
+                              ? "bg-[#f7f0e6] text-[#6b5d4f]"
+                              : report.status === "조사중"
+                              ? "bg-amber-50 text-amber-700"
+                              : "bg-[#fdf3ea] text-[#b35a2e]"
+                          }`}
+                        >
+                          {report.status}
+                        </span>
+                      </div>
+                      <p className="text-[#8a7a68] text-[10px]">
+                        {report.reportedAt} · {report.category}
+                      </p>
+                      <p className="text-[#57493c] text-[11px] leading-relaxed">{report.description}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
         {/* 탭 4: FC 익명 프로필 및 조건 설정 */}
         {mainTab === "FC_PROFILE" && (
           <div className="bg-white p-6 rounded-2xl border border-[#eee3d3] shadow-sm space-y-6">
@@ -2298,24 +3069,6 @@ export default function App() {
                   검증된 경력과 실적 정보로 GA 매니저들에게 최고의 조건(수수료, 정착금, DB)을 제안받으세요.
                 </p>
               </div>
-
-              <button
-                type="button"
-                onClick={() => setShowAuthPopup(true)}
-                disabled={isAutoSyncing}
-                className={`font-black px-4 py-2.5 rounded-xl text-xs transition shadow-sm flex items-center gap-2 shrink-0 ${
-                  socialProvider === "naver"
-                    ? "bg-[#03c75a] hover:bg-[#02b351] text-white"
-                    : "bg-amber-400 hover:bg-amber-500 text-amber-950"
-                }`}
-              >
-                <RefreshCw className={`w-3.5 h-3.5 ${isAutoSyncing ? "animate-spin" : ""}`} />
-                <span>
-                  {isAutoSyncing
-                    ? "데이터 불러오는 중..."
-                    : `${socialProvider === "naver" ? "네이버" : "카카오"} 인증 실적 자동 불러오기`}
-                </span>
-              </button>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -2399,42 +3152,82 @@ export default function App() {
                       ))}
                     </select>
                   </div>
+                </div>
 
-                  <div className="space-y-1">
-                    <label className="font-extrabold text-[#453a2f] text-xs flex items-center gap-1.5">
-                      <span>월 평균 매출 (업적)</span>
-                      {profile.isVerified && (
-                        <span className="inline-flex items-center gap-0.5 text-[10px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-full">
-                          <Check className="w-2.5 h-2.5" />
-                          인증됨
-                        </span>
-                      )}
-                    </label>
-                    <input
-                      type="text"
-                      value={profile.salesRange}
-                      onChange={(e) => setProfile({ ...profile, salesRange: e.target.value })}
-                      className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#d97a4d]"
-                    />
+                <div className="bg-[#fdfaf5] border border-[#eee3d3] rounded-2xl p-4 flex flex-col sm:flex-row gap-4">
+                  <div className="flex-1 space-y-3">
+                    <div className="flex items-center gap-3">
+                      <div className="w-28 sm:w-32 shrink-0">
+                        <p className="font-extrabold text-[#453a2f] text-xs leading-snug">월 평균매출(업적)</p>
+                        <p className="text-[#8a7a68] text-[10px] mt-0.5 leading-snug">국세청 홈택스 연동</p>
+                      </div>
+                      <div className="flex-1 flex items-center gap-2">
+                        <input
+                          type="text"
+                          value={profile.salesRange}
+                          readOnly={profile.isVerified}
+                          placeholder="실적 연동 후 자동 입력"
+                          onChange={(e) => setProfile({ ...profile, salesRange: e.target.value })}
+                          className={`w-full rounded-full border p-2.5 text-xs font-bold outline-none focus:ring-2 focus:ring-[#d97a4d] placeholder:font-medium placeholder:text-[#b3a692] ${
+                            profile.isVerified
+                              ? "bg-[#fdf3ea] border-[#f3ddc4] text-[#2b2621]"
+                              : "bg-white border-[#eee3d3] text-[#2b2621]"
+                          }`}
+                        />
+                        <span className="text-xs font-bold text-[#57493c] shrink-0">만원</span>
+                        {profile.isVerified && (
+                          <span className="inline-flex items-center gap-0.5 text-[10px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-full shrink-0">
+                            <Check className="w-2.5 h-2.5" />
+                            인증됨
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-3">
+                      <div className="w-28 sm:w-32 shrink-0">
+                        <p className="font-extrabold text-[#453a2f] text-xs leading-snug">13회차 유지율</p>
+                        <p className="text-[#8a7a68] text-[10px] mt-0.5 leading-snug">e-클린보험서비스 연동</p>
+                      </div>
+                      <div className="flex-1 flex items-center gap-2">
+                        <input
+                          type="text"
+                          value={profile.retentionRate}
+                          readOnly={profile.isVerified}
+                          placeholder="실적 연동 후 자동 입력"
+                          onChange={(e) => setProfile({ ...profile, retentionRate: e.target.value })}
+                          className={`w-full rounded-full border p-2.5 text-xs font-bold outline-none focus:ring-2 focus:ring-[#d97a4d] placeholder:font-medium placeholder:text-[#b3a692] ${
+                            profile.isVerified
+                              ? "bg-[#fdf3ea] border-[#f3ddc4] text-[#2b2621]"
+                              : "bg-white border-[#eee3d3] text-[#2b2621]"
+                          }`}
+                        />
+                        <span className="text-xs font-bold text-[#57493c] shrink-0">%</span>
+                        {profile.isVerified && (
+                          <span className="inline-flex items-center gap-0.5 text-[10px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-full shrink-0">
+                            <Check className="w-2.5 h-2.5" />
+                            인증됨
+                          </span>
+                        )}
+                      </div>
+                    </div>
                   </div>
 
-                  <div className="space-y-1">
-                    <label className="font-extrabold text-[#453a2f] text-xs flex items-center gap-1.5">
-                      <span>유지율</span>
-                      {profile.isVerified && (
-                        <span className="inline-flex items-center gap-0.5 text-[10px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-full">
-                          <Check className="w-2.5 h-2.5" />
-                          인증됨
-                        </span>
-                      )}
-                    </label>
-                    <input
-                      type="text"
-                      value={profile.retentionRate}
-                      onChange={(e) => setProfile({ ...profile, retentionRate: e.target.value })}
-                      className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#d97a4d]"
-                    />
-                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setShowAuthPopup(true)}
+                    disabled={isAutoSyncing}
+                    className={`sm:w-36 shrink-0 rounded-xl border-2 font-black text-xs sm:text-sm flex flex-row sm:flex-col items-center justify-center gap-1.5 py-3 transition ${
+                      profile.isVerified
+                        ? "bg-emerald-50 border-emerald-200 text-emerald-700"
+                        : "bg-[#fdf3ea] border-[#d97a4d] text-[#b35a2e] hover:bg-[#fbeee0]"
+                    }`}
+                  >
+                    <RefreshCw className={`w-4 h-4 ${isAutoSyncing ? "animate-spin" : ""}`} />
+                    <span>
+                      {isAutoSyncing ? "연동 중..." : profile.isVerified ? "실적 연동 완료" : "실적 연동하기"}
+                    </span>
+                  </button>
                 </div>
               </div>
 
@@ -2445,26 +3238,46 @@ export default function App() {
                   <span className="text-[#8a7a68] text-[11px] font-medium">GA에게 제안받고 싶은 조건을 알려주세요</span>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-1">
-                    <label className="font-extrabold text-[#453a2f] text-xs">희망 최소 수수료율</label>
-                    <input
-                      type="text"
-                      value={profile.minCommission}
-                      onChange={(e) => setProfile({ ...profile, minCommission: e.target.value })}
-                      className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#d97a4d]"
-                    />
+                <div className="space-y-2">
+                  <label className="font-extrabold text-[#453a2f] text-xs">
+                    이직 시 중요하게 생각하는 조건 (복수 선택 가능)
+                  </label>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                    {TRANSFER_PRIORITY_OPTIONS.map((opt) => {
+                      const selected = profile.desiredPriorities.includes(opt.key);
+                      return (
+                        <button
+                          key={opt.key}
+                          type="button"
+                          onClick={() => handleToggleDesiredPriority(opt.key)}
+                          className={`flex items-center gap-2 px-3 py-2.5 rounded-xl border text-xs font-bold transition text-left ${
+                            selected
+                              ? "bg-[#fdf3ea] border-[#d97a4d] text-[#b35a2e]"
+                              : "bg-[#fdfaf5] border-[#eee3d3] text-[#57493c] hover:border-[#ddd0ba]"
+                          }`}
+                        >
+                          <span
+                            className={`w-4 h-4 rounded-md border flex items-center justify-center shrink-0 ${
+                              selected ? "bg-[#d97a4d] border-[#d97a4d]" : "bg-white border-[#ddd0ba]"
+                            }`}
+                          >
+                            {selected && <Check className="w-3 h-3 text-white" />}
+                          </span>
+                          <span>{opt.label}</span>
+                        </button>
+                      );
+                    })}
                   </div>
 
-                  <div className="space-y-1">
-                    <label className="font-extrabold text-[#453a2f] text-xs">희망 최소 정착지원금</label>
+                  {profile.desiredPriorities.includes("other") && (
                     <input
                       type="text"
-                      value={profile.minSettlement}
-                      onChange={(e) => setProfile({ ...profile, minSettlement: e.target.value })}
+                      placeholder="그 외 중요하게 생각하는 조건을 직접 입력해주세요"
+                      value={profile.desiredPriorityOther}
+                      onChange={(e) => setProfile({ ...profile, desiredPriorityOther: e.target.value })}
                       className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#d97a4d]"
                     />
-                  </div>
+                  )}
                 </div>
 
                 <div className="space-y-1">
@@ -2473,7 +3286,8 @@ export default function App() {
                     type="text"
                     value={profile.preferredRegion}
                     onChange={(e) => setProfile({ ...profile, preferredRegion: e.target.value })}
-                    className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#d97a4d]"
+                    placeholder="예: 서울 / 강남 / OO역"
+                    className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#d97a4d] placeholder:font-medium placeholder:text-[#b3a692]"
                   />
                 </div>
 
@@ -2483,18 +3297,46 @@ export default function App() {
                     rows={3}
                     value={profile.memo}
                     onChange={(e) => setProfile({ ...profile, memo: e.target.value })}
-                    className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-medium outline-none focus:ring-2 focus:ring-[#d97a4d]"
+                    placeholder="예: 단독석 제공 가능한 지점을 선호하고, 초기 정착지원이 많은 곳이면 좋겠습니다."
+                    className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-medium outline-none focus:ring-2 focus:ring-[#d97a4d] placeholder:text-[#b3a692]"
                   />
                 </div>
               </div>
 
-              <div className="pt-2">
-                <button
-                  type="submit"
-                  className="w-full bg-[#d97a4d] hover:bg-[#b35a2e] text-white font-extrabold py-3.5 rounded-xl text-xs transition shadow-lg"
-                >
-                  익명 프로필 저장 및 GA 역경매 입찰 받기
-                </button>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                <div className="bg-[#fdf3ea] border border-[#f3ddc4] rounded-2xl p-4 space-y-2.5 flex flex-col">
+                  <div className="flex items-center gap-1.5">
+                    <Sparkles className="w-4 h-4 text-[#d97a4d]" />
+                    <h4 className="font-black text-sm text-[#2b2621]">① AI 추천 받기</h4>
+                  </div>
+                  <p className="text-[#6b5d4f] text-[11px] leading-relaxed flex-1">
+                    지금 설정한 이직 희망 조건으로 AI가 나에게 맞는 GA를 바로 찾아드려요. GA에게 공개 등록되지 않아요.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={handleGoToAiMatch}
+                    className="w-full bg-white hover:bg-[#fbeee0] border-2 border-[#d97a4d] text-[#b35a2e] font-extrabold py-3 rounded-xl text-xs transition flex items-center justify-center gap-1.5"
+                  >
+                    <Sparkles className="w-3.5 h-3.5" />
+                    AI 추천 GA 확인하기
+                  </button>
+                </div>
+
+                <div className="bg-white border border-[#eee3d3] rounded-2xl p-4 space-y-2.5 flex flex-col">
+                  <div className="flex items-center gap-1.5">
+                    <Megaphone className="w-4 h-4 text-[#d97a4d]" />
+                    <h4 className="font-black text-sm text-[#2b2621]">② GA 역경매 리스트에 등록하기</h4>
+                  </div>
+                  <p className="text-[#6b5d4f] text-[11px] leading-relaxed flex-1">
+                    익명 프로필을 GA 매니저들에게 공개해서, 직접 스카우트 제안(역경매)을 받아보세요.
+                  </p>
+                  <button
+                    type="submit"
+                    className="w-full bg-[#d97a4d] hover:bg-[#b35a2e] text-white font-extrabold py-3 rounded-xl text-xs transition shadow-lg"
+                  >
+                    역경매 리스트에 등록하기
+                  </button>
+                </div>
               </div>
             </form>
           </div>
@@ -2656,25 +3498,24 @@ export default function App() {
                   </div>
                   <p className="text-[#6b5d4f] text-[11px] leading-relaxed pt-1">{gaProfile.intro}</p>
                   <div className="flex flex-wrap gap-1.5 pt-1">
-                    <span className="bg-white border border-[#eee3d3] text-[#57493c] text-[10px] font-bold px-2 py-1 rounded-full">
-                      생보 {gaProfile.lifeCommissionMin}~{gaProfile.lifeCommissionMax}%
-                    </span>
-                    <span className="bg-white border border-[#eee3d3] text-[#57493c] text-[10px] font-bold px-2 py-1 rounded-full">
-                      손보 {gaProfile.nonLifeCommissionMin}~{gaProfile.nonLifeCommissionMax}%
-                    </span>
-                    <span className="bg-white border border-[#eee3d3] text-[#57493c] text-[10px] font-bold px-2 py-1 rounded-full">
-                      정착지원금{" "}
-                      {Number(gaProfile.settlementSupportPercent) > 0
-                        ? `직전업적 ${gaProfile.settlementSupportPercent}%까지`
-                        : "미지원"}
-                    </span>
-                    <span className="bg-white border border-[#eee3d3] text-[#57493c] text-[10px] font-bold px-2 py-1 rounded-full">
-                      DB {gaProfile.dbSupport}
-                    </span>
+                    {gaProfile.strengths.length === 0 && (
+                      <span className="text-[#b3a692] text-[10px] font-bold">
+                        아직 어필 분야가 선택되지 않았어요. "GA 정보"에서 등록해 주세요.
+                      </span>
+                    )}
+                    {gaProfile.strengths.map((key) => {
+                      const opt = TRANSFER_PRIORITY_OPTIONS.find((o) => o.key === key);
+                      const label = key === "other" && gaProfile.strengthOther ? gaProfile.strengthOther : opt?.label;
+                      return (
+                        <span
+                          key={key}
+                          className="bg-white border border-[#eee3d3] text-[#57493c] text-[10px] font-bold px-2 py-1 rounded-full"
+                        >
+                          {label}
+                        </span>
+                      );
+                    })}
                   </div>
-                  <p className="text-amber-700 text-[10px] font-bold pt-1">
-                    시책·포상금: {gaProfile.incentiveNote} (업데이트 {gaProfile.incentiveUpdatedAt})
-                  </p>
                 </div>
               </div>
             </div>
@@ -2869,11 +3710,16 @@ export default function App() {
 
                     <button
                       type="button"
-                      onClick={() => setActiveMessageThread({ id: offer.id, title: offer.candidateNickname })}
-                      className="w-full sm:w-auto px-4 py-2 bg-white border border-[#eee3d3] hover:border-[#e9a374] text-[#453a2f] font-bold rounded-xl text-[11px] transition flex items-center justify-center gap-1.5"
+                      onClick={() => handleOpenMessageThread(offer.id, offer.candidateNickname)}
+                      className="relative w-full sm:w-auto px-4 py-2 bg-white border border-[#eee3d3] hover:border-[#e9a374] text-[#453a2f] font-bold rounded-xl text-[11px] transition flex items-center justify-center gap-1.5"
                     >
                       <MessageSquare className="w-3.5 h-3.5" />
-                      <span>메시지{messageThreads[offer.id]?.length ? ` (${messageThreads[offer.id].length})` : ""}</span>
+                      <span>메시지</span>
+                      {getUnreadMessageCount(offer.id) > 0 && (
+                        <span className="absolute -top-2 -right-2 min-w-[18px] h-[18px] px-1 flex items-center justify-center rounded-full rounded-bl-sm bg-[#d97a4d] text-white text-[10px] font-extrabold leading-none shadow-sm">
+                          {getUnreadMessageCount(offer.id)}
+                        </span>
+                      )}
                     </button>
 
                     {offer.status === "매칭 완료" && (
@@ -2920,8 +3766,8 @@ export default function App() {
               <h2 className="text-lg font-black text-[#201b16]">GA 정보</h2>
               <p className="text-[#6b5d4f] text-xs mt-0.5">
                 설계사에게 노출되는 우리 GA의 기본 정보입니다. 후보별 최종 확정 조건은 설계사마다 달라 "제안 보내기"에서
-                개별로 입력하며, 아래 수수료율·정착지원금·DB 지원 범위는 설계사가 GA를 비교할 때 참고하는 어필 조건으로
-                비교·추천 화면에 공통으로 노출됩니다.
+                개별로 입력하며, 아래 어필 분야는 설계사가 GA를 비교할 때 참고하는 강점 태그로 비교·추천 화면에 공통으로
+                노출됩니다.
               </p>
             </div>
 
@@ -2970,114 +3816,52 @@ export default function App() {
 
               <div className="space-y-4 border-t border-[#f7f0e6] pt-5">
                 <div>
-                  <h3 className="font-black text-sm text-[#201b16]">설계사 비교·추천 화면에 노출되는 어필 조건</h3>
+                  <h3 className="font-black text-sm text-[#201b16]">설계사 비교·추천 화면에 노출되는 어필 분야</h3>
                   <p className="text-[#8a7a68] text-[11px] mt-0.5 leading-relaxed">
-                    아래 항목은 확정된 최종 조건이 아니라 설계사가 GA를 비교할 때 참고하는 범위입니다. 실제 최종 조건은 후보별 "제안 보내기"에서 개별로 협의합니다.
+                    수수료율·정착지원금 등 구체적인 수치 대신, 우리 GA가 가장 자신 있게 어필할 수 있는 분야를 태그로 골라주세요. 실제 최종 조건은 후보별 "제안 보내기"에서 개별로 협의합니다.
                   </p>
                 </div>
 
-                <div className="space-y-1">
-                  <label className="font-extrabold text-[#453a2f] text-xs">생명보험(인보험) 수수료 지급률 (범위)</label>
-                  <div className="flex items-center gap-2">
+                <div className="space-y-2">
+                  <label className="font-extrabold text-[#453a2f] text-xs">
+                    우리 GA가 가장 어필할 수 있는 분야 (복수 선택 가능)
+                  </label>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                    {TRANSFER_PRIORITY_OPTIONS.map((opt) => {
+                      const selected = gaProfile.strengths.includes(opt.key);
+                      return (
+                        <button
+                          key={opt.key}
+                          type="button"
+                          onClick={() => handleToggleGaStrength(opt.key)}
+                          className={`flex items-center gap-2 px-3 py-2.5 rounded-xl border text-xs font-bold transition text-left ${
+                            selected
+                              ? "bg-[#fdf3ea] border-[#d97a4d] text-[#b35a2e]"
+                              : "bg-[#fdfaf5] border-[#eee3d3] text-[#57493c] hover:border-[#ddd0ba]"
+                          }`}
+                        >
+                          <span
+                            className={`w-4 h-4 rounded-md border flex items-center justify-center shrink-0 ${
+                              selected ? "bg-[#d97a4d] border-[#d97a4d]" : "bg-white border-[#ddd0ba]"
+                            }`}
+                          >
+                            {selected && <Check className="w-3 h-3 text-white" />}
+                          </span>
+                          <span>{opt.label}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {gaProfile.strengths.includes("other") && (
                     <input
                       type="text"
-                      value={gaProfile.lifeCommissionMin}
-                      onChange={(e) => setGaProfile({ ...gaProfile, lifeCommissionMin: e.target.value })}
-                      placeholder="최소 (예: 85)"
+                      placeholder="그 외 어필할 수 있는 분야를 직접 입력해주세요"
+                      value={gaProfile.strengthOther}
+                      onChange={(e) => setGaProfile({ ...gaProfile, strengthOther: e.target.value })}
                       className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#d97a4d]"
                     />
-                    <span className="text-[#8a7a68] font-bold text-xs shrink-0">% ~</span>
-                    <input
-                      type="text"
-                      value={gaProfile.lifeCommissionMax}
-                      onChange={(e) => setGaProfile({ ...gaProfile, lifeCommissionMax: e.target.value })}
-                      placeholder="최대 (예: 90.5)"
-                      className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#d97a4d]"
-                    />
-                    <span className="text-[#8a7a68] font-bold text-xs shrink-0">%</span>
-                  </div>
-                </div>
-
-                <div className="space-y-1">
-                  <label className="font-extrabold text-[#453a2f] text-xs">손해보험(물보험) 수수료 지급률 (범위)</label>
-                  <div className="flex items-center gap-2">
-                    <input
-                      type="text"
-                      value={gaProfile.nonLifeCommissionMin}
-                      onChange={(e) => setGaProfile({ ...gaProfile, nonLifeCommissionMin: e.target.value })}
-                      placeholder="최소 (예: 87)"
-                      className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#d97a4d]"
-                    />
-                    <span className="text-[#8a7a68] font-bold text-xs shrink-0">% ~</span>
-                    <input
-                      type="text"
-                      value={gaProfile.nonLifeCommissionMax}
-                      onChange={(e) => setGaProfile({ ...gaProfile, nonLifeCommissionMax: e.target.value })}
-                      placeholder="최대 (예: 92.5)"
-                      className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 focus:ring-[#d97a4d]"
-                    />
-                    <span className="text-[#8a7a68] font-bold text-xs shrink-0">%</span>
-                  </div>
-                  <p className="text-[#8a7a68] text-[11px] leading-relaxed pt-0.5">
-                    생보/손보 상품군별로 수수료 체계가 달라 두 범위를 나눠서 받고 있어요. 경력·실적에 따라 지급 가능한 범위를 여유 있게 입력해주세요.
-                  </p>
-                </div>
-
-                <div className="space-y-1">
-                  <label className="font-extrabold text-[#453a2f] text-xs">정착지원금</label>
-                  <div className="flex items-center gap-2">
-                    <span className="text-[#6b5d4f] font-bold text-xs shrink-0">직전 업적의</span>
-                    <input
-                      type="number"
-                      min="0"
-                      value={gaProfile.settlementSupportPercent}
-                      onChange={(e) => setGaProfile({ ...gaProfile, settlementSupportPercent: e.target.value })}
-                      placeholder="0"
-                      className="w-24 bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold text-center outline-none focus:ring-2 focus:ring-[#d97a4d]"
-                    />
-                    <span className="text-[#6b5d4f] font-bold text-xs shrink-0">% 까지 지원</span>
-                  </div>
-                  <p className="text-[#8a7a68] text-[11px] leading-relaxed pt-0.5">
-                    직전 업적 대비 지원 가능한 최대 비율을 입력해주세요. 0을 입력하면 "미지원"으로 표시됩니다.
-                  </p>
-                </div>
-
-                <div className="space-y-1">
-                  <label className="font-extrabold text-[#453a2f] text-xs">DB 지원</label>
-                  <select
-                    value={gaProfile.dbSupport}
-                    onChange={(e) => setGaProfile({ ...gaProfile, dbSupport: e.target.value })}
-                    className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-bold text-[#2b2621] outline-none focus:ring-2 focus:ring-[#d97a4d]"
-                  >
-                    {DB_SUPPORT_OPTIONS.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="space-y-1">
-                  <label className="font-extrabold text-[#453a2f] text-xs">이번 시즌 시책·포상금 (선택 입력)</label>
-                  <textarea
-                    rows={2}
-                    value={gaProfile.incentiveNote}
-                    onChange={(e) => setGaProfile({ ...gaProfile, incentiveNote: e.target.value })}
-                    placeholder="예: OO보험사 신규 계약 시 대리점 추가시상 최대 OOO% (프로모션 기간 한정)"
-                    className="w-full bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-3 text-xs font-medium outline-none focus:ring-2 focus:ring-[#d97a4d]"
-                  />
-                  <div className="flex items-center gap-2 pt-1">
-                    <span className="text-[#6b5d4f] font-bold text-xs shrink-0">업데이트 기준월</span>
-                    <input
-                      type="month"
-                      value={gaProfile.incentiveUpdatedAt}
-                      onChange={(e) => setGaProfile({ ...gaProfile, incentiveUpdatedAt: e.target.value })}
-                      className="bg-[#fdfaf5] border border-[#eee3d3] rounded-xl p-2.5 text-xs font-bold outline-none focus:ring-2 focus:ring-[#d97a4d]"
-                    />
-                  </div>
-                  <p className="text-[#8a7a68] text-[11px] leading-relaxed pt-0.5">
-                    시책·포상금은 보험사·기간에 따라 자주 바뀌는 항목이라 정확한 %보다는 대표 시책과 기준월을 함께 안내해주세요. 설계사에게는 "참고용 스냅샷"으로 노출되며, 최종 조건은 개별 상담에서 확정됩니다.
-                  </p>
+                  )}
                 </div>
               </div>
 
@@ -3205,9 +3989,16 @@ export default function App() {
                   {communityPosts.filter((p) => p.reported).length}건
                 </p>
               </div>
+              <div className="bg-white p-4 rounded-2xl border border-[#eee3d3] shadow-sm">
+                <div className="flex items-center gap-1.5 text-[#8a7a68] text-[11px] font-semibold">
+                  <ShieldAlert className="w-3.5 h-3.5" />
+                  <span>처리 대기 신고</span>
+                </div>
+                <p className="text-xl font-black text-red-600 mt-1">{pendingReportCount}건</p>
+              </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
               <div className="bg-white p-5 rounded-2xl border border-[#eee3d3] shadow-sm space-y-3">
                 <div className="flex items-center justify-between">
                   <h3 className="font-black text-sm text-[#201b16]">GA 노출 승인 대기</h3>
@@ -3265,6 +4056,35 @@ export default function App() {
                         <div key={post.id} className="bg-red-50 border border-red-100 rounded-xl p-3">
                           <p className="font-bold text-[#2b2621] text-[11px]">{post.title}</p>
                           <p className="text-red-600 text-[10px] mt-0.5">{post.reportReason}</p>
+                        </div>
+                      ))}
+                  </div>
+                )}
+              </div>
+
+              <div className="bg-white p-5 rounded-2xl border border-[#eee3d3] shadow-sm space-y-3">
+                <div className="flex items-center justify-between">
+                  <h3 className="font-black text-sm text-[#201b16]">처리 대기 중인 허위 신고</h3>
+                  <button
+                    type="button"
+                    onClick={() => setMainTab("ADMIN_REPORTS")}
+                    className="text-[#d97a4d] text-[11px] font-bold hover:underline"
+                  >
+                    전체보기 →
+                  </button>
+                </div>
+                {pendingReportCount === 0 ? (
+                  <p className="text-[#8a7a68] text-[11px] py-6 text-center">처리 대기 중인 신고가 없습니다.</p>
+                ) : (
+                  <div className="space-y-2">
+                    {adminReports
+                      .filter((r) => r.status === "접수" || r.status === "조사중")
+                      .map((report) => (
+                        <div key={report.id} className="bg-red-50 border border-red-100 rounded-xl p-3">
+                          <p className="font-bold text-[#2b2621] text-[11px]">
+                            {report.gaName} · {report.category}
+                          </p>
+                          <p className="text-red-600 text-[10px] mt-0.5">{report.status}</p>
                         </div>
                       ))}
                   </div>
@@ -3459,17 +4279,31 @@ export default function App() {
                               ? "bg-emerald-50 text-emerald-700"
                               : ga.exposureStatus === "승인대기"
                               ? "bg-amber-50 text-amber-700"
+                              : ga.exposureStatus === "이용정지"
+                              ? "bg-red-50 text-red-600"
                               : "bg-[#f7f0e6] text-[#6b5d4f]"
                           }`}
                         >
                           {ga.exposureStatus}
                         </span>
+                        {isVerifiedRecruiter(ga) && (
+                          <span className="flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#fdf3ea] text-[#b35a2e]">
+                            <ShieldCheck className="w-3 h-3" />
+                            검증된 리크루터
+                          </span>
+                        )}
+                        {ga.strikeCount > 0 && (
+                          <span className="flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-red-50 text-red-600">
+                            <AlertTriangle className="w-3 h-3" />
+                            경고 {ga.strikeCount}/3
+                          </span>
+                        )}
                       </div>
                       <p className="text-[#8a7a68] text-[11px] mt-0.5">
                         담당자 {ga.contactName} · {ga.contactPhone} · 가입일 {ga.joinedDate}
                       </p>
                       <p className="text-[#6b5d4f] text-[11px] mt-0.5 font-bold">
-                        수수료 {ga.commissionMin}~{ga.commissionMax}%
+                        수수료 {ga.commissionMin}~{ga.commissionMax}% · 성공 매칭 {ga.successfulMatches}건
                       </p>
                     </div>
                     <div className="flex items-center gap-2 shrink-0 flex-wrap">
@@ -3491,7 +4325,7 @@ export default function App() {
                       >
                         상세보기
                       </button>
-                      {ga.exposureStatus !== "노출중" && (
+                      {!ga.blacklisted && ga.exposureStatus !== "노출중" && (
                         <button
                           type="button"
                           onClick={() => handleUpdateGaExposure(ga.id, "노출중")}
@@ -3500,7 +4334,7 @@ export default function App() {
                           노출 승인
                         </button>
                       )}
-                      {ga.exposureStatus !== "보류/비노출" && (
+                      {!ga.blacklisted && ga.exposureStatus !== "보류/비노출" && (
                         <button
                           type="button"
                           onClick={() => handleUpdateGaExposure(ga.id, "보류/비노출")}
@@ -3509,6 +4343,18 @@ export default function App() {
                           노출 보류
                         </button>
                       )}
+                      <button
+                        type="button"
+                        onClick={() => handleToggleGaBlacklist(ga.id)}
+                        className={`flex items-center gap-1 font-bold text-[11px] px-3 py-2 rounded-lg transition ${
+                          ga.blacklisted
+                            ? "bg-[#f7f0e6] hover:bg-[#eee3d3] text-[#57493c]"
+                            : "bg-red-50 hover:bg-red-100 text-red-600"
+                        }`}
+                      >
+                        <Ban className="w-3.5 h-3.5" />
+                        {ga.blacklisted ? "정지 해제" : "이용정지"}
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -3518,6 +4364,173 @@ export default function App() {
                   검색 조건에 맞는 GA가 없습니다.
                 </div>
               )}
+            </div>
+          </div>
+        )}
+
+        {/* 탭 관리자-2A: 허위 신고 관리 (관리자 전용) */}
+        {mainTab === "ADMIN_REPORTS" && (
+          <div className="space-y-4">
+            <div className="bg-white p-5 rounded-2xl border border-[#eee3d3] shadow-sm">
+              <div className="flex items-center gap-2">
+                <ShieldAlert className="w-5 h-5 text-[#d97a4d]" />
+                <h2 className="text-lg font-black text-[#201b16]">허위 신고 · 리크루터 신뢰도 관리</h2>
+              </div>
+              <p className="text-[#6b5d4f] text-xs mt-1 leading-relaxed">
+                FC가 제출한 허위 조건 신고 내역입니다. 이 화면은 관리자만 열람할 수 있으며, GA 매니저에게는 신고자 정보나
+                신고 내용이 노출되지 않습니다. 허위 기재가 확인되면 해당 GA에 경고가 누적되고, 3회(삼진아웃) 시 자동으로
+                이용정지 및 블랙리스트 등록됩니다.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <div className="bg-white p-4 rounded-2xl border border-[#eee3d3] shadow-sm">
+                <p className="text-[#8a7a68] text-[11px] font-semibold">접수</p>
+                <p className="text-xl font-black text-[#201b16] mt-1">
+                  {adminReports.filter((r) => r.status === "접수").length}건
+                </p>
+              </div>
+              <div className="bg-white p-4 rounded-2xl border border-[#eee3d3] shadow-sm">
+                <p className="text-[#8a7a68] text-[11px] font-semibold">조사중</p>
+                <p className="text-xl font-black text-amber-600 mt-1">
+                  {adminReports.filter((r) => r.status === "조사중").length}건
+                </p>
+              </div>
+              <div className="bg-white p-4 rounded-2xl border border-[#eee3d3] shadow-sm">
+                <p className="text-[#8a7a68] text-[11px] font-semibold">허위 확인</p>
+                <p className="text-xl font-black text-red-600 mt-1">
+                  {adminReports.filter((r) => r.status === "허위 확인").length}건
+                </p>
+              </div>
+              <div className="bg-white p-4 rounded-2xl border border-[#eee3d3] shadow-sm">
+                <p className="text-[#8a7a68] text-[11px] font-semibold">블랙리스트 GA</p>
+                <p className="text-xl font-black text-red-600 mt-1">
+                  {adminGaUsers.filter((ga) => ga.blacklisted).length}개사
+                </p>
+              </div>
+            </div>
+
+            <div className="space-y-3">
+              {adminReports.length === 0 && (
+                <div className="bg-white p-8 rounded-2xl border border-[#eee3d3] text-center text-[#8a7a68] text-xs">
+                  접수된 신고가 없습니다.
+                </div>
+              )}
+              {adminReports.map((report) => {
+                const targetGa = adminGaUsers.find((ga) => ga.id === report.gaId);
+                return (
+                  <div key={report.id} className="bg-white p-4 rounded-2xl border border-[#eee3d3] shadow-sm space-y-3">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                      <div>
+                        <div className="flex items-center gap-1.5 flex-wrap">
+                          <span className="text-[10px] text-[#8a7a68] font-bold">{report.reportedAt} 접수</span>
+                          <span
+                            className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                              report.status === "허위 확인"
+                                ? "bg-red-100 text-red-700"
+                                : report.status === "혐의없음"
+                                ? "bg-[#f7f0e6] text-[#6b5d4f]"
+                                : report.status === "조사중"
+                                ? "bg-amber-50 text-amber-700"
+                                : "bg-[#fdf3ea] text-[#b35a2e]"
+                            }`}
+                          >
+                            {report.status}
+                          </span>
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#f7f0e6] text-[#57493c]">
+                            {report.category}
+                          </span>
+                        </div>
+                        <p className="font-black text-[#201b16] text-xs mt-1">
+                          {report.gaName} <span className="text-[#8a7a68] font-bold text-[11px]">({report.branch})</span>
+                        </p>
+                        <p className="text-[#8a7a68] text-[11px] mt-0.5">
+                          신고자(익명): {report.reporterNickname}
+                          {targetGa && (targetGa.strikeCount > 0 || targetGa.blacklisted) && (
+                            <span className="text-red-600 font-bold">
+                              {" "}
+                              · 해당 GA 현재 경고 {targetGa.strikeCount}/3{targetGa.blacklisted ? " (이용정지됨)" : ""}
+                            </span>
+                          )}
+                        </p>
+                      </div>
+                    </div>
+
+                    <p className="text-[#453a2f] text-[11px] leading-relaxed bg-[#fdfaf5] border border-[#f7f0e6] rounded-xl p-3">
+                      {report.description}
+                    </p>
+
+                    <div className="flex items-center gap-1.5 text-[#8a7a68] text-[11px]">
+                      <Paperclip className="w-3.5 h-3.5" />
+                      <span>{report.evidenceFileName}</span>
+                    </div>
+
+                    {report.adminNote && (
+                      <p className="text-[#8a7a68] text-[10px] italic">관리자 메모: {report.adminNote}</p>
+                    )}
+
+                    {(report.status === "접수" || report.status === "조사중") && (
+                      <div className="flex flex-wrap gap-2 justify-end pt-1 border-t border-[#f7f0e6]">
+                        {report.status === "접수" && (
+                          <button
+                            type="button"
+                            onClick={() => handleUpdateReportStatus(report.id, "조사중")}
+                            className="bg-[#f7f0e6] hover:bg-[#eee3d3] text-[#57493c] font-bold text-[11px] px-3 py-2 rounded-lg transition"
+                          >
+                            조사중으로 전환
+                          </button>
+                        )}
+                        <button
+                          type="button"
+                          onClick={() => handleUpdateReportStatus(report.id, "혐의없음")}
+                          className="bg-[#f7f0e6] hover:bg-[#eee3d3] text-[#57493c] font-bold text-[11px] px-3 py-2 rounded-lg transition"
+                        >
+                          혐의없음 처리
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleUpdateReportStatus(report.id, "허위 확인")}
+                          className="bg-red-600 hover:bg-red-700 text-white font-bold text-[11px] px-3 py-2 rounded-lg transition"
+                        >
+                          허위 확인 · 경고 부여
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="bg-white p-4 rounded-2xl border border-[#eee3d3] shadow-sm space-y-3">
+              <h3 className="font-black text-xs text-[#453a2f]">리크루터 신뢰도 현황</h3>
+              <div className="space-y-2">
+                {adminGaUsers.map((ga) => (
+                  <div key={ga.id} className="flex items-center justify-between bg-[#fdfaf5] rounded-xl p-3 flex-wrap gap-2">
+                    <div>
+                      <p className="font-bold text-[#2b2621] text-[11px]">
+                        {ga.gaName} <span className="text-[#8a7a68] font-bold">({ga.branch})</span>
+                      </p>
+                      <p className="text-[#8a7a68] text-[10px] mt-0.5">
+                        성공 매칭 {ga.successfulMatches}건 · 경고 {ga.strikeCount}/3
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-1.5 flex-wrap">
+                      {isVerifiedRecruiter(ga) && (
+                        <span className="flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#fdf3ea] text-[#b35a2e]">
+                          <ShieldCheck className="w-3 h-3" />
+                          검증된 리크루터
+                        </span>
+                      )}
+                      {ga.blacklisted && (
+                        <span className="flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-red-100 text-red-700">
+                          <Ban className="w-3 h-3" />
+                          이용정지
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         )}
@@ -3963,17 +4976,60 @@ export default function App() {
       </main>
       </div>
 
-      {showAuthPopup && (
+      {showAuthPopup &&
+        (() => {
+          const meta = {
+            kakao: {
+              label: "카카오",
+              headerBg: "bg-[#fee500]",
+              headerText: "text-[#191919]",
+              headerSubText: "text-[#191919]/70",
+              ctaClass: "bg-[#fee500] hover:bg-[#fada00] text-[#191919]"
+            },
+            naver: {
+              label: "네이버",
+              headerBg: "bg-[#03c75a]",
+              headerText: "text-white",
+              headerSubText: "text-white/80",
+              ctaClass: "bg-[#03c75a] hover:bg-[#02b351] text-white"
+            },
+            google: {
+              label: "구글",
+              headerBg: "bg-white border-b border-[#eee3d3]",
+              headerText: "text-[#201b16]",
+              headerSubText: "text-[#8a7a68]",
+              ctaClass: "bg-white hover:bg-[#f7f0e6] text-[#3c4043] border border-[#eee3d3]"
+            }
+          }[socialProvider ?? "kakao"];
+
+          return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
           <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm overflow-hidden">
-            <div
-              className={`p-5 flex items-center gap-3 ${
-                socialProvider === "naver" ? "bg-[#03c75a]" : "bg-[#fee500]"
-              }`}
-            >
+            <div className={`p-5 flex items-center gap-3 ${meta.headerBg}`}>
               {socialProvider === "naver" ? (
                 <div className="w-9 h-9 rounded-full bg-white flex items-center justify-center shrink-0 font-black text-[#03c75a] text-base">
                   N
+                </div>
+              ) : socialProvider === "google" ? (
+                <div className="w-9 h-9 rounded-full bg-[#fdfaf5] border border-[#eee3d3] flex items-center justify-center shrink-0">
+                  <svg className="w-5 h-5" viewBox="0 0 48 48">
+                    <path
+                      fill="#EA4335"
+                      d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"
+                    />
+                    <path
+                      fill="#4285F4"
+                      d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.9-2.26 5.36-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"
+                    />
+                    <path
+                      fill="#FBBC05"
+                      d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"
+                    />
+                    <path
+                      fill="#34A853"
+                      d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"
+                    />
+                  </svg>
                 </div>
               ) : (
                 <div className="w-9 h-9 rounded-full bg-[#191919] flex items-center justify-center shrink-0">
@@ -3983,20 +5039,8 @@ export default function App() {
                 </div>
               )}
               <div>
-                <p
-                  className={`font-black text-sm ${
-                    socialProvider === "naver" ? "text-white" : "text-[#191919]"
-                  }`}
-                >
-                  {socialProvider === "naver" ? "네이버" : "카카오"} 인증
-                </p>
-                <p
-                  className={`text-[11px] ${
-                    socialProvider === "naver" ? "text-white/80" : "text-[#191919]/70"
-                  }`}
-                >
-                  인슈어매치가 아래 정보를 요청합니다
-                </p>
+                <p className={`font-black text-sm ${meta.headerText}`}>{meta.label} 인증</p>
+                <p className={`text-[11px] ${meta.headerSubText}`}>인슈어매치가 아래 정보를 요청합니다</p>
               </div>
             </div>
 
@@ -4004,9 +5048,7 @@ export default function App() {
               {isAutoSyncing ? (
                 <div className="py-8 flex flex-col items-center justify-center gap-3">
                   <RefreshCw className="w-7 h-7 text-[#d97a4d] animate-spin" />
-                  <p className="text-[#57493c] text-xs font-bold">
-                    {socialProvider === "naver" ? "네이버" : "카카오"} 인증 및 실적 데이터 조회 중...
-                  </p>
+                  <p className="text-[#57493c] text-xs font-bold">{meta.label} 인증 및 실적 데이터 조회 중...</p>
                 </div>
               ) : (
                 <>
@@ -4050,11 +5092,7 @@ export default function App() {
                     <button
                       type="button"
                       onClick={handleAutoFetchData}
-                      className={`flex-1 font-black py-3 rounded-xl text-xs transition ${
-                        socialProvider === "naver"
-                          ? "bg-[#03c75a] hover:bg-[#02b351] text-white"
-                          : "bg-[#fee500] hover:bg-[#fada00] text-[#191919]"
-                      }`}
+                      className={`flex-1 font-black py-3 rounded-xl text-xs transition ${meta.ctaClass}`}
                     >
                       동의하고 계속하기
                     </button>
@@ -4064,7 +5102,8 @@ export default function App() {
             </div>
           </div>
         </div>
-      )}
+          );
+        })()}
 
       {activeMessageThread && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
@@ -4133,6 +5172,7 @@ export default function App() {
           </div>
         </div>
       )}
+
 
       {offerTarget && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
@@ -4273,24 +5313,47 @@ export default function App() {
 
                 <div className="grid grid-cols-2 gap-3 text-[11px]">
                   <div>
-                    <span className="text-[#8a7a68] font-semibold block">월 평균 매출</span>
-                    <span className="font-bold text-[#2b2621]">{profile.salesRange}</span>
+                    <span className="text-[#8a7a68] font-semibold block">월 평균 매출 (업적)</span>
+                    <span className="font-bold text-[#2b2621]">
+                      {profile.salesRange ? `월 평균 ${profile.salesRange}만원` : "미연동"}
+                    </span>
                   </div>
                   <div>
-                    <span className="text-[#8a7a68] font-semibold block">유지율</span>
-                    <span className="font-bold text-[#2b2621]">{profile.retentionRate}</span>
-                  </div>
-                  <div>
-                    <span className="text-[#8a7a68] font-semibold block">희망 최소 수수료율</span>
-                    <span className="font-bold text-[#d97a4d]">{profile.minCommission}</span>
-                  </div>
-                  <div>
-                    <span className="text-[#8a7a68] font-semibold block">희망 최소 정착지원금</span>
-                    <span className="font-bold text-[#d97a4d]">{profile.minSettlement}</span>
+                    <span className="text-[#8a7a68] font-semibold block">13회차 유지율</span>
+                    <span className="font-bold text-[#2b2621]">
+                      {profile.retentionRate ? `${profile.retentionRate}%` : "미연동"}
+                    </span>
                   </div>
                   <div className="col-span-2">
                     <span className="text-[#8a7a68] font-semibold block">희망 근무 지역</span>
                     <span className="font-bold text-[#2b2621]">{profile.preferredRegion}</span>
+                  </div>
+                </div>
+
+                <div>
+                  <span className="text-[#8a7a68] font-semibold text-[11px] block mb-1.5">
+                    이직 시 중요하게 생각하는 조건
+                  </span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {profile.desiredPriorities.map((key) => {
+                      const opt = TRANSFER_PRIORITY_OPTIONS.find((o) => o.key === key);
+                      if (!opt) return null;
+                      const label =
+                        opt.key === "other" && profile.desiredPriorityOther
+                          ? `그 외: ${profile.desiredPriorityOther}`
+                          : opt.label;
+                      return (
+                        <span
+                          key={key}
+                          className="inline-flex items-center bg-[#fdf3ea] text-[#b35a2e] text-[11px] font-bold px-2.5 py-1 rounded-full"
+                        >
+                          {label}
+                        </span>
+                      );
+                    })}
+                    {profile.desiredPriorities.length === 0 && (
+                      <span className="text-[#8a7a68] text-[11px]">선택된 조건이 없습니다.</span>
+                    )}
                   </div>
                 </div>
 
@@ -4420,6 +5483,51 @@ export default function App() {
                           </div>
                         </div>
                       </div>
+
+                      <div className="bg-[#fdfaf5] border border-[#eee3d3] rounded-2xl p-4 space-y-2">
+                        <h4 className="font-black text-xs text-[#453a2f]">신뢰도 현황</h4>
+                        <div className="flex items-center gap-1.5 flex-wrap">
+                          {isVerifiedRecruiter(ga) ? (
+                            <span className="flex items-center gap-1 text-[10px] font-bold px-2 py-1 rounded-full bg-[#fdf3ea] text-[#b35a2e]">
+                              <ShieldCheck className="w-3 h-3" />
+                              검증된 리크루터
+                            </span>
+                          ) : (
+                            <span className="text-[10px] font-bold px-2 py-1 rounded-full bg-[#f7f0e6] text-[#6b5d4f]">
+                              미검증
+                            </span>
+                          )}
+                          <span
+                            className={`text-[10px] font-bold px-2 py-1 rounded-full ${
+                              ga.strikeCount > 0 ? "bg-red-50 text-red-600" : "bg-emerald-50 text-emerald-700"
+                            }`}
+                          >
+                            경고 {ga.strikeCount}/3
+                          </span>
+                          {ga.blacklisted && (
+                            <span className="flex items-center gap-1 text-[10px] font-bold px-2 py-1 rounded-full bg-red-100 text-red-700">
+                              <Ban className="w-3 h-3" />
+                              블랙리스트 등록됨
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-[#6b5d4f] text-[11px]">
+                          누적 성공 매칭 {ga.successfulMatches}건 · 허위 신고 접수 {adminReports.filter((r) => r.gaId === ga.id).length}건
+                        </p>
+                        {adminReports.filter((r) => r.gaId === ga.id).length > 0 && (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setAdminDetailTarget(null);
+                              setMainTab("ADMIN_REPORTS");
+                            }}
+                            className="text-[#d97a4d] text-[11px] font-bold hover:underline"
+                          >
+                            관련 신고 내역 보기 →
+                          </button>
+                        )}
+                      </div>
+
                       <div className="space-y-2">
                         <h4 className="font-black text-xs text-[#453a2f]">정산 내역</h4>
                         {relatedInvoices.length === 0 ? (
